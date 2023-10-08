@@ -1,6 +1,6 @@
 #include "window.h"
 
-namespace matrix {
+namespace Matrix {
 
 	namespace graphics
 	{
@@ -11,8 +11,8 @@ namespace matrix {
 		{
 			if (!glfwInit())
 				return;
-			window = glfwCreateWindow(width, height, title.data(), NULL, NULL);
-			if (!window)
+			m_Window = glfwCreateWindow(width, height, title.data(), NULL, NULL);
+			if (!m_Window)
 			{
 				std::cerr << " Window creation ERROR";
 				glfwTerminate();
@@ -20,22 +20,12 @@ namespace matrix {
 			}
 
 			InitGL();
-
-		}
-		void Window::Update()
-		{
-		}
-		int Window::GetWidth()
-		{
-			return 0;
-		}
-		int Window::GetHeight()
-		{
-			return 0;
+			
+			
 		}
 		void Window::InitGL()
 		{
-			glfwMakeContextCurrent(window);
+			glfwMakeContextCurrent(m_Window);
 			if (glewInit() != GLEW_OK)
 			{
 				std::cerr << " Error initializing glew";
@@ -50,6 +40,25 @@ namespace matrix {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_CULL_FACE);
 		}
+
+		Window::~Window()
+		{
+
+		}
+
+		void Window::Clear()
+		{
+			glClearStencil(0);  //sets the clear value for the stencil buffer to zero.
+			glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		}
+
+		void Window::Update()
+		{
+			glfwSwapBuffers(m_Window);
+		}
+
+
 	}
 
 

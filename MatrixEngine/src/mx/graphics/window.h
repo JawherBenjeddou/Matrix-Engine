@@ -2,16 +2,18 @@
 
 #include <iostream>
 
-#include "GLFW/glfw3.h" 
+
 #include "GL/glew.h"
+#include "GLFW/glfw3.h" 
+#include "Common.h"
 
 
-namespace matrix {
+namespace Matrix {
 	
     namespace graphics
 	{
 
-		class Window
+		 class MATRIX_API Window
 		{
 
         public:
@@ -19,23 +21,36 @@ namespace matrix {
 
             ~Window();
 
-            void Clear(glm::vec4& color);
+            void Clear();
 
             void Update();
 
-            int GetWidth();
+            uint32_t GetWidth() const
+            {
+                return m_Width;
+            }
 
-            int GetHeight();
+            uint32_t GetHeight() const
+            {
+                return m_Height;
+            }
 
-            GLFWwindow* GetWindow();
+
+            GLFWwindow* GetWindow() 
+            {
+                return m_Window;
+            }
 
         private:
+
             void InitGL();
+
         private:
-            const char* m_title;
-            uint32_t m_width;
-            uint32_t m_height;
-            GLFWwindow* m_window = nullptr;
+            const char* m_Title;
+            uint32_t m_Width;
+            uint32_t m_Height;
+           //bool m_Closed;
+            GLFWwindow* m_Window = nullptr;
 		};
 
 	}
