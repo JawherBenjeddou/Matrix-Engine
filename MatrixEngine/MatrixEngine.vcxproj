@@ -15,13 +15,18 @@
     <ClInclude Include="src\Matrix.h" />
     <ClInclude Include="src\mx\core\EntryPoint.h" />
     <ClInclude Include="src\mx\Common.h" />
-    <ClInclude Include="src\mx\graphics\Window.h" />
-    <ClInclude Include="src\mx\maths\Math.h" />
+    <ClInclude Include="src\mx\ui\Window.h" />
+    <ClInclude Include="src\mx\math\Math.h" />
+    <ClInclude Include="src\mx\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mx\core\Application.cpp" />
-    <ClCompile Include="src\mx\graphics\Window.cpp" />
-    <ClCompile Include="src\mx\maths\Math.cpp" />
+    <ClCompile Include="src\mx\ui\Window.cpp" />
+    <ClCompile Include="src\mx\math\Math.cpp" />
+    <ClCompile Include="src\mx\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -71,7 +76,9 @@
       <PreprocessorDefinitions>GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,7 +96,9 @@
       <PreprocessorDefinitions>GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

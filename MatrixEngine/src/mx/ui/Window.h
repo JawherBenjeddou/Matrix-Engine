@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 #include "GL/glew.h"
 #include "GLFW/glfw3.h" 
 #include "Common.h"
@@ -10,7 +9,7 @@
 
 namespace Matrix {
 	
-    namespace graphics
+    namespace ui
 	{
 
 		 class MATRIX_API Window

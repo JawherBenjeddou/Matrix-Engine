@@ -1,15 +1,26 @@
+#include "pch.h"
 #include "Application.h"
 
 namespace Matrix {
 	namespace core
 	{
+
+
+		Application::Application()
+		{
+			Run();
+		}
+
+
 		void Application::Run()
 		{
-			Matrix::graphics::Window window("Matrix", 900, 600);
-			while (!glfwWindowShouldClose(window.GetWindow()))
+			Matrix::ui::Window window("Matrix Engine", 900, 600);
+			while (true)
 			{
-				glfwPollEvents();
+
 			}
 		}
+
+
 	}
 }

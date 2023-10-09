@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "graphics/Window.h"
+#include "ui/Window.h"
 
 namespace Matrix {
 
@@ -9,11 +9,19 @@ namespace Matrix {
 	
 		class MATRIX_API Application
 		{
+
 		public:
-				void Run();
+
+			Application();
+
+		private:
+
+			void Run();
+
 		};
 
 		//Needs to be called on the Client side
 		Application* CreateApplication();
+	
 	}
 }

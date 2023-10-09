@@ -5,7 +5,6 @@
 	int main(int argc,char** argv)
 	{
 		auto launcher = Matrix::core::CreateApplication();
-		launcher->Run();
 		delete launcher;
 		return 0;
 	}

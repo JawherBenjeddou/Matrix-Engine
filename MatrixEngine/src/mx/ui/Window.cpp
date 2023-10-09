@@ -1,8 +1,10 @@
+#include "pch.h"
 #include "window.h"
+
 
 namespace Matrix {
 
-	namespace graphics
+	namespace ui
 	{
 		Window::Window(std::string_view title, int width, int height) :
 			m_Title(title.data()),
