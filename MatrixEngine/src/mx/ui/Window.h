@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include "math/Math.h"
 #include "GL/glew.h"
 #include "GLFW/glfw3.h" 
 #include "Common.h"
@@ -11,18 +12,29 @@ namespace Matrix {
 	
     namespace ui
 	{
+        struct MATRIX_API WindowSpec
+        {
+            std::string_view m_Title;
+            uint32_t m_Width;
+            uint32_t m_Height;
+            WindowSpec(std::string_view title = "Matrix Engine", uint32_t width = 1280, uint32_t height = 720)
+                : m_Title(title), m_Width(width), m_Height(height) {};
+        };
 
 		 class MATRIX_API Window
 		{
 
         public:
-            Window(std::string_view title, int width, int height);
+            Window(WindowSpec config);
 
             ~Window();
 
-            void Clear();
+            //Default clear color is 1.0f, 1.0f, 0.0f, 1.0f
+            void Clear(glm::vec4 clear_color) const;
 
-            void Update();
+            void OnUpdate() const;
+
+            bool Closed() const;
 
             uint32_t GetWidth() const
             {

@@ -1,23 +1,24 @@
 #include "pch.h"
 #include "Application.h"
-
 namespace Matrix {
 	namespace core
 	{
 
 
-		Application::Application()
+		Application::Application(Matrix::ui::WindowSpec config)
+			
 		{
+			m_Window = std::make_unique<Matrix::ui::Window>(config);
 			Run();
 		}
 
 
 		void Application::Run()
 		{
-			Matrix::ui::Window window("Matrix Engine", 900, 600);
-			while (true)
+			while (!m_Window->Closed())
 			{
-
+				m_Window->Clear({1.0f,0.5f,0.0f,1.0f});
+				m_Window->OnUpdate();
 			}
 		}
 

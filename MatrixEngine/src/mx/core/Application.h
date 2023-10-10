@@ -12,12 +12,14 @@ namespace Matrix {
 
 		public:
 
-			Application();
+			Application(Matrix::ui::WindowSpec config = Matrix::ui::WindowSpec());
 
 		private:
 
 			void Run();
 
+		private:
+			std::unique_ptr<Matrix::ui::Window> m_Window;
 		};
 
 		//Needs to be called on the Client side
