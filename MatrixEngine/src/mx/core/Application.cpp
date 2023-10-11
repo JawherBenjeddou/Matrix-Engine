@@ -17,7 +17,7 @@ namespace Matrix {
 		{
 			while (!m_Window->Closed())
 			{
-				m_Window->Clear({1.0f,0.5f,0.0f,1.0f});
+				m_Window->Clear();
 
 				m_Window->OnUpdate();
 			}

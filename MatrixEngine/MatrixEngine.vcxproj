@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\ui\Input.h" />
     <ClInclude Include="src\mx\core\Application.h" />
     <ClInclude Include="src\Matrix.h" />
     <ClInclude Include="src\mx\core\EntryPoint.h" />
@@ -20,6 +21,7 @@
     <ClInclude Include="src\mx\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mx\ui\Input.cpp" />
     <ClCompile Include="src\mx\core\Application.cpp" />
     <ClCompile Include="src\mx\ui\Window.cpp" />
     <ClCompile Include="src\mx\math\Math.cpp" />

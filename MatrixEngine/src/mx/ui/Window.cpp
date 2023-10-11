@@ -22,6 +22,8 @@ namespace Matrix {
 				return;
 			}
 
+			glfwSetKeyCallback(m_Window,Window::keyCallback);
+			
 			InitGL();
 			
 			
@@ -69,6 +71,11 @@ namespace Matrix {
 			return glfwWindowShouldClose(m_Window);
 		}
 
+
+		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			Input::SetKeyState(key, action);
+		}
 
 	}
 

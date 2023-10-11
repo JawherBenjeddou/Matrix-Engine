@@ -6,7 +6,7 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h" 
 #include "Common.h"
-
+#include "Input.h"
 
 namespace Matrix {
 	
@@ -30,11 +30,12 @@ namespace Matrix {
             ~Window();
 
             //Default clear color is 1.0f, 1.0f, 0.0f, 1.0f
-            void Clear(glm::vec4 clear_color) const;
+            void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
 
             void OnUpdate() const;
 
             bool Closed() const;
+
 
             uint32_t GetWidth() const
             {
@@ -52,6 +53,7 @@ namespace Matrix {
                 return m_Window;
             }
 
+            static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
         private:
 
             void InitGL();
