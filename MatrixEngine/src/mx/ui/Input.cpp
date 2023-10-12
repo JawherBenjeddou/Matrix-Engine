@@ -1,12 +1,10 @@
 
 #include "pch.h"
 #include "Input.h"
-
 namespace Matrix
 {
 	namespace ui
 	{
-		
 		Input::Input()
 		{
 			this->m_Mousex = 0.0;
@@ -29,13 +27,13 @@ namespace Matrix
 			m_KeyState[key] = action;
 		}
 
-		bool Input::IsKeyPressed(uint32_t keycode)
+		bool Input::IsKeyPressed(Key keycode)
 		{
-			if (keycode > MAX_KEYS)
+			if (static_cast<int>(keycode) > MAX_KEYS)
 			{
 				return false;
 			}
-			return m_KeyState[keycode] == GLFW_PRESS;
+			return m_KeyState[static_cast<int>(keycode)] == GLFW_PRESS;
 		}
 	
 	}

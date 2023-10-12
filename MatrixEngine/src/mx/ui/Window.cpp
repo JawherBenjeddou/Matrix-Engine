@@ -72,7 +72,7 @@ namespace Matrix {
 		}
 
 
-		void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+		void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			Input::SetKeyState(key, action);
 		}
