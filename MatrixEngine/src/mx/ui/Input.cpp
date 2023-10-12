@@ -5,6 +5,7 @@ namespace Matrix
 {
 	namespace ui
 	{
+
 		Input::Input()
 		{
 			this->m_Mousex = 0.0;
@@ -27,15 +28,29 @@ namespace Matrix
 			m_KeyState[key] = action;
 		}
 
-		bool Input::IsKeyPressed(Key keycode)
+		void Input::SetMouseState(uint32_t button, uint32_t action)
+		{
+			m_MouseButtonPressed[button] = action;
+		}
+
+		bool Input::IsPressed(Key keycode)
 		{
 			if (static_cast<int>(keycode) > MAX_KEYS)
 			{
 				return false;
 			}
-			return m_KeyState[static_cast<int>(keycode)] == GLFW_PRESS;
+			return m_KeyState[static_cast<int>(keycode)];
 		}
-	
+
+		bool Input::IsPressed(Mouse button)
+		{
+			if (static_cast<int>(button) > MAX_KEYS)
+			{
+				return false;
+			}
+			return m_MouseButtonPressed[static_cast<int>(button)];
+		}
+
 	}
 }
 

@@ -22,8 +22,10 @@ namespace Matrix {
 				return;
 			}
 
-			glfwSetKeyCallback(m_Window,Window::keyCallback);
+			glfwSetKeyCallback(m_Window,Window::KeyCallBack);
 			
+			glfwSetMouseButtonCallback(m_Window, Window::MouseCallBack);
+
 			InitGL();
 			
 			
@@ -45,6 +47,8 @@ namespace Matrix {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_CULL_FACE);
 		}
+
+		
 
 		Window::~Window()
 		{
@@ -72,11 +76,14 @@ namespace Matrix {
 		}
 
 
-		void Window::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+		void Window::KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			Input::SetKeyState(key, action);
 		}
-
+		void Window::MouseCallBack(GLFWwindow* window, int button, int action, int mods)
+		{
+			Input::SetMouseState(button, action);
+		}
 	}
 
 

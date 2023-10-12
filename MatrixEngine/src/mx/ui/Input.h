@@ -5,66 +5,80 @@
 #include "GLFW/glfw3.h"
 enum class Key
 {
-	UNKNOWN = -1,
-	SPACE = 32,
-	APOSTROPHE = 39,
-	COMMA = 44,
-	MINUS = 45,
-	PERIOD = 46,
-	SLASH = 47,
-	ZERO = 48,
-	ONE = 49,
-	TWO = 50,
-	THREE = 51,
-	FOUR = 52,
-	FIVE = 53,
-	SIX = 54,
-	SEVEN = 55,
-	EIGHT = 56,
-	NINE = 57,
-	SEMICOLON = 59,
-	EQUAL = 61,
-	A = 65,
-	B = 66,
-	C = 67,
-	D = 68,
-	E = 69,
-	F = 70,
-	G = 71,
-	H = 72,
-	I = 73,
-	J = 74,
-	K = 75,
-	L = 76,
-	M = 77,
-	N = 78,
-	O = 79,
-	P = 80,
-	Q = 81,
-	R = 82,
-	S = 83,
-	T = 84,
-	U = 85,
-	V = 86,
-	W = 87,
-	X = 88,
-	Y = 89,
-	Z = 90,
+	UNKNOWN = GLFW_KEY_UNKNOWN,
+	SPACE = GLFW_KEY_SPACE,
+	APOSTROPHE = GLFW_KEY_APOSTROPHE,
+	COMMA = GLFW_KEY_COMMA,
+	MINUS = GLFW_KEY_MINUS,
+	PERIOD = GLFW_KEY_PERIOD,
+	SLASH = GLFW_KEY_SLASH,
+	SEMICOLON = GLFW_KEY_SEMICOLON,
+	EQUAL = GLFW_KEY_EQUAL,
+	A = GLFW_KEY_A,
+	B = GLFW_KEY_B,
+	C = GLFW_KEY_C,
+	D = GLFW_KEY_D,
+	E = GLFW_KEY_E,
+	F = GLFW_KEY_F,
+	G = GLFW_KEY_G,
+	H = GLFW_KEY_H,
+	I = GLFW_KEY_I,
+	J = GLFW_KEY_J,
+	K = GLFW_KEY_K,
+	L = GLFW_KEY_L,
+	M = GLFW_KEY_M,
+	N = GLFW_KEY_N,
+	O = GLFW_KEY_O,
+	P = GLFW_KEY_P,
+	Q = GLFW_KEY_Q,
+	R = GLFW_KEY_R,
+	S = GLFW_KEY_S,
+	T = GLFW_KEY_T,
+	U = GLFW_KEY_U,
+	V = GLFW_KEY_V,
+	W = GLFW_KEY_W,
+	X = GLFW_KEY_X,
+	Y = GLFW_KEY_Y,
+	Z = GLFW_KEY_Z,
 	LEFT_BRACKET = 91, /* [ */
 	BACKSLASH = 92,  /* \ */
 	RIGHT_BRACKET = 93,  /* ] */
 	GRAVE_ACCENT = 96,  /* ` */
-	WORLD_1 = 161, /* non-US #1 */
-	WORLD_2 = 162, /* non-US #2 */
+	ZERO = GLFW_KEY_0,
+	ONE = GLFW_KEY_1,
+	TWO = GLFW_KEY_2,
+	THREE = GLFW_KEY_3,
+	FOUR = GLFW_KEY_4,
+	FIVE = GLFW_KEY_5,
+	SIX = GLFW_KEY_6,
+	SEVEN = GLFW_KEY_7,
+	EIGHT = GLFW_KEY_8,
+	NINE = GLFW_KEY_9
+};
 
+enum class Mouse
+{
+	UNKNOWN = GLFW_KEY_UNKNOWN,
+	BUTTON_1 = GLFW_MOUSE_BUTTON_1,
+	BUTTON_2 = GLFW_MOUSE_BUTTON_2,
+	BUTTON_3 = GLFW_MOUSE_BUTTON_3,
+	BUTTON_4 = GLFW_MOUSE_BUTTON_4,
+	BUTTON_5 = GLFW_MOUSE_BUTTON_5,
+	BUTTON_6 = GLFW_MOUSE_BUTTON_6,
+	BUTTON_7 = GLFW_MOUSE_BUTTON_7,
+	BUTTON_8 = GLFW_MOUSE_BUTTON_8,
+	BUTTON_LAST = GLFW_MOUSE_BUTTON_LAST,
+	BUTTON_LEFT = GLFW_MOUSE_BUTTON_LEFT,
+	BUTTON_RIGHT = GLFW_MOUSE_BUTTON_RIGHT,
+	BUTTON_MIDDLE = GLFW_MOUSE_BUTTON_MIDDLE
 };
 namespace Matrix
 {
 	namespace ui
 	{
-		
-		#define MAX_BUTTONS 24
-		#define MAX_KEYS 1024
+		//constexpr so doesn't leak to user - code
+		constexpr uint16_t MAX_BUTTONS = 24;
+		constexpr uint16_t MAX_KEYS = 1024;
 
 		class MATRIX_API Input
 		{
@@ -75,12 +89,16 @@ namespace Matrix
 
 			static void SetKeyState(int32_t key, int32_t action);
 
-			static bool IsKeyPressed(Key keycode);
+			static void SetMouseState(uint32_t button, uint32_t action);
+
+			static bool IsPressed(Key keycode);
+
+			static bool IsPressed(Mouse button);
 		
 		private:
-			inline static bool m_KeyState[MAX_KEYS];
+			inline static bool m_KeyState[MAX_KEYS]{ 0 };
 			
-			inline static bool m_MouseButtonPressed[MAX_BUTTONS];
+			inline static bool m_MouseButtonPressed[MAX_BUTTONS]{ 0 };
 			inline static double m_Mousex;
 			inline static double m_Mousey;
 			inline static double m_Lastx;

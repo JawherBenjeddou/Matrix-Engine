@@ -53,7 +53,9 @@ namespace Matrix {
                 return m_Window;
             }
 
-            static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+            static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+            static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
         private:
 
             void InitGL();
