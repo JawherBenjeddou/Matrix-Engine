@@ -3,6 +3,7 @@
 #include "Common.h"
 #include "math/Math.h"
 #include "GLFW/glfw3.h"
+
 enum class MATRIX_API Key
 {
 	UNKNOWN = GLFW_KEY_UNKNOWN,

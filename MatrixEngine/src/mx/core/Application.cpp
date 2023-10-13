@@ -18,7 +18,7 @@ namespace Matrix {
 			while (!m_Window->Closed())
 			{
 				m_Window->Clear();
-				//std::cout << "Mouse X = " << m_Input.GetMousePosition().x << "Mouse Y = " << m_Input.GetMousePosition().y << "\n";
+
 				m_Window->OnUpdate();
 			}
 		}
