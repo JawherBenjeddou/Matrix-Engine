@@ -18,10 +18,7 @@ namespace Matrix {
 			while (!m_Window->Closed())
 			{
 				m_Window->Clear();
-				if (Matrix::ui::Input::IsPressed(Mouse::BUTTON_MIDDLE))
-				{
-					std::cout << "A pressed" << std::endl;
-				}
+				//std::cout << "Mouse X = " << m_Input.GetMousePosition().x << "Mouse Y = " << m_Input.GetMousePosition().y << "\n";
 				m_Window->OnUpdate();
 			}
 		}

@@ -20,6 +20,7 @@ namespace Matrix {
 
 		private:
 			std::unique_ptr<Matrix::ui::Window> m_Window;
+			Matrix::ui::Input m_Input;
 		};
 
 		//Needs to be called on the Client side

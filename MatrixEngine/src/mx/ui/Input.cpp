@@ -8,12 +8,10 @@ namespace Matrix
 
 		Input::Input()
 		{
-			this->m_Mousex = 0.0;
-			this->m_Mousey = 0.0;
-			this->m_Scrollx = 0.0;
-			this->m_Scrolly = 0.0;
-			this->m_Lastx = 0.0;
-			this->m_Lasty = 0.0;
+			m_Scrollx = 0.0;
+			m_Scrolly = 0.0;
+			m_Lastx = 0.0;
+			m_Lasty = 0.0;
 
 			for (size_t count = 0; count < MAX_KEYS; count++) {
 				m_KeyState[count] = GLFW_RELEASE;
@@ -23,17 +21,26 @@ namespace Matrix
 			}
 		}
 
+		void Input::CursorFocus(int32_t entered)
+		{
+			m_CursorCheck = entered;
+		}
+
 		void Input::SetKeyState(int32_t key, int32_t action)
 		{
 			m_KeyState[key] = action;
 		}
 
-		void Input::SetMouseState(uint32_t button, uint32_t action)
+		void Input::SetMouseState(int32_t button, int32_t action)
 		{
 			m_MouseButtonPressed[button] = action;
 		}
+		void Input::SetCursorPosition(const glm::vec2& position)
+		{
+			m_MousePos = position;
+		}
 
-		bool Input::IsPressed(Key keycode)
+		bool Input::IsPressed(const Key& keycode) const
 		{
 			if (static_cast<int>(keycode) > MAX_KEYS)
 			{
@@ -42,7 +49,7 @@ namespace Matrix
 			return m_KeyState[static_cast<int>(keycode)];
 		}
 
-		bool Input::IsPressed(Mouse button)
+		bool Input::IsPressed(const Mouse& button) const
 		{
 			if (static_cast<int>(button) > MAX_KEYS)
 			{
@@ -50,6 +57,17 @@ namespace Matrix
 			}
 			return m_MouseButtonPressed[static_cast<int>(button)];
 		}
+
+		bool Input::IsCursorInViewport() const
+		{
+			return m_CursorCheck;
+		}
+
+		glm::vec2 Input::GetMousePosition() const
+		{
+			return m_MousePos;
+		}
+	
 
 	}
 }

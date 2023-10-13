@@ -26,10 +26,17 @@ namespace Matrix {
 			
 			glfwSetMouseButtonCallback(m_Window, Window::MouseCallBack);
 
+			glfwSetCursorPosCallback(m_Window, Window::CursorPositionCallBack);
+
+			glfwSetCursorEnterCallback(m_Window, Window::CursorEnterCallBack);
+
 			InitGL();
-			
-			
 		}
+		inline uint32_t Window::GetWidth() const
+		{
+			return m_Width;
+		}
+	
 		void Window::InitGL()
 		{
 			glfwMakeContextCurrent(m_Window);
@@ -75,14 +82,23 @@ namespace Matrix {
 			return glfwWindowShouldClose(m_Window);
 		}
 
-
 		void Window::KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
 			Input::SetKeyState(key, action);
 		}
+
 		void Window::MouseCallBack(GLFWwindow* window, int button, int action, int mods)
 		{
 			Input::SetMouseState(button, action);
+		}
+
+		void Window::CursorPositionCallBack(GLFWwindow* window, double xpos, double ypos)
+		{
+			Input::SetCursorPosition(glm::vec2(xpos,ypos));
+		}
+		void Window::CursorEnterCallBack(GLFWwindow* window, int entered)
+		{
+			Input::CursorFocus(entered);
 		}
 	}
 

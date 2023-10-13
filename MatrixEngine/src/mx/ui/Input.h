@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "math/Math.h"
 #include "GLFW/glfw3.h"
-enum class Key
+enum class MATRIX_API Key
 {
 	UNKNOWN = GLFW_KEY_UNKNOWN,
 	SPACE = GLFW_KEY_SPACE,
@@ -40,10 +40,10 @@ enum class Key
 	X = GLFW_KEY_X,
 	Y = GLFW_KEY_Y,
 	Z = GLFW_KEY_Z,
-	LEFT_BRACKET = 91, /* [ */
-	BACKSLASH = 92,  /* \ */
-	RIGHT_BRACKET = 93,  /* ] */
-	GRAVE_ACCENT = 96,  /* ` */
+	LEFT_BRACKET = GLFW_KEY_LEFT_BRACKET, /* [ */
+	BACKSLASH = GLFW_KEY_BACKSLASH,  /* \ */
+	RIGHT_BRACKET = GLFW_KEY_RIGHT_BRACKET,  /* ] */
+	GRAVE_ACCENT = GLFW_KEY_GRAVE_ACCENT,  /* ` */
 	ZERO = GLFW_KEY_0,
 	ONE = GLFW_KEY_1,
 	TWO = GLFW_KEY_2,
@@ -56,7 +56,7 @@ enum class Key
 	NINE = GLFW_KEY_9
 };
 
-enum class Mouse
+enum class MATRIX_API Mouse
 {
 	UNKNOWN = GLFW_KEY_UNKNOWN,
 	BUTTON_1 = GLFW_MOUSE_BUTTON_1,
@@ -76,7 +76,7 @@ namespace Matrix
 {
 	namespace ui
 	{
-		//constexpr so doesn't leak to user - code
+		//constexpr instead of macro so doesn't leak to user - code
 		constexpr uint16_t MAX_BUTTONS = 24;
 		constexpr uint16_t MAX_KEYS = 1024;
 
@@ -84,28 +84,37 @@ namespace Matrix
 		{
 		public:
 			Input();
-			 
-			~Input() {}
+		public:
+			bool IsPressed(const Key& keycode) const;
 
+			bool IsPressed(const Mouse& button) const;
+
+			bool IsCursorInViewport() const;
+			
+			glm::vec2 GetMousePosition() const;
+
+		private:
 			static void SetKeyState(int32_t key, int32_t action);
 
-			static void SetMouseState(uint32_t button, uint32_t action);
+			static void SetMouseState(int32_t button, int32_t action);
+	
+			static void SetCursorPosition(const glm::vec2& position);
 
-			static bool IsPressed(Key keycode);
+			static void CursorFocus(int32_t entered);
 
-			static bool IsPressed(Mouse button);
-		
 		private:
+			friend class Window;
+
 			inline static bool m_KeyState[MAX_KEYS]{ 0 };
-			
 			inline static bool m_MouseButtonPressed[MAX_BUTTONS]{ 0 };
-			inline static double m_Mousex;
-			inline static double m_Mousey;
+			
+			inline static glm::vec2 m_MousePos;
 			inline static double m_Lastx;
 			inline static double m_Lasty;
-			double m_Scrollx, m_Scrolly;
-
-			bool m_IsDragging;
+			inline static double m_Scrollx;
+			inline static double m_Scrolly;
+			inline static bool m_IsDragging;
+			inline static int m_CursorCheck;
 		};
 		
 	

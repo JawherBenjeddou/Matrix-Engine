@@ -12,6 +12,7 @@ namespace Matrix {
 	
     namespace ui
 	{
+
         struct MATRIX_API WindowSpec
         {
             std::string_view m_Title;
@@ -22,25 +23,20 @@ namespace Matrix {
         };
 
 		 class MATRIX_API Window
-		{
+		 {
 
-        public:
+            public:
             Window(WindowSpec config);
 
             ~Window();
 
-            //Default clear color is 1.0f, 1.0f, 0.0f, 1.0f
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
 
             void OnUpdate() const;
 
             bool Closed() const;
 
-
-            uint32_t GetWidth() const
-            {
-                return m_Width;
-            }
+            uint32_t GetWidth() const;
 
             uint32_t GetHeight() const
             {
@@ -48,19 +44,24 @@ namespace Matrix {
             }
 
 
-            GLFWwindow* GetWindow() 
+            GLFWwindow* GetWindow()
             {
                 return m_Window;
             }
+         
+         private:
+
+            void InitGL();
 
             static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 
             static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
+
+            static void CursorPositionCallBack(GLFWwindow* window, double xpos, double ypos);
+
+            static void CursorEnterCallBack(GLFWwindow* window, int entered);
         private:
 
-            void InitGL();
-
-        private:
             const char* m_Title;
             uint32_t m_Width;
             uint32_t m_Height;
