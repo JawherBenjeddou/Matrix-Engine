@@ -9,7 +9,6 @@ namespace Matrix {
 	
 		class MATRIX_API Application
 		{
-
 		public:
 
 			Application(Matrix::ui::WindowSpec config = Matrix::ui::WindowSpec());
