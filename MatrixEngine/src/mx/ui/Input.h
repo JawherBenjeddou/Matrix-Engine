@@ -84,8 +84,11 @@ namespace Matrix
 		class MATRIX_API Input
 		{
 		public:
-			Input();
+
+		    void InitSystem();
+
 		public:
+
 			bool IsPressed(const Key& keycode) const;
 
 			bool IsPressed(const Mouse& button) const;
@@ -95,6 +98,7 @@ namespace Matrix
 			glm::vec2 GetMousePosition() const;
 
 		private:
+
 			static void SetKeyState(int32_t key, int32_t action);
 
 			static void SetMouseState(int32_t button, int32_t action);
@@ -104,18 +108,20 @@ namespace Matrix
 			static void CursorFocus(int32_t entered);
 
 		private:
+
 			friend class Window;
 
-			inline static bool m_KeyState[MAX_KEYS]{ 0 };
-			inline static bool m_MouseButtonPressed[MAX_BUTTONS]{ 0 };
+			inline static bool s_KeyState[MAX_KEYS]{ 0 };
+			inline static bool s_MouseButtonPressed[MAX_BUTTONS]{ 0 };
 			
 			inline static glm::vec2 m_MousePos;
-			inline static double m_Lastx;
-			inline static double m_Lasty;
-			inline static double m_Scrollx;
-			inline static double m_Scrolly;
-			inline static bool m_IsDragging;
-			inline static int m_CursorCheck;
+			inline static double s_Lastx;
+			inline static double s_Lasty;
+			inline static double s_Scrollx;
+			inline static double s_Scrolly;
+			inline static bool   s_IsDragging;
+			inline static int    s_CursorCheck;
+
 		};
 		
 	

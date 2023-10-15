@@ -1,7 +1,6 @@
 #pragma once
-
 #include "Common.h"
-#include "ui/Window.h"
+#include "EngineCore.h"
 
 namespace Matrix {
 
@@ -11,18 +10,16 @@ namespace Matrix {
 		{
 		public:
 
-			Application(Matrix::ui::WindowSpec config = Matrix::ui::WindowSpec());
+			Application();
 
 		private:
 
 			void Run();
-
+		
 		private:
-			std::unique_ptr<Matrix::ui::Window> m_Window;
-			Matrix::ui::Input m_Input;
+			Matrix::core::EngineCore m_Engine;
 		};
 
-		//Needs to be called on the Client side
 		Application* CreateApplication();
 	
 	}

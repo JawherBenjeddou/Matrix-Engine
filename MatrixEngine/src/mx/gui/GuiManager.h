@@ -9,8 +9,6 @@ namespace Matrix
 		{
 			GuiManager(){}
 			~GuiManager(){}
-
-
 		};
 	}
 }

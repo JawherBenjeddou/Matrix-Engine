@@ -24,33 +24,37 @@ namespace Matrix {
 
 		 class MATRIX_API Window
 		 {
-
             public:
-            Window(WindowSpec config);
+            Window(WindowSpec config = WindowSpec());
 
             ~Window();
 
-            void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
+            void InitSystem();
 
             void OnUpdate() const;
 
             bool Closed() const;
 
-            uint32_t GetWidth() const;
+            inline uint32_t GetWidth() const
+            {
+                return m_Width;
+            }
 
-            uint32_t GetHeight() const
+            inline uint32_t GetHeight() const
             {
                 return m_Height;
             }
 
 
-            GLFWwindow* GetWindow()
+            GLFWwindow* GetWindow() 
             {
                 return m_Window;
             }
          
          private:
 
+            void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
+            
             void InitGL();
 
             static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);

@@ -11,6 +11,10 @@ namespace Matrix {
 			m_Width(config.m_Width),
 			m_Height(config.m_Height)
 		{
+
+		}
+		void Window::InitSystem()
+		{
 			if (!glfwInit())
 				return;
 			glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
@@ -22,8 +26,8 @@ namespace Matrix {
 				return;
 			}
 
-			glfwSetKeyCallback(m_Window,Window::KeyCallBack);
-			
+			glfwSetKeyCallback(m_Window, Window::KeyCallBack);
+
 			glfwSetMouseButtonCallback(m_Window, Window::MouseCallBack);
 
 			glfwSetCursorPosCallback(m_Window, Window::CursorPositionCallBack);
@@ -31,10 +35,6 @@ namespace Matrix {
 			glfwSetCursorEnterCallback(m_Window, Window::CursorEnterCallBack);
 
 			InitGL();
-		}
-		inline uint32_t Window::GetWidth() const
-		{
-			return m_Width;
 		}
 	
 		void Window::InitGL()
@@ -70,11 +70,13 @@ namespace Matrix {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		}
 
+
 		void Window::OnUpdate() const
 		{
 			glfwPollEvents();
 			glViewport(0, 0, m_Width, m_Height);
 			glfwSwapBuffers(m_Window);
+			Clear();
 		}
 
 		bool Window::Closed() const

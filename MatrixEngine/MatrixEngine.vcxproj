@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\core\Logging.h" />
+    <ClInclude Include="src\mx\core\EngineCore.h" />
     <ClInclude Include="src\mx\gui\GuiManager.h" />
     <ClInclude Include="src\mx\ui\Input.h" />
     <ClInclude Include="src\mx\core\Application.h" />
@@ -22,6 +24,8 @@
     <ClInclude Include="src\mx\pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mx\core\Logging.cpp" />
+    <ClCompile Include="src\mx\core\EngineCore.cpp" />
     <ClCompile Include="src\mx\gui\GuiManager.cpp" />
     <ClCompile Include="src\mx\ui\Input.cpp" />
     <ClCompile Include="src\mx\core\Application.cpp" />
@@ -80,7 +84,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;$(SolutionDir)MatrixEngine\src;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -100,7 +104,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;$(SolutionDir)MatrixEngine\src;$(SolutionDir)Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>

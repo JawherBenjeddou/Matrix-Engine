@@ -2,13 +2,9 @@
 
 
 
-
-#include "mx/core/Application.h"
+#include "Common.h"
 #include "mx/ui/Window.h"
-#include "mx/math/Math.h"
-
-
-
+#include "core/Application.h"
 
 
 
