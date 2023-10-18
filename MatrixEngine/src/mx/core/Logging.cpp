@@ -13,5 +13,10 @@ namespace Matrix
 			s_ClientLogger = spdlog::stdout_color_mt("APPLICATION");
 		}
 
+		void Logging::ShutDown()
+		{
+			spdlog::shutdown();
+		}
+
 	}
 }

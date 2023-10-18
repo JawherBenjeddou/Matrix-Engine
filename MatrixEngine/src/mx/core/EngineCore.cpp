@@ -9,7 +9,8 @@ namespace Matrix
         void EngineCore::Initialize()
         {
             m_LoggingSystem.InitLogging();
-            MX_CORE_INFO("Initialization Started");
+            GetInfo();
+            MX_CORE_CRITICAL("Initialization Started");
 
             // Initialize Window System
             auto startTimeWindow = std::chrono::high_resolution_clock::now();
@@ -35,15 +36,28 @@ namespace Matrix
 			m_WindowSystem.OnUpdate();
 		}
 
+        //Usually in reverse order 
         void EngineCore::Shutdown()
         {
             m_WindowSystem.~Window();
+            Logging::ShutDown();
         }
 
 		bool EngineCore::IsWindowClosed() const
 		{
 			return m_WindowSystem.Closed();
 		}
+
+        void EngineCore::GetInfo()
+        {
+            MX_CORE_INFO("Matrix Engine v{}.{}", 0, 1);
+            m_WindowSystem.GetInfo();
+#ifdef _DEBUG
+            std::cout << "Configuration : DEBUG \n";
+#else
+            std::cout << "Configuration : RELEASE \n";
+#endif // RELEASE_MODE
+        }
 
 	}
 }

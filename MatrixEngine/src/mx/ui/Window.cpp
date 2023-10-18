@@ -21,7 +21,7 @@ namespace Matrix {
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 			if (!m_Window)
 			{
-				std::cerr << " Window creation ERROR";
+				MX_CORE_CRITICAL(" Window creation ERROR");
 				glfwTerminate();
 				return;
 			}
@@ -42,10 +42,8 @@ namespace Matrix {
 			glfwMakeContextCurrent(m_Window);
 			if (glewInit() != GLEW_OK)
 			{
-				std::cerr << " Error initializing glew";
+				MX_CORE_CRITICAL(" Error initializing glew");
 			}
-
-			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_STENCIL_TEST);
@@ -55,7 +53,10 @@ namespace Matrix {
 			glEnable(GL_CULL_FACE);
 		}
 
-		
+		void Window::GetInfo()
+		{
+			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+		}
 
 		Window::~Window()
 		{

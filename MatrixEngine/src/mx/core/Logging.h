@@ -12,11 +12,19 @@ namespace Matrix
 		class MATRIX_API Logging
 		{
 		public:
+		
+			Logging() = default;
+			~Logging() = default;
+		
+		public:
 			void InitLogging();
+		
+			static void ShutDown();
 
 			inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-			inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 
+			inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+		
 		private:
 			inline static std::shared_ptr<spdlog::logger> s_CoreLogger;
 			inline static std::shared_ptr<spdlog::logger> s_ClientLogger;

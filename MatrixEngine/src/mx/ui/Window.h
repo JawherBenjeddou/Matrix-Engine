@@ -7,6 +7,7 @@
 #include "GLFW/glfw3.h" 
 #include "Common.h"
 #include "Input.h"
+#include "core/Logging.h"
 
 namespace Matrix {
 	
@@ -34,6 +35,8 @@ namespace Matrix {
             void OnUpdate() const;
 
             bool Closed() const;
+            
+            void GetInfo();
 
             inline uint32_t GetWidth() const
             {
