@@ -53,14 +53,13 @@ namespace Matrix
         {
             MX_CORE_INFO("MATRIX ENGINE v{}.{}", 0, 1);
 
-#ifdef  MX_RELEASE_MODE 
+#ifdef  MX_DEBUG_MODE 
 
-            std::cout << "Configuration : RELEASE \n";
+            std::cout << ("Configuration : DEBUG \n");
+#endif  
+#ifdef  MX_RELEASE_MODE
 
-#endif
-#ifdef MX_DEBUG_MODE
-
-            std::cout << "Configuration : DEBUG \n";
+            std::cout << ("Configuration : RELEASE \n");
 
 #endif 
         }
