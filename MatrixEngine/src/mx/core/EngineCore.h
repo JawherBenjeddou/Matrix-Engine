@@ -24,6 +24,8 @@ namespace Matrix
             // Check if the engine's window is closed
             bool IsWindowClosed() const;
 
+            void GetInfo();
+
         private:
             Matrix::core::Logging m_LoggingSystem;
             Matrix::ui::Window m_WindowSystem;
