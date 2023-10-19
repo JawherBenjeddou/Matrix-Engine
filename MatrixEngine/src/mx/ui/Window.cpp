@@ -55,7 +55,22 @@ namespace Matrix {
 
 		void Window::GetInfo()
 		{
-			std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
+			std::cout << "Graphics Card : " << glGetString(GL_RENDERER) << "\n";
+
+			if (glfwExtensionSupported("GL_NVX_gpu_memory_info")) 
+			{
+				int32_t totalAvailableMemoryMB;
+				glGetIntegerv(GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX, &totalAvailableMemoryMB);
+
+				// Print the total available VRAM
+				std::cout << "Total Available VRAM: " << totalAvailableMemoryMB / 1000 << " GB" << "\n";
+			}
+			else 
+			{
+				std::cout << "GL_NVX_gpu_memory_info extension not supported.Cannot query VRAM." << "\n";
+			}
+
+			std::cout << "OpenGL " << glGetString(GL_VERSION) << "\n";
 		}
 
 		Window::~Window()
