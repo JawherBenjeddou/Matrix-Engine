@@ -51,7 +51,10 @@ namespace Matrix
 
         void EngineCore::GetInfo()
         {
-            MX_CORE_INFO("MATRIX ENGINE v{}.{}", 0, 1);
+            MX_CORE_TRACE("MATRIX ENGINE v{}.{}", 0, 1);
+            std::cout << ("-------------------- \n");
+            std::cout << ("SYSTEM INFORMATION \n");
+            std::cout << ("-------------------- \n");
 
 #ifdef  MX_DEBUG_MODE 
 
