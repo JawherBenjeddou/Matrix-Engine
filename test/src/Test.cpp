@@ -1,6 +1,6 @@
 #include "src/Matrix.h"
 #include "ui/Input.h"
-
+#include "stb_image.h"
 class EngineCoreTester : public Matrix::core::Application
 {
 public:
