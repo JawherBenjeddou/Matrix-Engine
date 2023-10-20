@@ -35,22 +35,9 @@ namespace Matrix {
 			glfwSetCursorEnterCallback(m_Window, Window::CursorEnterCallBack);
 
 			InitGL();
-		}
-	
-		void Window::InitGL()
-		{
-			glfwMakeContextCurrent(m_Window);
-			if (glewInit() != GLEW_OK)
-			{
-				MX_CORE_CRITICAL(" Error initializing glew");
-			}
 
-			glEnable(GL_DEPTH_TEST);
-			glEnable(GL_STENCIL_TEST);
-			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_CULL_FACE);
+			SetWindowIcon();
+
 		}
 
 		void Window::GetInfo()
@@ -79,14 +66,6 @@ namespace Matrix {
 			glfwTerminate();
 		}
 
-		void Window::Clear(glm::vec4 clear_color) const 
-		{
-			glClearStencil(0);  //sets the clear value for the stencil buffer to zero.
-			glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-		}
-
-
 		void Window::OnUpdate() const
 		{
 			glfwPollEvents();
@@ -98,6 +77,54 @@ namespace Matrix {
 		bool Window::Closed() const
 		{
 			return glfwWindowShouldClose(m_Window);
+		}
+
+		void Window::SetWindowIcon()  
+		{
+			
+			unsigned char* data = stbi_load("../resources/branding/icon.png", &m_IconWidth, &m_IconHeight, &m_IconChannels, STBI_rgb_alpha);
+			if (data)
+			{
+				GLFWimage icon;
+
+
+				icon.pixels = data;
+				icon.width = m_IconWidth;
+				icon.height = m_IconHeight;
+
+				// Assuming you have a GLFWwindow* named 'm_Window', you can set the icon like this:
+				glfwSetWindowIcon(m_Window, 1, &icon);
+
+				stbi_image_free(data);
+			}
+			else
+			{
+				MX_CORE_ERROR("Texture failed to load at path: ../resources/branding/icon.png");
+				stbi_image_free(data);
+			}
+		}
+
+		void Window::Clear(glm::vec4 clear_color) const
+		{
+			glClearStencil(0);  //sets the clear value for the stencil buffer to zero.
+			glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		}
+
+		void Window::InitGL()
+		{
+			glfwMakeContextCurrent(m_Window);
+			if (glewInit() != GLEW_OK)
+			{
+				MX_CORE_CRITICAL(" Error initializing glew");
+			}
+
+			glEnable(GL_DEPTH_TEST);
+			glEnable(GL_STENCIL_TEST);
+			glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glEnable(GL_CULL_FACE);
 		}
 
 		void Window::KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -114,10 +141,12 @@ namespace Matrix {
 		{
 			Input::SetCursorPosition(glm::vec2(xpos,ypos));
 		}
+
 		void Window::CursorEnterCallBack(GLFWwindow* window, int entered)
 		{
 			Input::CursorFocus(entered);
 		}
+
 	}
 
 

@@ -8,6 +8,7 @@
 #include "Common.h"
 #include "Input.h"
 #include "core/Logging.h"
+#include "stb_image.h"
 
 namespace Matrix {
 	
@@ -56,6 +57,8 @@ namespace Matrix {
          
          private:
 
+            void SetWindowIcon();
+            
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
             
             void InitGL();
@@ -68,7 +71,9 @@ namespace Matrix {
 
             static void CursorEnterCallBack(GLFWwindow* window, int entered);
         private:
-
+            int m_IconWidth;
+            int m_IconHeight; 
+            int m_IconChannels;
             const char* m_Title;
             uint32_t m_Width;
             uint32_t m_Height;
