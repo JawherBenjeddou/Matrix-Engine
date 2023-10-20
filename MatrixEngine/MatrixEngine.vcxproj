@@ -22,6 +22,7 @@
     <ClInclude Include="src\mx\ui\Window.h" />
     <ClInclude Include="src\mx\math\Math.h" />
     <ClInclude Include="src\mx\pch.h" />
+    <ClInclude Include="src\mx\util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\mx\core\Logging.cpp" />
@@ -36,6 +37,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\mx\util\stb_image.cpp" />
+    <ClCompile Include="src\mx\util\Timer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
