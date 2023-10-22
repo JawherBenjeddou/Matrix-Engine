@@ -58,7 +58,6 @@ namespace Matrix
 
 		void GuiManager::RenderGuiFrame()
 		{
-			uint32_t counter = 0;
 			// 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
 			{
 				ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.

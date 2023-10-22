@@ -82,7 +82,7 @@ namespace Matrix {
 		void Window::SetWindowIcon()  
 		{
 			
-			unsigned char* data = stbi_load("../resources/branding/icon.png", &m_IconWidth, &m_IconHeight, &m_IconChannels, STBI_rgb_alpha);
+			unsigned char* data = stbi_load("../resources/branding/iconpsd.png", &m_IconWidth, &m_IconHeight, &m_IconChannels, STBI_rgb_alpha);
 			if (data)
 			{
 				GLFWimage icon;

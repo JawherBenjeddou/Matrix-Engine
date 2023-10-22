@@ -26,6 +26,7 @@ namespace Matrix
 
         private:
             Matrix::ui::Window* m_Window;
+            uint32_t counter = 0;
         };
 	}
 }
