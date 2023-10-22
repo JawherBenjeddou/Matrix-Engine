@@ -14,8 +14,8 @@ namespace Matrix
 
 
 
-		GuiManager::GuiManager(Matrix::ui::Window* window)
-			:m_Window(window)
+		GuiManager::GuiManager(Matrix::ui::Window& window)
+			:m_Window(&window)
 		{
 
 		}

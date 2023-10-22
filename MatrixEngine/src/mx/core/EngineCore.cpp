@@ -6,7 +6,7 @@ namespace Matrix
 	namespace core
 	{
         EngineCore::EngineCore()
-            :m_GuiSystem(&m_WindowSystem)
+            :m_GuiSystem(m_WindowSystem)
         {
         }
         void EngineCore::Initialize()

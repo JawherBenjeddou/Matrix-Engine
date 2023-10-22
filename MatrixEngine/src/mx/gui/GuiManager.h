@@ -10,7 +10,7 @@ namespace Matrix
         class GuiManager {
 
         public:
-            GuiManager(Matrix::ui::Window* window);
+            GuiManager(Matrix::ui::Window& window);
 
             // Initialize ImGui and perform any necessary setup.
             void InitSystem();
