@@ -23,7 +23,7 @@ namespace Matrix {
             WindowSpec(std::string_view title = "Matrix Engine", uint32_t width = 1280, uint32_t height = 720)
                 : m_Title(title), m_Width(width), m_Height(height) {};
         };
-
+         
 		 class MATRIX_API Window
 		 {
             public:
@@ -57,6 +57,7 @@ namespace Matrix {
          
          private:
 
+            //temporarily (must be set by user to add his game icon or smth)
             void SetWindowIcon();
             
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;

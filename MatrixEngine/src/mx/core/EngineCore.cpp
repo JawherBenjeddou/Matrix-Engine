@@ -5,7 +5,10 @@ namespace Matrix
 {
 	namespace core
 	{
-
+        EngineCore::EngineCore()
+            :m_GuiSystem(&m_WindowSystem)
+        {
+        }
         void EngineCore::Initialize()
         {
             m_LoggingSystem.InitLogging();
@@ -29,11 +32,26 @@ namespace Matrix
 
             MX_CORE_WARN("Input System Initialized in {} ms", elapsedTimeInput.count());
 
+
+
+            // Initialize Gui System
+            auto startTimeGui = std::chrono::high_resolution_clock::now();
+            m_GuiSystem.InitSystem();
+            auto endTimeGui = std::chrono::high_resolution_clock::now();
+            auto elapsedTimeGui = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeInput - startTimeInput);
+
+            MX_CORE_WARN("Gui System Initialized in {} ms", elapsedTimeGui.count());
+
+
+
+
             MX_CORE_INFO("Initialization Completed");
         }
 
 		void EngineCore::OnUpdate()
 		{
+            m_GuiSystem.BeginFrame();
+            m_GuiSystem.RenderGuiFrame();
 			m_WindowSystem.OnUpdate();
 		}
 
@@ -42,6 +60,7 @@ namespace Matrix
         {
             m_WindowSystem.~Window();
             Logging::ShutDown();
+            m_GuiSystem.Shutdown();
         }
 
 		bool EngineCore::IsWindowClosed() const

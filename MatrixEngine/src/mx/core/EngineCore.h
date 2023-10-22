@@ -1,8 +1,10 @@
 #pragma once
 #include "Common.h"
 
+//Systems
 #include "ui\Window.h"
 #include "Logging.h"
+#include "gui/GuiManager.h"
 
 namespace Matrix
 {
@@ -11,6 +13,7 @@ namespace Matrix
         class MATRIX_API EngineCore
         {
         public:
+            EngineCore();
 
             // Initialize the engine and all its subsystems
             void Initialize();
@@ -30,6 +33,7 @@ namespace Matrix
             Matrix::core::Logging m_LoggingSystem;
             Matrix::ui::Window m_WindowSystem;
             Matrix::ui::Input m_InputSystem;
+            Matrix::gui::GuiManager m_GuiSystem;
         };
 
 	}
