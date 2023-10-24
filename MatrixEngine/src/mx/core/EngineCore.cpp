@@ -11,7 +11,11 @@ namespace Matrix
         }
         void EngineCore::Initialize()
         {
+            //Starts the GameTimer
+            m_Timer.Start();
+
             m_LoggingSystem.InitLogging();
+
             GetInfo();
 
             // Initialize Window System
@@ -32,8 +36,6 @@ namespace Matrix
 
             MX_CORE_WARN("Input System Initialized in {} ms", elapsedTimeInput.count());
 
-
-
             // Initialize Gui System
             auto startTimeGui = std::chrono::high_resolution_clock::now();
             m_GuiSystem.InitSystem();
@@ -50,17 +52,20 @@ namespace Matrix
 
 		void EngineCore::OnUpdate()
 		{
-            m_GuiSystem.BeginFrame();
-            m_GuiSystem.RenderGuiFrame();
+            //m_GuiSystem.BeginFrame(); //Called first than gui code batween this and update
+            m_GuiSystem.OnRenderGui();
 			m_WindowSystem.OnUpdate();
+            m_Timer.Tick();
 		}
 
         //Usually in reverse order 
         void EngineCore::Shutdown()
         {
+            MX_CORE_TRACE("Engine shutting down...");
             m_WindowSystem.~Window();
             Logging::ShutDown();
             m_GuiSystem.Shutdown();
+            MX_CORE_TRACE("Engine SHUTDOWN!");
         }
 
 		bool EngineCore::IsWindowClosed() const
@@ -70,7 +75,7 @@ namespace Matrix
 
         void EngineCore::GetInfo()
         {
-            MX_CORE_TRACE("MATRIX ENGINE v{}.{}", 0, 1);
+            MX_CORE_INFO("MATRIX ENGINE v{}.{}", 0, 1);
             std::cout << ("-------------------- \n");
             std::cout << ("SYSTEM INFORMATION \n");
             std::cout << ("-------------------- \n");

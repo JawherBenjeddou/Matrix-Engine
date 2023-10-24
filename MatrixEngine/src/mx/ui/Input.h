@@ -84,46 +84,59 @@ namespace Matrix
 		class MATRIX_API Input
 		{
 		public:
-
-		    void InitSystem();
+			// Input system initialization
+			void InitSystem();
 
 		public:
-
+			/**
+			 * @brief Check if a keyboard key is pressed.
+			 * @param keycode The key to check.
+			 * @return True if the key is pressed, false otherwise.
+			 */
 			bool IsPressed(const Key& keycode) const;
 
+			/**
+			 * @brief Check if a mouse button is pressed.
+			 * @param button The mouse button to check.
+			 * @return True if the button is pressed, false otherwise.
+			 */
 			bool IsPressed(const Mouse& button) const;
 
+			/**
+			 * @brief Check if the cursor is within the application's viewport.
+			 * @return True if the cursor is within the viewport, false otherwise.
+			 */
 			bool IsCursorInViewport() const;
-			
+
+			/**
+			 * @brief Get the current mouse cursor position.
+			 * @return The mouse cursor position as a 2D vector.
+			 */
 			glm::vec2 GetMousePosition() const;
 
 		private:
-
+			// Static methods for handling input state
 			static void SetKeyState(int32_t key, int32_t action);
 
 			static void SetMouseState(int32_t button, int32_t action);
-	
+
 			static void SetCursorPosition(const glm::vec2& position);
 
 			static void CursorFocus(int32_t entered);
 
 		private:
-
 			friend class Window;
 
-			inline static bool s_KeyState[MAX_KEYS]{ 0 };
-			inline static bool s_MouseButtonPressed[MAX_BUTTONS]{ 0 };
-			
-			inline static glm::vec2 m_MousePos;
-			inline static double s_Lastx;
-			inline static double s_Lasty;
-			inline static double s_Scrollx;
-			inline static double s_Scrolly;
-			inline static bool   s_IsDragging;
-			inline static int    s_CursorCheck;
-
+			inline static bool s_KeyState[MAX_KEYS]{ 0 };  // Array for keyboard key states
+			inline static bool s_MouseButtonPressed[MAX_BUTTONS]{ 0 };  // Array for mouse button states
+			inline static glm::vec2 m_MousePos;  // Current mouse position
+			inline static double s_Lastx;  // Last x-coordinate of the cursor
+			inline static double s_Lasty;  // Last y-coordinate of the cursor
+			inline static double s_Scrollx;  // Scroll x-coordinate
+			inline static double s_Scrolly;  // Scroll y-coordinate
+			inline static bool s_IsDragging;  // Flag to indicate dragging
+			inline static int s_CursorCheck;  // Cursor focus check
 		};
-		
 	
 	}
 }

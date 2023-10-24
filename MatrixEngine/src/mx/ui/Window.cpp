@@ -79,10 +79,10 @@ namespace Matrix {
 			return glfwWindowShouldClose(m_Window);
 		}
 
-		void Window::SetWindowIcon()  
+		void Window::SetWindowIcon(const char* path)
 		{
 			
-			unsigned char* data = stbi_load("../resources/branding/iconpsd.png", &m_IconWidth, &m_IconHeight, &m_IconChannels, STBI_rgb_alpha);
+			unsigned char* data = stbi_load(path, &m_IconWidth, &m_IconHeight, &m_IconChannels, STBI_rgb_alpha);
 			if (data)
 			{
 				GLFWimage icon;
@@ -99,7 +99,7 @@ namespace Matrix {
 			}
 			else
 			{
-				MX_CORE_ERROR("Texture failed to load at path: ../resources/branding/icon.png");
+				MX_CORE_ERROR("Texture failed to load at path: ");
 				stbi_image_free(data);
 			}
 		}

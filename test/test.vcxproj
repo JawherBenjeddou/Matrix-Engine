@@ -68,8 +68,12 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>copy "$(SolutionDir)bin\Debug-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)bin\Debug-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -92,8 +96,12 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>copy "$(SolutionDir)bin\Release-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)bin\Release-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\MatrixEngine\MatrixEngine.vcxproj">

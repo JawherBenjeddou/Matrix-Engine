@@ -17,12 +17,17 @@ namespace Matrix
 			~Logging() = default;
 		
 		public:
+			//@brief Initializes the logging system.
 			void InitLogging();
-		
+			
+			
+			//@brief Shuts down the logging system.
 			static void ShutDown();
 
+			//@return The core logger instance.
 			inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 
+			//@return The client logger instance.
 			inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 		
 		private:

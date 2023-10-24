@@ -14,7 +14,7 @@ namespace Matrix {
 	
     namespace ui
 	{
-
+        // Structure for specifying window properties aka (title,widh,heigh).
         struct MATRIX_API WindowSpec
         {
             std::string_view m_Title;
@@ -24,46 +24,51 @@ namespace Matrix {
                 : m_Title(title), m_Width(width), m_Height(height) {};
         };
          
-		 class MATRIX_API Window
-		 {
-            public:
+        class MATRIX_API Window
+        {
+        public:
             Window(WindowSpec config = WindowSpec());
 
             ~Window();
 
+            // Initialize the window and input system.
             void InitSystem();
 
+            // Update the window and handle input events.
             void OnUpdate() const;
 
+            /**
+             * @brief Check if window is closed.
+             * @return True if window is closed, false otherwise.
+             */
             bool Closed() const;
-            
+
+            // Get window information.
             void GetInfo();
 
-            inline uint32_t GetWidth() const
-            {
-                return m_Width;
-            }
+            //Get the width of the window.
+            uint32_t GetWidth() const { return m_Width; }
 
-            inline uint32_t GetHeight() const
-            {
-                return m_Height;
-            }
+            // Get the height of the window.
+            uint32_t GetHeight() const { return m_Height; }
 
-
-            GLFWwindow* GetWindow() 
+            // Get a pointer to the GLFW window.
+            auto* GetWindow()
             {
                 return m_Window;
             }
-         
-         private:
 
-            //temporarily (must be set by user to add his game icon or smth)
-            void SetWindowIcon();
-            
+        private:
+            // Set the window icon (temporary, should be set by the user).
+            void SetWindowIcon(const char* path = "../resources/branding/iconpsd256.png");
+
+            // Clear the window with a specified clear color.
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
-            
+
+            // Initialize OpenGL.
             void InitGL();
 
+            // Static callback functions for handling input events.
             static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 
             static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
@@ -71,16 +76,16 @@ namespace Matrix {
             static void CursorPositionCallBack(GLFWwindow* window, double xpos, double ypos);
 
             static void CursorEnterCallBack(GLFWwindow* window, int entered);
+
         private:
             int m_IconWidth;
-            int m_IconHeight; 
+            int m_IconHeight;
             int m_IconChannels;
             const char* m_Title;
             uint32_t m_Width;
             uint32_t m_Height;
-           //bool m_Closed;
             GLFWwindow* m_Window = nullptr;
-		};
+        };
 
 	}
 

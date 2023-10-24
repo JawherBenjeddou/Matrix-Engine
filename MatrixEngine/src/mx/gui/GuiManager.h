@@ -1,38 +1,46 @@
 #pragma once
 
-#include "ui/Window.h"
-#include "core/Logging.h"
+#include "UI/Window.h"   
+#include "Core/logging.h" 
 
 namespace Matrix
 {
-	namespace gui
-	{
-        class GuiManager {
-
+    namespace gui
+    {
+        // A manager responsible for controlling the core and all inits of ImGui.
+        class MATRIX_API GuiManager
+        {
         public:
+
+          
             GuiManager(Matrix::ui::Window& window);
 
-            // Initialize ImGui and perform any necessary setup.
+            // Initialize the GUI system, including ImGui.
             void InitSystem();
 
-            // Shutdown and clean up ImGui resources.
+            // Clean up and release resources used by the GUI.
             void Shutdown();
 
-            // Start a new ImGui frame.
+            //Renders all the engine gui
+            void OnRenderGui();
+
+
+        private:
+
+            //Configures the ImGui style with custom colors.
+            void SetupImGuiStyleColors();
+
+            // Begin a new frame for the GUI.
             void BeginFrame();
 
-            // Render the ImGui UI.
+            // Render the ImGui-based user interface.
             void RenderGuiFrame();
 
         private:
-            Matrix::ui::Window* m_Window;
+            float m_FontSize;
             uint32_t counter = 0;
+            Matrix::ui::Window* m_Window;
         };
-	}
+
+    }
 }
-
-
-
-
-
-
