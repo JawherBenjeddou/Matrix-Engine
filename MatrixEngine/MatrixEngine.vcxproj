@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\graphics\DebugContext.h" />
     <ClInclude Include="src\mx\gui\GuiManager.h" />
     <ClInclude Include="src\mx\core\Logging.h" />
     <ClInclude Include="src\mx\core\EngineCore.h" />

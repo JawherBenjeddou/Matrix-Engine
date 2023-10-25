@@ -23,10 +23,11 @@ namespace Matrix
             auto startTimeWindow = std::chrono::high_resolution_clock::now();
             m_WindowSystem.InitSystem();
             m_WindowSystem.GetInfo();
+            MX_CORE_INFO("Initialization Started ... ");
             auto endTimeWindow = std::chrono::high_resolution_clock::now();
             auto elapsedTimeWindow = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeWindow - startTimeWindow);
 
-            MX_CORE_INFO("Initialization Started ... ");
+            m_WindowSystem.SetWindowIcon();
             MX_CORE_WARN("Window System Initialized in {} ms", elapsedTimeWindow.count());
 
             // Initialize Input System

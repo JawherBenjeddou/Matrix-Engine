@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "window.h"
-
+#include "graphics/DebugContext.h"
 
 namespace Matrix {
 
@@ -18,6 +18,9 @@ namespace Matrix {
 			if (!glfwInit())
 				return;
 			glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+#ifdef  MX_DEBUG_MODE
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+#endif //  MX_DEBUG_MODE
 			m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 			if (!m_Window)
 			{
@@ -35,8 +38,6 @@ namespace Matrix {
 			glfwSetCursorEnterCallback(m_Window, Window::CursorEnterCallBack);
 
 			InitGL();
-
-			SetWindowIcon();
 
 		}
 
@@ -99,7 +100,7 @@ namespace Matrix {
 			}
 			else
 			{
-				MX_CORE_ERROR("Texture failed to load at path: ");
+				MX_CORE_ERROR("Icon failed to load at path: {0}", path);
 				stbi_image_free(data);
 			}
 		}
@@ -118,6 +119,9 @@ namespace Matrix {
 			{
 				MX_CORE_CRITICAL(" Error initializing glew");
 			}
+			
+			//enables the opengl debug context
+			Matrix::graphics::EnableDebugContext();
 
 			glEnable(GL_DEPTH_TEST);
 			glEnable(GL_STENCIL_TEST);
@@ -125,6 +129,7 @@ namespace Matrix {
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_CULL_FACE);
+
 		}
 
 		void Window::KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -146,8 +151,10 @@ namespace Matrix {
 		{
 			Input::CursorFocus(entered);
 		}
+	
 
 	}
 
 
 }
+

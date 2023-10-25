@@ -1,11 +1,13 @@
 #pragma once
 
+#include "Common.h"
 #include <iostream>
 
 #include "math/Math.h"
+
 #include "GL/glew.h"
 #include "GLFW/glfw3.h" 
-#include "Common.h"
+
 #include "Input.h"
 #include "core/Logging.h"
 #include "stb_image.h"
@@ -46,6 +48,9 @@ namespace Matrix {
             // Get window information.
             void GetInfo();
 
+            // Set the window icon (temporary, should be set by the user).
+            void SetWindowIcon(const char* path = "../resources/branding/iconpsd256.png");
+
             //Get the width of the window.
             uint32_t GetWidth() const { return m_Width; }
 
@@ -59,8 +64,7 @@ namespace Matrix {
             }
 
         private:
-            // Set the window icon (temporary, should be set by the user).
-            void SetWindowIcon(const char* path = "../resources/branding/iconpsd256.png");
+          
 
             // Clear the window with a specified clear color.
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
