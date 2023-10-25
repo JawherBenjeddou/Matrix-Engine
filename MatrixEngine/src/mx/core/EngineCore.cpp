@@ -8,6 +8,7 @@ namespace Matrix
         EngineCore::EngineCore()
             :m_GuiSystem(m_WindowSystem)
         {
+   
         }
         void EngineCore::Initialize()
         {

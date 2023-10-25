@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <functional>
 #include <fstream>
+#include <variant>
 
 // Data structures
 #include <string>

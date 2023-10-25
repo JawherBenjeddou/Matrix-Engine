@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.h"
+#include "pch.h"
 
 //Systems
 #include "ui/Window.h"

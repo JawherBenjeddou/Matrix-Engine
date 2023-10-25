@@ -20,6 +20,7 @@ namespace Matrix {
 		
 		private:
 			Matrix::core::EngineCore m_Engine;
+		
 		};
 
 		/**
@@ -30,3 +31,18 @@ namespace Matrix {
 	
 	}
 }
+
+/**
+ * @brief Macro to create the CreateApplication function for an application class.
+ *
+ * Use this macro in a derived application class header to auto-generate
+ * the CreateApplication function. It simplifies the process of instantiating
+ * the class as an application.
+ *
+ * @return A new instance of the specified application class.
+ */
+#define IMPLEMENT_APPLICATION_CLASS(appClass) \
+    Matrix::core::Application* Matrix::core::CreateApplication() \
+    { \
+        return new appClass(); \
+    }
