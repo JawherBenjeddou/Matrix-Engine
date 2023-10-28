@@ -19,7 +19,9 @@ namespace Matrix {
             IMGUI_CHECKVERSION();
             ImGui::CreateContext();
             ImGuiIO& io = ImGui::GetIO();
-            io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+            io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+            io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+            io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
             ImGui::StyleColorsDark();
 
             ImGui_ImplGlfw_InitForOpenGL(m_Window->GetWindow(), true);
@@ -41,24 +43,24 @@ namespace Matrix {
 
         void GuiManager::OnRenderGui() {
             BeginFrame();
+
             //Gui code goes here
             //.
             //.
             //.
-             ImGui::Begin("Features");                          // Create a window called "Hello, world!" and append into it.
+            DrawGui(); //TODO:  needs to call every custom gui of every instance figure out how to 
 
-             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-
-             if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                 counter++;
-             ImGui::SameLine();
-             ImGui::Text("counter = %d", counter);
-
-             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f);
-             ImGui::End();
 
 
             RenderGuiFrame();
+        }
+
+        void GuiManager::DrawGui()
+        {
+  
+            static bool show = true;
+            ImGui::ShowDemoWindow(&show);
+
         }
 
         void GuiManager::SetupImGuiStyleColors()
@@ -152,8 +154,20 @@ namespace Matrix {
         }
 
         void GuiManager::RenderGuiFrame() {
+       
+            ImGuiIO& io = ImGui::GetIO();
+            io.DisplaySize = ImVec2(m_Window->GetWidth(),m_Window->GetHeight());
+
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+            if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+            {
+                GLFWwindow* backup_current_context = glfwGetCurrentContext();
+                ImGui::UpdatePlatformWindows();
+                ImGui::RenderPlatformWindowsDefault();
+                glfwMakeContextCurrent(backup_current_context);
+            }
         }
     }
 }

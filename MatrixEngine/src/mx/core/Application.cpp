@@ -16,7 +16,6 @@ namespace Matrix {
 			m_Engine.Initialize();
 			while (!m_Engine.IsWindowClosed())
 			{
-
 				m_Engine.OnUpdate();
 			}
 

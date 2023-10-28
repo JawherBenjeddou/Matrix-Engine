@@ -21,9 +21,11 @@ namespace Matrix
             // Clean up and release resources used by the GUI.
             void Shutdown();
 
-            //Renders all the engine gui
+            //Renders all the engine gui (gets called every frame).
             void OnRenderGui();
 
+            //Draws all the custom gui and can be overriden by sub classes.
+            virtual void DrawGui();
 
         private:
 
