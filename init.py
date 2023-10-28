@@ -9,10 +9,10 @@ def install_dependencies():
     # Define a list of GitHub repositories and their respective branches or versions
     #(URL, branch_option, branch_name)
     github_repositories = [
+        ("https://github.com/nothings/stb",  "--branch", "master"),  # No specific branch/version for this repository
         ("https://github.com/g-truc/glm", "--branch", "0.9.9.8"),
         ("https://github.com/ocornut/imgui", "--branch", "v1.89.9"),
-        ("https://github.com/gabime/spdlog", "--branch", "v1.12.0"),
-        ("https://github.com/nothings/stb", "")  # No specific branch/version for this repository
+        ("https://github.com/gabime/spdlog", "--branch", "v1.12.0")
     ]
 
     try:
