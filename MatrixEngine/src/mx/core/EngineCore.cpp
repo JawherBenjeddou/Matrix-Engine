@@ -17,6 +17,7 @@ namespace Matrix
 
             m_LoggingSystem.InitLogging();
 
+           
             GetInfo();
 
             // Initialize Window System
@@ -45,8 +46,6 @@ namespace Matrix
             auto elapsedTimeGui = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeInput - startTimeInput);
 
             MX_CORE_WARN("Gui System Initialized in {} ms", elapsedTimeGui.count());
-
-
 
 
             MX_CORE_INFO("Initialization Completed");

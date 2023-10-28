@@ -11,13 +11,13 @@ namespace Matrix
     {
         void GLAPIENTRY OpenGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
             if (severity == GL_DEBUG_SEVERITY_HIGH) {
-                MX_CORE_CRITICAL("OpenGL Error (High):  {0} ", message);
+                MX_CORE_CRITICAL("OpenGL Error (High): {} ", message);
             }
             else if (severity == GL_DEBUG_SEVERITY_MEDIUM) {
-                MX_CORE_ERROR("OpenGL Error (Medium):  {0} ", message);
+                MX_CORE_ERROR("OpenGL Error (Medium): {} ", message);
             }
             else if (severity == GL_DEBUG_SEVERITY_LOW) {
-                MX_CORE_ERROR("OpenGL Error (LOW):  {0} ", message);
+                MX_CORE_ERROR("OpenGL Error (LOW): {} ", message);
 
             }
         }

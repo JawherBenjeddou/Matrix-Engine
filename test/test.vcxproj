@@ -68,8 +68,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy "$(SolutionDir)bin\Debug-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)bin\Debug-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
@@ -96,8 +95,7 @@
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy "$(SolutionDir)bin\Release-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)bin\Release-x64\MatrixEngine\MatrixEngine.dll" "$(OutDir)"</Command>
