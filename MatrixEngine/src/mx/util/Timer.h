@@ -1,4 +1,5 @@
 #pragma once
+///@file Timer.h
 
 #include "GLFW/glfw3.h"
 #include <chrono>
@@ -12,22 +13,22 @@ namespace Matrix
         public:
             Timer();
 
-            // Start or restart the timer.
+            /// Start or restart the timer.
             void Start();
 
-            // Stop the timer.
+            /// Stop the timer.
             void Stop();
 
-            // Reset the timer.
+            /// Reset the timer.
             void Reset();
 
-            // Get the elapsed time in seconds.
+            /// Get the elapsed time in seconds.
             float ElapsedTime() const;
 
-            // Get the time in seconds since the last frame.
+            /// Get the time in seconds since the last frame.
             float DeltaTime() const;
 
-            // Called at the beginning of each frame.
+            /// Called at the beginning of each frame.
             void Tick();
 
         private:

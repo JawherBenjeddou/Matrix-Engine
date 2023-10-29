@@ -1,4 +1,5 @@
 #pragma once
+///@file Input.h
 
 #include "Common.h"
 #include "math/Math.h"
@@ -84,7 +85,7 @@ namespace Matrix
 		class MATRIX_API Input
 		{
 		public:
-			// Input system initialization
+			/// Input system initialization
 			void InitSystem();
 
 		public:
@@ -115,27 +116,27 @@ namespace Matrix
 			glm::vec2 GetMousePosition() const;
 
 		private:
-			// Static methods for handling input state
+			/// Static methods for handling Keyboard input state
 			static void SetKeyState(int32_t key, int32_t action);
-
+			/// Static methods for handling Mouse input state
 			static void SetMouseState(int32_t button, int32_t action);
-
+			/// Static methods for handling Cursor Position input state
 			static void SetCursorPosition(const glm::vec2& position);
-
+			/// Static methods for checking if curson in viewport
 			static void CursorFocus(int32_t entered);
 
 		private:
 			friend class Window;
 
-			inline static bool s_KeyState[MAX_KEYS]{ 0 };  // Array for keyboard key states
-			inline static bool s_MouseButtonPressed[MAX_BUTTONS]{ 0 };  // Array for mouse button states
-			inline static glm::vec2 m_MousePos;  // Current mouse position
-			inline static double s_Lastx;  // Last x-coordinate of the cursor
-			inline static double s_Lasty;  // Last y-coordinate of the cursor
-			inline static double s_Scrollx;  // Scroll x-coordinate
-			inline static double s_Scrolly;  // Scroll y-coordinate
-			inline static bool s_IsDragging;  // Flag to indicate dragging
-			inline static int s_CursorCheck;  // Cursor focus check
+			inline static bool s_KeyState[MAX_KEYS]{ 0 };  /// Array for keyboard key states
+			inline static bool s_MouseButtonPressed[MAX_BUTTONS]{ 0 };  /// Array for mouse button states
+			inline static glm::vec2 m_MousePos;  /// Current mouse position
+			inline static double s_Lastx;  /// Last x-coordinate of the cursor
+			inline static double s_Lasty;  /// Last y-coordinate of the cursor
+			inline static double s_Scrollx;  /// Scroll x-coordinate
+			inline static double s_Scrolly;  /// Scroll y-coordinate
+			inline static bool s_IsDragging;  /// Flag to indicate dragging
+			inline static int s_CursorCheck;  /// Cursor focus check
 		};
 	
 	}

@@ -1,4 +1,6 @@
 #pragma once
+///@file Application.h
+
 #include "Common.h"
 #include "EngineCore.h"
 
@@ -6,7 +8,7 @@ namespace Matrix {
 
 	namespace core {
 		
-		//application class for the Matrix framework.
+		///application class for the Matrix framework.
 		class MATRIX_API Application
 		{
 		public:
@@ -15,7 +17,7 @@ namespace Matrix {
 
 		private:
 
-			//Main execution loop for the application.
+			///Main execution loop for the application.
 			void Run();
 		
 		private:

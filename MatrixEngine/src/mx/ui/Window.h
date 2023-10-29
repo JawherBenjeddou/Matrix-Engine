@@ -1,4 +1,5 @@
 #pragma once
+///@file Window.h
 
 #include "Common.h"
 #include <iostream>
@@ -16,7 +17,7 @@ namespace Matrix {
 	
     namespace ui
 	{
-        // Structure for specifying window properties aka (title,widh,heigh).
+        /// Structure for specifying window properties aka (title,widh,heigh).
         struct MATRIX_API WindowSpec
         {
             std::string_view m_Title;
@@ -33,10 +34,10 @@ namespace Matrix {
 
             ~Window();
 
-            // Initialize the window and input system.
+            /// Initialize the window and input system.
             void InitSystem();
 
-            // Update the window and handle input events.
+            /// Update the window and handle input events.
             void OnUpdate() const;
 
             /**
@@ -45,19 +46,19 @@ namespace Matrix {
              */
             bool Closed() const;
 
-            // Get window information.
+            /// Get window information.
             void GetInfo();
 
-            // Set the window icon (temporary, should be set by the user).
+            /// Set the window icon (temporary, should be set by the user).
             void SetWindowIcon(const char* path = "../resources/branding/iconpsd256.png");
 
-            //Get the width of the window.
+            ///Get the width of the window.
             uint32_t GetWidth() const { return m_Width; }
 
-            // Get the height of the window.
+            /// Get the height of the window.
             uint32_t GetHeight() const { return m_Height; }
 
-            // Get a pointer to the GLFW window.
+            /// Get a pointer to the GLFW window.
             auto* GetWindow()
             {
                 return m_Window;
@@ -66,13 +67,13 @@ namespace Matrix {
         private:
           
 
-            // Clear the window with a specified clear color.
+            /// Clear the window with a specified clear color.
             void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
 
-            // Initialize OpenGL.
+            /// Initialize OpenGL.
             void InitGL();
 
-            // Static callback functions for handling input events.
+            /// Static callback functions for handling input events.
             static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
 
             static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
