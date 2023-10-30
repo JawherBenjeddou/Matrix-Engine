@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "EngineCore.h"
 
+
 namespace Matrix
 {
 	namespace core
@@ -47,13 +48,32 @@ namespace Matrix
 
             MX_CORE_WARN("Gui System Initialized in {} ms", elapsedTimeGui.count());
 
+            ShaderFactory::GetInstance().CreateShader("defaultshader","../MatrixEngine/src/mx/graphics/shaders/default/default.frag","../MatrixEngine/src/mx/graphics/shaders/default/default.vert");
 
+
+            float vertices[] = {
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.0f, 0.5f, 0.0f
+            };
+
+            unsigned int VBO;
+            glGenBuffers(1, &VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),(void*)0);
+            glEnableVertexAttribArray(0);
+            
+            MX_CORE_INFO("Shader compilation completed successfully in {} ms");
+           
+            
             MX_CORE_INFO("Initialization Completed");
         }
 
 		void EngineCore::OnUpdate()
 		{
-            //m_GuiSystem.BeginFrame(); //Called first than gui code batween this and update
+            glUseProgram(ShaderFactory::GetInstance().GetShader("defaultshader")->GetId());
+            glDrawArrays(GL_TRIANGLES, 0, 3);
             m_GuiSystem.OnRenderGui();
 			m_WindowSystem.OnUpdate();
             m_Timer.Tick();
@@ -62,11 +82,11 @@ namespace Matrix
         //Usually in reverse order 
         void EngineCore::Shutdown()
         {
-            MX_CORE_TRACE("Engine shutting down...");
+            ShaderFactory::GetInstance().Cleanup();
+            m_GuiSystem.Shutdown();
             m_WindowSystem.~Window();
             Logging::ShutDown();
-            m_GuiSystem.Shutdown();
-            MX_CORE_TRACE("Engine SHUTDOWN!");
+            MX_CORE_INFO("Engine SHUTDOWN!");
         }
 
 		bool EngineCore::IsWindowClosed() const

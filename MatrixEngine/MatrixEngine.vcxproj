@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\graphics\shaders\Shader.h" />
+    <ClInclude Include="src\mx\graphics\shaders\ShaderFactory.h" />
     <ClInclude Include="src\mx\graphics\DebugContext.h" />
     <ClInclude Include="src\mx\gui\GuiManager.h" />
     <ClInclude Include="src\mx\core\Logging.h" />
@@ -27,6 +29,8 @@
     <ClInclude Include="src\mx\util\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mx\graphics\shaders\Shader.cpp" />
+    <ClCompile Include="src\mx\graphics\shaders\ShaderFactory.cpp" />
     <ClCompile Include="src\mx\gui\GuiManager.cpp" />
     <ClCompile Include="src\mx\core\Logging.cpp" />
     <ClCompile Include="src\mx\core\EngineCore.cpp" />
@@ -48,6 +52,10 @@
     </ClCompile>
     <ClCompile Include="src\mx\util\stb_image.cpp" />
     <ClCompile Include="src\mx\util\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\mx\graphics\shaders\default\default.frag" />
+    <None Include="src\mx\graphics\shaders\default\default.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

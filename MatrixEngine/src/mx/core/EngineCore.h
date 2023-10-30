@@ -9,6 +9,7 @@
 #include "Logging.h"
 #include "gui/GuiManager.h"
 #include "util/Timer.h"
+#include "graphics/shaders/ShaderFactory.h"
 
 namespace Matrix
 {
@@ -35,6 +36,8 @@ namespace Matrix
             void GetInfo();
 
         private:
+            using ShaderFactory = Matrix::graphics::ShaderFactory;
+
             Matrix::core::Logging m_LoggingSystem;
             Matrix::ui::Window m_WindowSystem;
             Matrix::ui::Input m_InputSystem;

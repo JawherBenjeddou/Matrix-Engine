@@ -1,5 +1,7 @@
 #pragma once
-///@file GuiManager.h
+/**
+    @file GuiManager.h
+*/
 
 #include "UI/Window.h"   
 #include "Core/logging.h" 

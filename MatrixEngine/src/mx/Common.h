@@ -14,6 +14,10 @@
 
 #ifdef MX_DEBUG_MODE
 	// Engine custom assert macro
+	#define MX_ASSERT_NC(message) \
+	            std::cerr << "Assertion failed: " << " in " << __FILE__ << " line " << __LINE__ << ": " << message << std::endl; \
+	            std::terminate();
+
 	#define MX_ASSERT(condition, message) \
 	    do { \
 	        if (!(condition)) { \
