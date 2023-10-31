@@ -15,39 +15,30 @@ namespace Matrix
         {
             //Starts the GameTimer
             m_Timer.Start();
-
+            
+            //Init logging
             m_LoggingSystem.InitLogging();
 
-           
+            //Log system info
             GetInfo();
 
             // Initialize Window System
-            auto startTimeWindow = std::chrono::high_resolution_clock::now();
             m_WindowSystem.InitSystem();
             m_WindowSystem.GetInfo();
             MX_CORE_INFO("Initialization Started ... ");
-            auto endTimeWindow = std::chrono::high_resolution_clock::now();
-            auto elapsedTimeWindow = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeWindow - startTimeWindow);
-
             m_WindowSystem.SetWindowIcon();
-            MX_CORE_WARN("Window System Initialized in {} ms", elapsedTimeWindow.count());
+            MX_CORE_WARN("Window System Initialized");
 
             // Initialize Input System
-            auto startTimeInput = std::chrono::high_resolution_clock::now();
             m_InputSystem.InitSystem();
-            auto endTimeInput = std::chrono::high_resolution_clock::now();
-            auto elapsedTimeInput = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeInput - startTimeInput);
-
-            MX_CORE_WARN("Input System Initialized in {} ms", elapsedTimeInput.count());
+            MX_CORE_WARN("Input System Initialized");
 
             // Initialize Gui System
-            auto startTimeGui = std::chrono::high_resolution_clock::now();
             m_GuiSystem.InitSystem();
-            auto endTimeGui = std::chrono::high_resolution_clock::now();
-            auto elapsedTimeGui = std::chrono::duration_cast<std::chrono::milliseconds>(endTimeInput - startTimeInput);
+            MX_CORE_WARN("Gui System Initialized");
 
-            MX_CORE_WARN("Gui System Initialized in {} ms", elapsedTimeGui.count());
-
+            //Initializing Shaders
+            MX_CORE_WARN("Compiling Shaders...");
             ShaderFactory::GetInstance().CreateShader("defaultshader","../MatrixEngine/src/mx/graphics/shaders/default/default.frag","../MatrixEngine/src/mx/graphics/shaders/default/default.vert");
 
 
@@ -66,19 +57,19 @@ namespace Matrix
             glEnableVertexAttribArray(0);
 
             
-            MX_CORE_WARN("Shader compilation completed successfully in {} ms");
+            MX_CORE_WARN("Shader compilation completed successfully");
            
             
-            MX_CORE_INFO("Initialization Completed");
+            MX_CORE_INFO("Engine Initialization Completed");
         }
 
 		void EngineCore::OnUpdate()
 		{
+            m_Timer.Tick();
             glUseProgram(ShaderFactory::GetInstance().GetShader("defaultshader")->GetId());
             glDrawArrays(GL_TRIANGLES, 0, 3);
             m_GuiSystem.OnRenderGui();
 			m_WindowSystem.OnUpdate();
-            m_Timer.Tick();
 		}
 
         //Usually in reverse order 
