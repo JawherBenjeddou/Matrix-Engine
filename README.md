@@ -21,4 +21,4 @@ The plan for Matrix Engine is: to create a powerful 2D/3D engine, but also to se
 - implementing batch rendering ,
 - Adding audio,
 - adding physics,
-- making a interactive game based on the "mandela effect".
+- making an interactive game based on the "mandela effect".
