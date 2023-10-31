@@ -31,7 +31,7 @@ namespace Matrix
 			{
 				glGetShaderInfoLog(vertex, 512, NULL, VertexErrorInfo);
 				MX_CORE_ERROR("ERROR::SHADER::VERTEX::COMPILATION_FAILED");
-				MX_CORE_ERROR("{}", VertexErrorInfo);
+				MX_ASSERT(false, VertexErrorInfo);
 			};
 
 			char FragmentErrorInfo[512];
@@ -47,7 +47,7 @@ namespace Matrix
 			{
 				glGetShaderInfoLog(fragment, 512, NULL, FragmentErrorInfo);
 				MX_CORE_ERROR("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED");
-				MX_CORE_ERROR("{}", FragmentErrorInfo);
+				MX_ASSERT(false, FragmentErrorInfo);
 			}
 
 
@@ -64,7 +64,7 @@ namespace Matrix
 			{
 				glGetProgramInfoLog(m_ID, 512, NULL, LinkingErrorInfo);
 				MX_CORE_ERROR("ERROR::SHADER::LINKING::LINKING_FAILED");
-				MX_CORE_ERROR("{}", LinkingErrorInfo);
+				MX_ASSERT(false, LinkingErrorInfo);
 			}
 
 			//Delete shaders 
@@ -92,9 +92,7 @@ namespace Matrix
 				shader_code = shaderStream.str();
 			}
 			catch (std::ifstream::failure e) {
-
-				MX_CORE_ERROR("ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ");
-				
+				MX_ASSERT(false,"ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ");
 			}
 
 			return shader_code;

@@ -10,7 +10,7 @@ namespace Matrix
 {
 	namespace graphics
 	{
-		class MATRIX_API Shader
+		class MATRIX_DLL Shader
 		{
 		public:
 			template <typename Type>

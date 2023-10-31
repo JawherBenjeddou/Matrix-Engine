@@ -2,23 +2,19 @@
 ///@file Window.h
 
 #include "Common.h"
-#include <iostream>
-
 #include "math/Math.h"
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h" 
 
 #include "Input.h"
-#include "core/Logging.h"
-#include "stb_image.h"
 
 namespace Matrix {
 	
     namespace ui
 	{
         /// Structure for specifying window properties aka (title,widh,heigh).
-        struct MATRIX_API WindowSpec
+        struct MATRIX_DLL WindowSpec
         {
             std::string_view m_Title;
             uint32_t m_Width;
@@ -26,8 +22,9 @@ namespace Matrix {
             WindowSpec(std::string_view title = "Matrix Engine", uint32_t width = 1280, uint32_t height = 720)
                 : m_Title(title), m_Width(width), m_Height(height) {};
         };
-         
-        class MATRIX_API Window
+
+        
+        class MATRIX_DLL Window
         {
         public:
             Window(WindowSpec config = WindowSpec());
@@ -50,7 +47,7 @@ namespace Matrix {
             void GetInfo();
 
             /// Set the window icon (temporary, should be set by the user).
-            void SetWindowIcon(const char* path = "../resources/branding/iconpsd256.png");
+            void SetWindowIcon(const char* path = "../resources/branding/icon/iconpsd256.png");
 
             ///Get the width of the window.
             uint32_t GetWidth() const { return m_Width; }
@@ -68,7 +65,7 @@ namespace Matrix {
           
 
             /// Clear the window with a specified clear color.
-            void Clear(glm::vec4 clear_color = glm::vec4(0.5f, 0.5f, 1.0f, 1.0f)) const;
+            void Clear(glm::vec4 clear_color = glm::vec4(0.16f, 0.16f, 0.16f, 1.0f)) const;
 
             /// Initialize OpenGL.
             void InitGL();

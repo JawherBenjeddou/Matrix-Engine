@@ -9,7 +9,7 @@ namespace Matrix
 {
     namespace graphics
     {
-        class MATRIX_API ShaderFactory
+        class MATRIX_DLL ShaderFactory
         {
         public:
             static inline ShaderFactory& GetInstance() {

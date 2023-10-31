@@ -2,14 +2,17 @@
 ///@file Application.h
 
 #include "Common.h"
+
 #include "EngineCore.h"
 
 namespace Matrix {
 
 	namespace core {
-		
+
+	
+
 		///application class for the Matrix framework.
-		class MATRIX_API Application
+		class MATRIX_DLL Application
 		{
 		public:
 
@@ -21,7 +24,7 @@ namespace Matrix {
 			void Run();
 		
 		private:
-			Matrix::core::EngineCore m_Engine;
+			EngineCore m_Engine;
 		
 		};
 

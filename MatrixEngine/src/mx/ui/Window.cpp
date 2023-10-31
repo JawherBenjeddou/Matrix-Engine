@@ -1,6 +1,10 @@
 #include "pch.h"
+
 #include "window.h"
 #include "graphics/DebugContext.h"
+
+#include "core/Logging.h"
+#include "stb_image.h"
 
 namespace Matrix {
 

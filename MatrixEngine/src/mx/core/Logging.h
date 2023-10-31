@@ -10,7 +10,7 @@ namespace Matrix
 {
 	namespace core
 	{
-		class MATRIX_API Logging
+		class MATRIX_DLL Logging
 		{
 		public:
 		

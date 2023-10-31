@@ -5,7 +5,7 @@
 #include "math/Math.h"
 #include "GLFW/glfw3.h"
 
-enum class MATRIX_API Key
+enum class MATRIX_DLL Key
 {
 	UNKNOWN = GLFW_KEY_UNKNOWN,
 	SPACE = GLFW_KEY_SPACE,
@@ -58,7 +58,7 @@ enum class MATRIX_API Key
 	NINE = GLFW_KEY_9
 };
 
-enum class MATRIX_API Mouse
+enum class MATRIX_DLL Mouse
 {
 	UNKNOWN = GLFW_KEY_UNKNOWN,
 	BUTTON_1 = GLFW_MOUSE_BUTTON_1,
@@ -82,7 +82,7 @@ namespace Matrix
 		constexpr uint16_t MAX_BUTTONS = 24;
 		constexpr uint16_t MAX_KEYS = 1024;
 
-		class MATRIX_API Input
+		class MATRIX_DLL Input
 		{
 		public:
 			/// Input system initialization

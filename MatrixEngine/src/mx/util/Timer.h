@@ -1,7 +1,7 @@
 #pragma once
+
 ///@file Timer.h
 
-#include "GLFW/glfw3.h"
 #include <chrono>
 
 namespace Matrix

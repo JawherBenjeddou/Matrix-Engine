@@ -2,16 +2,18 @@
 /**
     @file GuiManager.h
 */
+#include "Common.h"
 
-#include "UI/Window.h"   
-#include "Core/logging.h" 
+#include "ui/Window.h"
+
 
 namespace Matrix
 {
     namespace gui
     {
+        
         /// A manager responsible for controlling the core and all inits of ImGui.
-        class MATRIX_API GuiManager
+        class MATRIX_DLL GuiManager
         {
         public:
 

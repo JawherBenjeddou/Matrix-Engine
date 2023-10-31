@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\graphics\buffers\ElementBuffer.h" />
+    <ClInclude Include="src\mx\graphics\cameras\OrthoCamera.h" />
     <ClInclude Include="src\mx\graphics\shaders\Shader.h" />
     <ClInclude Include="src\mx\graphics\shaders\ShaderFactory.h" />
     <ClInclude Include="src\mx\graphics\DebugContext.h" />
@@ -27,8 +29,13 @@
     <ClInclude Include="src\mx\math\Math.h" />
     <ClInclude Include="src\mx\pch.h" />
     <ClInclude Include="src\mx\util\Timer.h" />
+    <ClInclude Include="src\mx\graphics\buffers\VertexArray.h" />
+    <ClInclude Include="src\mx\graphics\buffers\VertexBuffer.h" />
+    <ClInclude Include="src\mx\graphics\textures\Texture2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mx\graphics\buffers\ElementBuffer.cpp" />
+    <ClCompile Include="src\mx\graphics\cameras\OrthoCamera.cpp" />
     <ClCompile Include="src\mx\graphics\shaders\Shader.cpp" />
     <ClCompile Include="src\mx\graphics\shaders\ShaderFactory.cpp" />
     <ClCompile Include="src\mx\gui\GuiManager.cpp" />
@@ -52,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="src\mx\util\stb_image.cpp" />
     <ClCompile Include="src\mx\util\Timer.cpp" />
+    <ClCompile Include="src\mx\graphics\buffers\VertexArray.cpp" />
+    <ClCompile Include="src\mx\graphics\buffers\VertexBuffer.cpp" />
+    <ClCompile Include="src\mx\graphics\textures\Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\mx\graphics\shaders\default\default.frag" />

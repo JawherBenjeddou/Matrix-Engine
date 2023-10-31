@@ -12,19 +12,19 @@ namespace Matrix
         void GLAPIENTRY OpenGLDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
             if (severity == GL_DEBUG_SEVERITY_HIGH) {
                 MX_CORE_CRITICAL("OpenGL Error (High): {} ", message);
-                std::terminate();
+                MX_ASSERT(false, message);
             }
             else if (severity == GL_DEBUG_SEVERITY_MEDIUM) {
                 MX_CORE_ERROR("OpenGL Error (Medium): {} ", message);
-
+                MX_ASSERT(false, message);
              }
             else if (severity == GL_DEBUG_SEVERITY_LOW) {
                 MX_CORE_ERROR("OpenGL Error (LOW): {} ", message);
-
+                MX_ASSERT(false, message);
             }
         }
 
-        MATRIX_API inline void EnableDebugContext()
+        MATRIX_DLL inline void EnableDebugContext()
         {
 #ifdef MX_DEBUG_MODE
             // Enable the OpenGL debug output
@@ -34,7 +34,7 @@ namespace Matrix
 #endif // MX_DEBUG_MODE
         }
 
-        MATRIX_API inline void DisableDebugContext()
+        MATRIX_DLL inline void DisableDebugContext()
         {
             glDebugMessageCallback(nullptr, nullptr);
             glDisable(GL_DEBUG_OUTPUT);

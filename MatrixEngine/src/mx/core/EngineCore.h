@@ -2,7 +2,6 @@
 ///@file EngineCore.h
 
 #include "Common.h"
-#include "pch.h"
 
 //Systems
 #include "ui/Window.h"
@@ -15,7 +14,7 @@ namespace Matrix
 {
 	namespace core
 	{
-        class MATRIX_API EngineCore
+        class MATRIX_DLL EngineCore
         {
         public:
             EngineCore();

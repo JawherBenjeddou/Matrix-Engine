@@ -22,7 +22,7 @@ namespace Matrix
 				return it->second;
 			}
 			else {
-				MX_ASSERT_NULL(nullptr, "SHADER DOES NOT EXIST !");
+				MX_ASSERT_NULL(nullptr, "ERROR NULLPTR::SHADER DOES NOT EXIST !");
 			}
 		}
 

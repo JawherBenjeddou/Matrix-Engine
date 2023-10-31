@@ -4,20 +4,15 @@
 
 #ifdef MX_PLATFORM_WINDOWS
 	#ifdef MX_BUILD_DLL
-		#define MATRIX_API __declspec(dllexport)
+		#define MATRIX_DLL __declspec(dllexport)
 	#else
-		#define MATRIX_API __declspec(dllimport)
+		#define MATRIX_DLL __declspec(dllimport)
 	#endif // MX_BUILD_DLL
 #else
 	#error Engine is only supported by windows check rep for more info !
 #endif
 
 #ifdef MX_DEBUG_MODE
-	// Engine custom assert macro
-	#define MX_ASSERT_NC(message) \
-	            std::cerr << "Assertion failed: " << " in " << __FILE__ << " line " << __LINE__ << ": " << message << std::endl; \
-	            std::terminate();
-
 	#define MX_ASSERT(condition, message) \
 	    do { \
 	        if (!(condition)) { \
