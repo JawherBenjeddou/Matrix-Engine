@@ -18,7 +18,7 @@ Start by cloning the repository with `git clone --recursive https://github.com/J
 ## The Plan
 The plan for Matrix Engine is: to create a powerful 2D/3D engine, but also to serve as an education tool for teaching game engine design and architecture and also game dev,I'm interested in learning how to create a game engine because I believe that gaining this level of expertise will not only empower me to develop my own custom game engines but also enhance my proficiency in using existing game engines .
 ## Short term goals :
--implementing a fast 2D renderer .
--Adding audio
--adding physics
--making a interactive game based on the "mandela effect".
+- implementing batch rendering ,
+- Adding audio,
+- adding physics,
+- making a interactive game based on the "mandela effect".
