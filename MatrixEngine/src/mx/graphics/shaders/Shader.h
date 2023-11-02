@@ -48,7 +48,7 @@ namespace Matrix
 
 		private:
 			friend class ShaderFactory;
-			//PROGRAM ID
+			//PROGRAM ID 
 			uint32_t m_ID;
 		};
 	}

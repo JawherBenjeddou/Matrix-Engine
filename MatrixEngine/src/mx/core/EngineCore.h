@@ -1,4 +1,5 @@
 #pragma once
+
 ///@file EngineCore.h
 
 #include "Common.h"
@@ -8,7 +9,13 @@
 #include "Logging.h"
 #include "gui/GuiManager.h"
 #include "util/Timer.h"
+
 #include "graphics/shaders/ShaderFactory.h"
+#include "graphics/textures/Texture2D.h"
+
+#include "graphics/buffers/ElementBuffer.h"
+#include "graphics/buffers/VertexArray.h"
+#include "graphics/buffers/VertexBuffer.h"
 
 namespace Matrix
 {
