@@ -40,42 +40,29 @@ namespace Matrix
             //Initializing Shaders
             MX_CORE_WARN("Compiling Shaders...");
             ShaderFactory::GetInstance().CreateShader("defaultshader","../MatrixEngine/src/mx/graphics/shaders/default/default.frag","../MatrixEngine/src/mx/graphics/shaders/default/default.vert");
-
-            
             MX_CORE_WARN("Shader compilation completed successfully");
-
-            //TODO: figure out how to draw the rect and than add the texture later on..
             float vertices[] = {
-                // positions // colors // texture coords
-                0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-                0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-                -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-                -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top left
+                 -0.5f, -0.5f, 0.0f, // bottom left
+                  0.5f, -0.5f, 0.0f, // bottom right
+                  0.5f,  0.5f, 0.0f, // top right
+                 -0.5f,  0.5f, 0.0f  // top left
             };
-            using namespace Matrix::graphics;
-            
-            // Generate VAO and bind it
-            VertexArray vao;
 
-            // Generate VBO, bind it, and fill it with data
-            VertexBuffer vbo;
-            vbo.BufferData(sizeof(vertices), vertices);
-
-            // Specify the vertex attributes
-            // Position attribute (x and y only)
-            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+            unsigned int indices[] = {
+                0, 1, 2, // first triangle
+                2, 3, 0  // second triangle
+            };
+        
+            uint32_t VBO;
+            glGenBuffers(1,&VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+            unsigned int EBO;
+            glGenBuffers(1, &EBO);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float),(void*)0);
             glEnableVertexAttribArray(0);
-
-            // Texture coordinate attribute
-            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),(void*)(6 * sizeof(float)));
-            glEnableVertexAttribArray(2);
-
-            // Unbind VBO and VAO
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            //vao.UnBind();
-            //Texture2D sprite;
-            //sprite.LoadTexture2D("../resources/branding/logo2_white.png");
-
             MX_CORE_INFO("Engine Initialization Completed");
         }
 
@@ -83,8 +70,7 @@ namespace Matrix
 		{
             m_Timer.Tick();
             glUseProgram(ShaderFactory::GetInstance().GetShader("defaultshader")->GetId());
-
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             m_GuiSystem.OnRenderGui();
 			m_WindowSystem.OnUpdate();
 		}
