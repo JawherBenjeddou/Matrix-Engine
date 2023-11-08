@@ -13,8 +13,7 @@ namespace Matrix
         }
         void EngineCore::Initialize()
         {
-            //Starts the GameTimer
-            m_Timer.Start();
+        
             
             //Init logging
             m_LoggingSystem.InitLogging();
@@ -66,13 +65,13 @@ namespace Matrix
             MX_CORE_INFO("Engine Initialization Completed");
         }
 
-		void EngineCore::OnUpdate()
+		void EngineCore::OnUpdate(float deltatime)
 		{
-            m_Timer.Tick();
             glUseProgram(ShaderFactory::GetInstance().GetShader("defaultshader")->GetId());
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             m_GuiSystem.OnRenderGui();
 			m_WindowSystem.OnUpdate();
+            std::cout << deltatime <<"\n";
 		}
 
         //Usually in reverse order 

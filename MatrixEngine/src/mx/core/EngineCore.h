@@ -8,7 +8,7 @@
 #include "ui/Window.h"
 #include "Logging.h"
 #include "gui/GuiManager.h"
-#include "util/Timer.h"
+
 
 #include "graphics/shaders/ShaderFactory.h"
 #include "graphics/textures/Texture2D.h"
@@ -30,7 +30,7 @@ namespace Matrix
             void Initialize();
 
             /// Run the main update loop for the engine.
-            void OnUpdate();
+            void OnUpdate(float deltatime);
             
             /// Clean up and shut down the engine.
             void Shutdown();
@@ -48,7 +48,7 @@ namespace Matrix
             Matrix::ui::Window m_WindowSystem;
             Matrix::ui::Input m_InputSystem;
             Matrix::gui::GuiManager m_GuiSystem;
-            Matrix::util::Timer m_Timer;
+ 
         };
 
 	}

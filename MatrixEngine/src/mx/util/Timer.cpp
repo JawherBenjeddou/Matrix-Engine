@@ -11,7 +11,7 @@ namespace Matrix
             // Initialize the timer without starting it.
         }
 
-        void Timer::Start()
+        void Timer::StartFrame()
         {
             m_StartTime = std::chrono::high_resolution_clock::now();
             m_LastFrameTime = m_StartTime;
@@ -48,7 +48,7 @@ namespace Matrix
             return duration.count() * 1000.0f;
         }
 
-        void Timer::Tick()
+        void Timer::EndFrame()
         {
             if (m_Running)
             {

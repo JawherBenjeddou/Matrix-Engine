@@ -13,8 +13,8 @@ namespace Matrix
         public:
             Timer();
 
-            /// Start or restart the timer.
-            void Start();
+            /// Called at the beginning of each frame.
+            void StartFrame();
 
             /// Stop the timer.
             void Stop();
@@ -28,8 +28,8 @@ namespace Matrix
             /// Get the time in seconds since the last frame.
             float DeltaTime() const;
 
-            /// Called at the beginning of each frame.
-            void Tick();
+            /// Called at the end of each frame.
+            void EndFrame();
 
         private:
             std::chrono::high_resolution_clock::time_point m_StartTime;

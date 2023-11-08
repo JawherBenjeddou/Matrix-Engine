@@ -2,6 +2,7 @@
 ///@file Application.h
 
 #include "Common.h"
+#include "util/Timer.h"
 
 #include "EngineCore.h"
 
@@ -25,7 +26,7 @@ namespace Matrix {
 		
 		private:
 			EngineCore m_Engine;
-		
+			Matrix::util::Timer m_Timer;
 		};
 
 		/**
