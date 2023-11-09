@@ -19,7 +19,7 @@ namespace Matrix {
             std::string_view m_Title;
             uint32_t m_Width;
             uint32_t m_Height;
-            WindowSpec(std::string_view title = "Matrix Engine", uint32_t width = 1280, uint32_t height = 720)
+            WindowSpec(std::string_view title = "mxEditor", uint32_t width = 1280, uint32_t height = 720)
                 : m_Title(title), m_Width(width), m_Height(height) {};
         };
 
