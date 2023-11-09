@@ -2,6 +2,8 @@
 ![logo2](https://github.com/JawherBenjeddou/Matrix-Engine/assets/102749041/a1e5b302-26e3-4d03-b3cc-8e30a44e122c)
 Open-source, high performance 2D game engine currently in development.
 
+Give a ⭐️ if you like this project! (means a lot)
+
 ## Getting Started
 Visual Studio 2017 to 2022 is recommended, Matrix Engine is  untested on other development environments whilst i'm focusing on a Windows build.
 
@@ -25,4 +27,3 @@ The plan for Matrix Engine is: to create a powerful 2D/3D engine, but also to se
  - [ ] making an interactive game based on the "mandela effect".
 
 
-Give a ⭐️ if you like this project!
