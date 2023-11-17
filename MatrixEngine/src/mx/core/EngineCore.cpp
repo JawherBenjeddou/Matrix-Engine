@@ -73,7 +73,7 @@ namespace Matrix
 
             using namespace Matrix::graphics;
             Texture2D* sprite = new Texture2D();
-            sprite->LoadTexture2D("../resources/branding/sprite2.png");
+            sprite->LoadTexture2D("../resources/branding/sprite.png");
             sprite->Bind();
             MX_CORE_INFO("Engine Initialization Completed");
         }
