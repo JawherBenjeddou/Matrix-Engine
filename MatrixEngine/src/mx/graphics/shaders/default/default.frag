@@ -9,5 +9,5 @@ uniform sampler2D u_SpriteTextureID;
 
 void main()
 {	
-	FragColor = vec4(1.0f,1.0f,0.0f,1.0f);
+	FragColor = mix(u_Color,texture(u_SpriteTextureID,SpriteTextureCoord),0.5);
 }

@@ -30,17 +30,19 @@ namespace Matrix
 
 			glGenTextures(1, &m_TextureID);
 			glBindTexture(GL_TEXTURE_2D, m_TextureID);
-
+			//TODO : figure out why i'm getting format and tex type uncompatible? "castring not working"
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+			//fixes texture loading flipped
+			stbi_set_flip_vertically_on_load(true);
 			unsigned char* data = stbi_load(filepath.data(), &m_Width, &m_Height, &m_NrChannels, 0);
 
 			if (data)
 			{
-				//TODO : figure out why i'm getting format and tex type uncompatible?
+				
 				int32_t format = 0;
 				if (m_NrComponents == 1)
 					format = GL_RED;
