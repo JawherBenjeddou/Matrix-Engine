@@ -1,8 +1,8 @@
 #pragma once
+#include "Common.h"
 
 ///@file EngineCore.h
 
-#include "Common.h"
 
 //Systems
 #include "ui/Window.h"
@@ -12,6 +12,9 @@
 
 #include "graphics/shaders/ShaderFactory.h"
 #include "graphics/textures/Texture2D.h"
+#include "graphics/renderer/SpriteRenderer.h"
+#include "graphics/cameras/OrthoCamera.h"
+#include "graphics/world/World.h"
 
 #include "graphics/buffers/ElementBuffer.h"
 #include "graphics/buffers/VertexArray.h"
@@ -27,7 +30,7 @@ namespace Matrix
             EngineCore();
 
             /// Initialize the engine and all its subsystems.
-            void Initialize();
+            void Initialize();  
 
             /// Run the main update loop for the engine.
             void OnUpdate(float deltatime);
@@ -43,12 +46,19 @@ namespace Matrix
 
         private:
             using ShaderFactory = Matrix::graphics::ShaderFactory;
-
             Matrix::core::Logging m_LoggingSystem;
+
             Matrix::ui::Window m_WindowSystem;
             Matrix::ui::Input m_InputSystem;
+
             Matrix::gui::GuiManager m_GuiSystem;
- 
+
+            Matrix::graphics::OrthoCamera m_CameraSystem2D;
+            Matrix::graphics::SpriteRenderer m_SpriteRendererSystem;
+
+            
+            std::shared_ptr<Matrix::graphics::World> m_WorldSystem;
+
         };
 
 	}

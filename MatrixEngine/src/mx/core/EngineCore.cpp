@@ -7,9 +7,11 @@ namespace Matrix
 	namespace core
 	{
         EngineCore::EngineCore()
-            :m_GuiSystem(m_WindowSystem)
+            : m_GuiSystem(m_WindowSystem),
+              m_CameraSystem2D(0.0f, m_WindowSystem.GetHeight(), 0.0f, m_WindowSystem.GetWidth()),
+              m_WorldSystem(std::make_shared<Matrix::graphics::World>(m_CameraSystem2D))
         {
-   
+
         }
         void EngineCore::Initialize()
         {
@@ -22,7 +24,7 @@ namespace Matrix
             GetInfo();
 
             // Initialize Window System
-            m_WindowSystem.InitSystem();
+            m_WindowSystem.InitSystem();    
             m_WindowSystem.GetInfo();
             MX_CORE_INFO("Initialization Started ... ");
             m_WindowSystem.SetWindowIcon();
@@ -30,8 +32,7 @@ namespace Matrix
 
             // Initialize Input System
             m_InputSystem.InitSystem();
-            MX_CORE_WARN("Input System Initialized");
-
+          
             // Initialize Gui System
             m_GuiSystem.InitSystem();
             MX_CORE_WARN("Gui System Initialized");
@@ -40,49 +41,16 @@ namespace Matrix
             MX_CORE_WARN("Compiling Shaders...");
             ShaderFactory::GetInstance().CreateShader("defaultshader","../MatrixEngine/src/mx/graphics/shaders/default/default.frag","../MatrixEngine/src/mx/graphics/shaders/default/default.vert");
             MX_CORE_WARN("Shader compilation completed successfully");
-            float vertices[] = {
-              -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, // bottom left
-               0.5f, -0.5f, 0.0f,  1.0f, 0.0f, // bottom right
-               0.5f,  0.5f, 0.0f,  1.0f, 1.0f, // top right
-              -0.5f,  0.5f, 0.0f,  0.0f, 1.0f  // top left
-            };
+            MX_CORE_WARN("Initializing World");
 
-            unsigned int indices[] = {
-                0, 1, 2, // first triangle
-                2, 3, 0  // second triangle
-            };
-
-            uint32_t VBO;
-            glGenBuffers(1, &VBO);
-            glBindBuffer(GL_ARRAY_BUFFER, VBO);
-            glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-            unsigned int EBO;
-            glGenBuffers(1, &EBO);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-            // position attribute
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-            glEnableVertexAttribArray(0);
-
-            // texture coord attribute
-            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-            glEnableVertexAttribArray(1);
-
-
-            using namespace Matrix::graphics;
-            Texture2D* sprite = new Texture2D();
-            sprite->LoadTexture2D("../resources/branding/sprite.png");
-            sprite->Bind();
+            m_SpriteRendererSystem.Init();
             MX_CORE_INFO("Engine Initialization Completed");
         }
 
 		void EngineCore::OnUpdate(float deltatime)
 		{
-            glUseProgram(ShaderFactory::GetInstance().GetShader("defaultshader")->GetId());
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             m_GuiSystem.OnRenderGui();
+            m_WorldSystem->OnUpdate();
 			m_WindowSystem.OnUpdate();
 		}
 

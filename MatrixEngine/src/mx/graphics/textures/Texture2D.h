@@ -1,8 +1,7 @@
 #pragma once
-
+#include "Common.h"
 ///@file Texture2D.h
 
-#include "Common.h"
 #include "GL/glew.h"
 
 

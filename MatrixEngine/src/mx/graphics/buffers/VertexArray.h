@@ -1,8 +1,9 @@
 #pragma once
+#include "Common.h"
 
 ///@file VertexArray.h
 
-#include "Common.h"
+
 
 namespace Matrix
 {
@@ -17,6 +18,7 @@ namespace Matrix
 			/// Destructor for VertexArray (calls DeleteVertexArray).
 			~VertexArray();
 
+			void Init();
 			/// Bind the VertexArray.
 			void Bind() const;
 

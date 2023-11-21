@@ -1,7 +1,8 @@
 #pragma once
+#include "Common.h"
 ///@file Input.h
 
-#include "Common.h"
+
 #include "math/Math.h"
 #include "GLFW/glfw3.h"
 
@@ -94,7 +95,7 @@ namespace Matrix
 			 * @param keycode The key to check.
 			 * @return True if the key is pressed, false otherwise.
 			 */
-			bool IsPressed(const Key& keycode) const;
+			bool IsPressed(const Key& keycode) const; //maybe change this to isKeyPressed and for mouse IsMousePressed ?
 
 			/**
 			 * @brief Check if a mouse button is pressed.

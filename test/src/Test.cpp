@@ -6,10 +6,11 @@ public:
 
 	EngineCoreTester()
 	{
+
 	}
 
 	~EngineCoreTester() {}
-
+	
 
 };
 

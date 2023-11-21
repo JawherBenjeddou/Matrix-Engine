@@ -18,6 +18,7 @@ namespace Matrix
 			for (size_t mcount = 0; mcount < MAX_BUTTONS; mcount++) {
 				s_MouseButtonPressed[mcount] = GLFW_RELEASE;
 			}
+
 		}
 
 		void Input::CursorFocus(int32_t entered)

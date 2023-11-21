@@ -10,6 +10,10 @@ namespace Matrix
 		ElementBuffer::ElementBuffer() 
 			: m_ID(0)
 		{
+		}
+
+		void ElementBuffer::Init()
+		{
 			glGenBuffers(1, &m_ID);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 		}

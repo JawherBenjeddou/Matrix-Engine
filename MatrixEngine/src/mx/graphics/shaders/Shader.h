@@ -39,10 +39,10 @@ namespace Matrix
 				return m_ID;
 			}
 
+			void UseShaderProgram();
+		
 		private:
 			void CompileShaderProgram(std::string_view fragpath, std::string_view vertpath);
-
-			void UseShaderProgram();
 
 			std::string ReadFile(std::string_view filepath);
 

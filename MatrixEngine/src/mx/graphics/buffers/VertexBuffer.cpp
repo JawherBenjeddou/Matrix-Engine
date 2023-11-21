@@ -10,13 +10,18 @@ namespace Matrix
 		VertexBuffer::VertexBuffer() 
 			: m_ID(0)
 		{
-			glGenBuffers(1, &m_ID);
-			glBindBuffer(GL_ARRAY_BUFFER, m_ID);
+			
 		}
 
 		VertexBuffer::~VertexBuffer()
 		{
 			glDeleteBuffers(1, &m_ID);
+		}
+
+		void VertexBuffer::Init()
+		{
+			glGenBuffers(1, &m_ID);
+			glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 		}
 
 		void VertexBuffer::Bind() const

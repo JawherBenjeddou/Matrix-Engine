@@ -12,7 +12,8 @@ def install_dependencies():
         ("https://github.com/nothings/stb",  "--branch", "master"),  # No specific branch/version for this repository
         ("https://github.com/g-truc/glm", "--branch", "0.9.9.8"),
         ("https://github.com/ocornut/imgui", "--branch", "v1.89.9-docking"),
-        ("https://github.com/gabime/spdlog", "--branch", "v1.12.0")
+        ("https://github.com/gabime/spdlog", "--branch", "v1.12.0"),
+        ("https://github.com/skypjack/entt", "--branch", "v3.12.2")
     ]
 
     try:

@@ -1,8 +1,8 @@
 #pragma once
+#include "Common.h" 
 
 ///@file ElementBuffer.h
 
-#include "Common.h" 
 
 namespace Matrix 
 {
@@ -17,7 +17,8 @@ namespace Matrix
 
 			/// Deletes the vertex buffer.
 			~ElementBuffer();
-
+			
+			void Init();
 			/// Bind the VertexBuffer.
 			void Bind() const;
 

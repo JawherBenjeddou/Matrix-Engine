@@ -1,8 +1,9 @@
 #pragma once
+#include "Common.h"
+
 /**
     @file GuiManager.h
 */
-#include "Common.h"
 
 #include "ui/Window.h"
 

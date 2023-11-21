@@ -10,6 +10,12 @@ namespace Matrix
 		VertexArray::VertexArray()
 			: m_ID(0)
 		{
+		
+		}
+
+		void VertexArray::Init()
+		{
+
 			glGenVertexArrays(1, &m_ID);
 			glBindVertexArray(m_ID);
 		}

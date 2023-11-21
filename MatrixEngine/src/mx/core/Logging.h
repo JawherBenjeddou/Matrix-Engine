@@ -1,7 +1,8 @@
 #pragma once
+#include "Common.h"
 ///@file Logging.h
 
-#include "Common.h"
+
 
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
