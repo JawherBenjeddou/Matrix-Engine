@@ -9,7 +9,7 @@ namespace Matrix
 {
 	namespace graphics
 	{
-		World::World(const OrthoCamera& camera)
+		World::World(SharedObj<OrthoCamera> camera)
 			:m_Camera(camera)
 		{
 
@@ -23,7 +23,7 @@ namespace Matrix
 		void World::OnUpdate()
 		{
 			ShaderFactory::GetInstance().GetShader("defaultshader")->UseShaderProgram();
-			ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_Camera.GetViewProjectionMatrix());
+			ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_Camera->GetViewProjectionMatrix());
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 
@@ -39,9 +39,6 @@ namespace Matrix
 		{
 
 		}
-		World* World::GetWorld()
-		{
-			return this;
-		}
+	
 	}
 }

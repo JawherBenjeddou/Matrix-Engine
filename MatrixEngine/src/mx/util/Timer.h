@@ -3,12 +3,13 @@
 ///@file Timer.h
 
 #include <chrono>
+#include "Common.h"
 
 namespace Matrix
 {
     namespace util
     {
-        class Timer
+        class MATRIX_DLL Timer
         {
         public:
             Timer();

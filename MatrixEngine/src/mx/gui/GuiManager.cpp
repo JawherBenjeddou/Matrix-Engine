@@ -11,8 +11,8 @@
 namespace Matrix {
     namespace gui {
 
-        GuiManager::GuiManager(Matrix::ui::Window& window)
-            : m_Window(&window),
+        GuiManager::GuiManager(SharedObj<Matrix::ui::Window> window)
+            : m_Window(window),
               m_FontSize(20.0f)
         {}
 
@@ -157,7 +157,7 @@ namespace Matrix {
         void GuiManager::RenderGuiFrame() {
        
             ImGuiIO& io = ImGui::GetIO();
-            io.DisplaySize = ImVec2(m_Window->GetWidth(),m_Window->GetHeight());
+            io.DisplaySize = ImVec2(static_cast<float>(m_Window->GetWidth()),static_cast<float>(m_Window->GetHeight()));
 
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

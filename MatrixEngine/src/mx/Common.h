@@ -47,3 +47,12 @@
 #define MX_ASSERT_NOT_NULL(pointer, message) do {} while (false)
 
 #endif
+namespace Matrix
+{
+	// custom aliases for smart pointers
+	template <typename T>
+	using ExclObj = std::unique_ptr<T>;
+
+	template <typename T>
+	using SharedObj = std::shared_ptr<T>;
+}

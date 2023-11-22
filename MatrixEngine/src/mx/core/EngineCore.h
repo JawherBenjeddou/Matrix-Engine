@@ -45,20 +45,14 @@ namespace Matrix
             void GetInfo();
 
         private:
-            using ShaderFactory = Matrix::graphics::ShaderFactory;
-            Matrix::core::Logging m_LoggingSystem;
-
-            Matrix::ui::Window m_WindowSystem;
-            Matrix::ui::Input m_InputSystem;
-
-            Matrix::gui::GuiManager m_GuiSystem;
-
-            Matrix::graphics::OrthoCamera m_CameraSystem2D;
-            Matrix::graphics::SpriteRenderer m_SpriteRendererSystem;
-
-            
-            std::shared_ptr<Matrix::graphics::World> m_WorldSystem;
-
+             using ShaderFactory = Matrix::graphics::ShaderFactory;
+             Matrix::core::Logging m_LoggingSystem;
+             SharedObj<Matrix::ui::Window>m_WindowSystem;
+             SharedObj<Matrix::ui::Input>m_InputSystem;
+             SharedObj<Matrix::gui::GuiManager>m_GuiSystem;
+             SharedObj<Matrix::graphics::OrthoCamera>m_CameraSystem2D;
+             SharedObj<Matrix::graphics::World>m_WorldSystem;
+             SharedObj<Matrix::graphics::SpriteRenderer>m_SpriteRendererSystem;
         };
 
 	}

@@ -19,7 +19,7 @@ namespace Matrix
         public:
 
           
-            GuiManager(Matrix::ui::Window& window);
+            GuiManager(SharedObj<Matrix::ui::Window> window);
 
             ///Initialize the GUI system, including ImGui.
             void InitSystem();
@@ -47,7 +47,7 @@ namespace Matrix
         private:
             float m_FontSize;
             uint32_t counter = 0;
-            Matrix::ui::Window* m_Window;
+            SharedObj<Matrix::ui::Window> m_Window;
         };
 
     }
