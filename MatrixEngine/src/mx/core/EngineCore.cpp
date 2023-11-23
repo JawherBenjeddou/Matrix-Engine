@@ -12,9 +12,10 @@ namespace Matrix
             m_InputSystem = std::make_shared<Matrix::ui::Input>();
             m_GuiSystem = std::make_shared < Matrix::gui::GuiManager>(m_WindowSystem);
             //TODO : is the camera gonna be updated every frame? check for that 
-            m_CameraSystem2D = std::make_shared<Matrix::graphics::OrthoCamera>(0.0f, static_cast<float>(m_WindowSystem->GetHeight()), 0.0f, static_cast<float>(m_WindowSystem->GetWidth()));
-            m_WorldSystem = std::make_shared<Matrix::graphics::World>(m_CameraSystem2D);
-            m_SpriteRendererSystem = std::make_shared<Matrix::graphics::SpriteRenderer>();
+            //it actually fucking worked damn (understand why we pass parameters like this)
+            //keep playing around with this
+            m_CameraSystem2D = std::make_shared<Matrix::graphics::OrthoCamera>(-3.0f,3.0f, -3.0f, 3.0f);
+            m_WorldSystem = std::make_shared<Matrix::graphics::World>();
         }
         void EngineCore::Initialize()
         {
@@ -43,7 +44,7 @@ namespace Matrix
             ShaderFactory::GetInstance().CreateShader("defaultshader","../MatrixEngine/src/mx/graphics/shaders/default/default.frag","../MatrixEngine/src/mx/graphics/shaders/default/default.vert");
             MX_CORE_WARN("Shader compilation completed successfully");
 
-            m_SpriteRendererSystem->Init();
+            m_WorldSystem->InitWorld();
             
             
             
@@ -53,6 +54,8 @@ namespace Matrix
 
 		void EngineCore::OnUpdate(float deltatime)
 		{
+            ShaderFactory::GetInstance().GetShader("defaultshader")->UseShaderProgram();
+            ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_CameraSystem2D->GetViewProjectionMatrix());
             m_GuiSystem->OnRenderGui();
             m_WorldSystem->OnUpdate();
 			m_WindowSystem->OnUpdate();

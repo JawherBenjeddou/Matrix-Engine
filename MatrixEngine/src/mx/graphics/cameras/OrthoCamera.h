@@ -23,7 +23,7 @@ namespace Matrix
 
 
             /// Set the camera's position
-            void SetPosition(const glm::vec2& pos);
+            void SetPosition(const glm::vec3& pos);
 
             /// Set the camera's rotation in degrees
             void SetRotation(float angleDegrees);
@@ -48,8 +48,8 @@ namespace Matrix
         private:
             glm::mat4 m_ProjectionMatrix;
             glm::mat4 m_ViewMatrix;
-            glm::vec2 m_Position;
-            float m_Rotation;
+            glm::vec3 m_Position;
+            float m_Rotation = 0.0f;
             float m_Zoom;
         };
 

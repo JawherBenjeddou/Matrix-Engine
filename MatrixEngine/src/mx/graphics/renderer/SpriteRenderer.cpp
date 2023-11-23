@@ -4,6 +4,7 @@
 #include "graphics/buffers/VertexBuffer.h"
 #include "graphics/buffers/VertexArray.h"
 #include "graphics/buffers/ElementBuffer.h"
+#include "graphics/world/Components.h"
 
 namespace Matrix
 {
@@ -17,16 +18,14 @@ namespace Matrix
 		};
 		static RendererStorage s_storage;
 
-		SpriteRenderer::SpriteRenderer()
-		{
-		}
 		void SpriteRenderer::Init()
 		{
 			float vertices[] = {
-			 -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, // bottom left
-			  0.5f, -0.5f, 0.0f,  1.0f, 0.0f, // bottom right
-			  0.5f,  0.5f, 0.0f,  1.0f, 1.0f, // top right
-			 -0.5f,  0.5f, 0.0f,  0.0f, 1.0f  // top left
+				// Position (x, y, z)      Texture Coordinates (s, t)
+				-0.5f, -0.5f, 0.0f,       0.0f, 0.0f, // bottom left
+				 0.5f, -0.5f, 0.0f,       1.0f, 0.0f, // bottom right
+				 0.5f,  0.5f, 0.0f,       1.0f, 1.0f, // top right
+				-0.5f,  0.5f, 0.0f,       0.0f, 1.0f  // top left
 			};
 			unsigned int indices[] = {
 			 0, 1, 2, // first triangle
@@ -45,6 +44,28 @@ namespace Matrix
 			glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 			glEnableVertexAttribArray(1);
 
+		}
+
+		void SpriteRenderer::DrawSprites()
+		{
+			// Assuming ShaderFactory is responsible for shader management
+			Shader* defaultShader = ShaderFactory::GetInstance().GetShader("defaultshader");
+
+			// Iterate through entities and draw each sprite
+			for (auto& entity : m_Entities)
+			{
+				// Set the model matrix for the current entity
+				defaultShader->SetUniformValue<glm::mat4>("u_model", entity.GetComponent<PSRComponent>().Transform);
+
+				// Draw the quad (6 indices for a quad)
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			}
+
+		}
+
+		void SpriteRenderer::UpdateEntities(std::vector<Entity>& entities)
+		{
+			m_Entities = entities;
 		}
 		
 	}

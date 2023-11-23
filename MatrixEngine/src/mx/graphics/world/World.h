@@ -15,11 +15,12 @@ namespace Matrix
 	namespace core { class EngineCore; }
 	namespace graphics
 	{						
+		//base class for all objects that can be placed in a level.
 		class MATRIX_DLL World
 		{
 		public:
 
-			World(SharedObj<OrthoCamera> camera);
+			World();
 
 
 			Entity SpawnEntity(std::string name);
@@ -29,6 +30,8 @@ namespace Matrix
 
 
 		private:
+			void DrawScreenElements();
+
 			void OnUpdate();
 
 			void InitWorld();
@@ -36,13 +39,15 @@ namespace Matrix
 		private:
 			friend class Matrix::core::EngineCore;
 
+
+			//very temporary
+			float move = 0.0f;
 			//holds data for entites
 			entt::registry m_Registry;
 
-			//world camera
-			SharedObj<OrthoCamera> m_Camera;
-
 			std::vector<Entity> m_Entities;
+
+			SharedObj<SpriteRenderer> m_SpriteRenderer;
 		};
 	}
 }

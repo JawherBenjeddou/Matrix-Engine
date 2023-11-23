@@ -6,11 +6,11 @@ layout (location = 1) in vec2 uv;
 uniform mat4 u_ViewProjection;
 uniform mat4 u_model;
 
-out vec2 SpriteTextureCoord;
+out vec2 SpriteTextureCoord;	
 
 void main()
 {
-	gl_Position = vec4(aPos,1.0);
+	gl_Position = u_ViewProjection * u_model * vec4(aPos,1.0);
 	SpriteTextureCoord = uv;
 }
 
