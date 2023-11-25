@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "OrthoCamera.h"
 
-
+//TODO: redo the camera and assing missing scale matrix 
 namespace Matrix
 {
 	namespace graphics

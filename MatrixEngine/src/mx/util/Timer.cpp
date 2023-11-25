@@ -6,7 +6,8 @@ namespace Matrix
     namespace util
     {
         Timer::Timer()
-            : m_Running(false)
+            :m_Running(false),
+             m_ElapsedTime(0.0f)
         {
             // Initialize the timer without starting it.
         }

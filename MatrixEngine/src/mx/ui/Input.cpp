@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Input.h"
-
+#include "core/Logging.h"
 namespace Matrix
 {
 	namespace ui
@@ -19,6 +19,7 @@ namespace Matrix
 				s_MouseButtonPressed[mcount] = GLFW_RELEASE;
 			}
 
+			MX_CORE_WARN("Input System Initialized");
 		}
 
 		void Input::CursorFocus(int32_t entered)

@@ -22,8 +22,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f2965d00-9010-4559-b8ae-781a9af8f928}</ProjectGuid>
-    <RootNamespace>MatrixEngineEditor</RootNamespace>
+    <ProjectGuid>{1954b67b-987c-4dc3-8a54-5815d382ebea}</ProjectGuid>
+    <RootNamespace>editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -1,19 +1,19 @@
 #include "pch.h"
 #include "ShaderFactory.h"
-
-
+#include "core/Logging.h"
 namespace Matrix
 {
 	namespace graphics
 	{
 		void ShaderFactory::CreateShader(const std::string& shadername,std::string_view fragpath, std::string_view vertpath)
 		{
-			Shader* shader = new Shader();
+			SharedObj<Shader> shader = std::make_shared<Shader>();
 			shader->CompileShaderProgram(fragpath, vertpath);
-			m_Shaders.insert({ shadername, shader });
+			MX_CORE_WARN("{} compiled successfully", shadername);
+			m_Shaders.insert({ shadername, shader});
 
 		}
-		Shader* ShaderFactory::GetShader(std::string_view shadername)
+		SharedObj<Shader> ShaderFactory::GetShader(std::string_view shadername)
 		{
 			auto it = m_Shaders.find(shadername.data());
 
@@ -21,18 +21,20 @@ namespace Matrix
 				// Shader found, return it
 				return it->second;
 			}
-			else {
-				MX_ASSERT_NULL(nullptr, "ERROR NULLPTR::SHADER DOES NOT EXIST !");
+			else
+			{
+				return nullptr;
 			}
 		}
 
 		void ShaderFactory::Cleanup()
 		{
-			for (auto it = m_Shaders.begin(); it != m_Shaders.end(); ++it)
+			for (auto& [shaderName, shaderPtr] : m_Shaders)
 			{
-				delete it->second; // Delete the Shader object
+				shaderPtr.reset();
 			}
 			m_Shaders.clear();
+			MX_CORE_WARN("ALL SHADERS ARE CLEARED");
 		}
 	}
 }

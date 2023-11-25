@@ -16,6 +16,7 @@
     <ProjectGuid>{a8b0b3bc-db83-4b4c-8424-de3603f6d83c}</ProjectGuid>
     <RootNamespace>test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>test</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -44,18 +45,18 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)build\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)build\bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)build\bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MX_DEBUG_MODE;GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MX_DEBUG_MODE;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\entt\single_include\entt;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;$(SolutionDir)MatrixEngine;$(SolutionDir)Dependencies\spdlog\include;$(SolutionDir)Dependencies\stb;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -82,7 +83,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MX_RELEASE_MODE;GLEW_STATIC;MX_PLATFORM_WINDOWS;MX_BUILD_DLL</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;MX_RELEASE_MODE;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\entt\single_include\entt;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)MatrixEngine\src\mx;$(SolutionDir)Dependencies\GLM;$(SolutionDir)MatrixEngine;$(SolutionDir)Dependencies\spdlog\include;$(SolutionDir)Dependencies\stb;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

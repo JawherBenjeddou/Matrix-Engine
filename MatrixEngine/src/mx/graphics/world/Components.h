@@ -1,8 +1,7 @@
 #pragma once
 #include "Common.h"
 
-#include "math.h"
-
+#include "math/Math.h"
 #include "graphics/textures/Texture2D.h"
 
 namespace Matrix
@@ -34,9 +33,11 @@ namespace Matrix
             {
                 glm::mat4 PositionMatrix = glm::translate(glm::mat4(1.0f), Position);
                 glm::mat4 ScaleMatrix = glm::scale(glm::mat4(1.0f), Scale);
-                glm::mat4 RotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(Rotation), glm::vec3(0.0f, 1.0f, 0.0f));
+                glm::mat4 RotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(Rotation), glm::vec3(0.0f, 0.0f, 1.0f));
 
-                Transform = PositionMatrix * RotationMatrix * ScaleMatrix;  // Fixed the order
+                Transform = ScaleMatrix * RotationMatrix * PositionMatrix; // Fixed the order
+     
+
             }
         };
 

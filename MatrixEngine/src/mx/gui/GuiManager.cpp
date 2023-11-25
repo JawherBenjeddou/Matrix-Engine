@@ -1,5 +1,5 @@
 #include "pch.h"
-
+#include "core/Logging.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -34,12 +34,14 @@ namespace Matrix {
             
 
             SetupImGuiStyleColors();
+            MX_CORE_WARN("Gui System Initialized");
         }
 
         void GuiManager::Shutdown() {
             ImGui_ImplOpenGL3_Shutdown();
             ImGui_ImplGlfw_Shutdown();
             ImGui::DestroyContext();
+            MX_CORE_WARN("GuiSystem successfully destroyed");
         }
 
         void GuiManager::OnRenderGui() {

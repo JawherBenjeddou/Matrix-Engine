@@ -1,9 +1,6 @@
 #pragma once
 #include "Common.h"
 
-#include "glm/glm.hpp"
-#include "graphics/shaders/ShaderFactory.h"
-
 #include "graphics/world/Entity.h"
 
 namespace Matrix
@@ -14,15 +11,15 @@ namespace Matrix
 		{
 
 		public:
-			SpriteRenderer(std::vector<Entity>& entities) : m_Entities(entities) {}
+			SpriteRenderer(std::vector<SharedObj<Entity>>& entities) : m_Entities(entities) {}
 
 			void Init();
 
 			void DrawSprites();
 
-			void UpdateEntities(std::vector<Entity>& entities);
+			void UpdateEntities(std::vector<SharedObj<Entity>>& entities);
 		private:
-			std::vector<Entity>& m_Entities;
+			std::vector<SharedObj<Entity>>& m_Entities;
 		};
 
 	}

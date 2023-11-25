@@ -40,12 +40,14 @@ namespace Matrix
 				 m_Width(std::move(other.m_Width)),
 				 m_Height(std::move(other.m_Height)),
 				 m_NrChannels(std::move(other.m_NrChannels)),
-				 m_TexType(std::move(other.m_TexType))
+				 m_TexType(std::move(other.m_TexType)),
+				 m_NrComponents(std::move(other.m_NrComponents))
 			{
 				other.m_TextureID = 0;
 				other.m_Width = 0;
 				other.m_Height = 0;
 				other.m_NrChannels = 0;
+				other.m_NrComponents = 0;
 				other.m_TexType.clear();
 			}
 

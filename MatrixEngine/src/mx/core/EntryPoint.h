@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef MX_PLATFORM_WINDOWS
+#ifdef _WIN64
 	extern Matrix::core::Application* Matrix::core::CreateApplication();
 	int main(int argc,char** argv)
 	{
@@ -8,4 +8,6 @@
 		delete launcher;
 		return 0;
 	}
+#else
+#error Engine is only supported by windows check rep for more info !
 #endif

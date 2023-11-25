@@ -13,7 +13,10 @@ namespace Matrix {
 		Window::Window(WindowSpec config) :
 			m_Title(config.m_Title.data()),
 			m_Width(config.m_Width),
-			m_Height(config.m_Height)
+			m_Height(config.m_Height),
+			m_IconWidth(0),
+			m_IconHeight(0),
+			m_IconChannels(0)
 		{
 
 		}
@@ -69,6 +72,7 @@ namespace Matrix {
 		{
 			glfwDestroyWindow(m_Window);
 			glfwTerminate();
+			MX_CORE_WARN("Window successfully destroyed");
 		}
 
 		void Window::OnUpdate() const

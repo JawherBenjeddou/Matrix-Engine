@@ -19,9 +19,9 @@ namespace Matrix
 
             void CreateShader(const std::string& shadername,std::string_view fragpath, std::string_view vertpath);
 
-            Shader* GetShader(std::string_view shadername);
+            SharedObj<Shader> GetShader(std::string_view shadername);
 
-            //clean up the memory when no longer needed.
+            //clean up the shaders when no longer needed.
             void Cleanup();
 
         private:
@@ -33,7 +33,7 @@ namespace Matrix
             ShaderFactory& operator=(const ShaderFactory&) = delete;
             ShaderFactory& operator=(ShaderFactory&&) = delete;
         private:
-            std::unordered_map<std::string,Shader*> m_Shaders;
+            std::unordered_map<std::string,SharedObj<Shader>> m_Shaders;
         };
     }
 }
