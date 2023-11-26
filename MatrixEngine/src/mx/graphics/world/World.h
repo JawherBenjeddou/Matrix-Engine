@@ -22,7 +22,7 @@ namespace Matrix
 			
 			//SharedObj<Entity> FindEntityByName(std::string_view name);
 	
-
+			void MoveEntity();
 
 		private:
 			void DrawScreenElements();

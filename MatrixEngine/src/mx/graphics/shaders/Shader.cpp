@@ -72,9 +72,14 @@ namespace Matrix
 			glDeleteShader(fragment);
 		}
 
-		void Shader::UseShaderProgram()
+		void Shader::EnableShaderProgram()
 		{
 			glUseProgram(m_ID);
+		}
+
+		void Shader::DisableShaderProgram()
+		{
+			glUseProgram(0);
 		}
 
 		std::string Shader::ReadFile(std::string_view filepath)

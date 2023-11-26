@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\mx\core\Event.h" />
     <ClInclude Include="src\mx\graphics\renderer\SpriteRenderer.h" />
     <ClInclude Include="src\mx\graphics\world\Entity.h" />
     <ClInclude Include="src\mx\graphics\buffers\ElementBuffer.h" />

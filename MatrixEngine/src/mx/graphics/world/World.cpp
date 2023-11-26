@@ -5,6 +5,7 @@
 #include "GL/glew.h"
 #include "Components.h"
 #include "core/Logging.h"
+#include "core/Event.h"
 namespace Matrix
 {
 	namespace graphics
@@ -18,16 +19,18 @@ namespace Matrix
 		void World::InitWorld()
 		{
 			m_SpriteRenderer->Init();
-			SpawnEntity("jawher");
-			m_Entities[0]->GetComponent<PSRComponent>().Position.x += 3.0f;
+			SpawnEntity("joe");
+			m_Entities[0]->GetComponent<PSRComponent>().Position.x += 5.0f;
 			m_Entities[0]->GetComponent<PSRComponent>().updateTransform();
 			SpawnEntity("test");
 			MX_CORE_WARN("Game World Initialized successfully");
+			events::Event::GetInstance().AddFunction(events::EventType::MOVE, [this]() { MoveEntity(); });
 		}
 	
 		//TODO : Remove this shit
 		void World::OnUpdate()
 		{
+			
 			DrawScreenElements();
 		}
 
@@ -45,6 +48,12 @@ namespace Matrix
 		{
 			return ;
 		}*/
+
+		void World::MoveEntity()
+		{
+			m_Entities[0]->GetComponent<PSRComponent>().Position.x += 3.0f;
+			m_Entities[0]->GetComponent<PSRComponent>().updateTransform();
+		}
 
 		void World::DrawScreenElements()
 		{

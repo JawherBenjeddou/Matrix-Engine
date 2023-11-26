@@ -45,6 +45,7 @@ namespace Matrix
             void GetInfo();
 
         private:
+            uint32_t test = 0;
              using ShaderFactory = Matrix::graphics::ShaderFactory;
              Matrix::core::Logging m_LoggingSystem;
              SharedObj<Matrix::ui::Window>m_WindowSystem;

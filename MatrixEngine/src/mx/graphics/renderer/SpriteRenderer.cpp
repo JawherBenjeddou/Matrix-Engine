@@ -61,11 +61,13 @@ namespace Matrix
 			// Iterate through entities and draw each sprite
 			for (auto& entity : m_Entities)
 			{
+				basicshader->EnableShaderProgram();
 				// Set the model matrix for the current entity
 				basicshader->SetUniformValue<glm::mat4>("u_model", entity->GetComponent<PSRComponent>().Transform);
 
 				// Draw the quad (6 indices for a quad)
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				basicshader->DisableShaderProgram();
 			}
 
 		}

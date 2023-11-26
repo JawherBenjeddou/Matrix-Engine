@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "EngineCore.h"
 
+#include "Event.h"
+
 namespace Matrix
 {
 	namespace core
@@ -47,11 +49,17 @@ namespace Matrix
 
 		void EngineCore::OnUpdate(float deltatime)
 		{
-            ShaderFactory::GetInstance().GetShader("defaultshader")->UseShaderProgram();
+            ShaderFactory::GetInstance().GetShader("defaultshader")->EnableShaderProgram();
             ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_CameraSystem2D->GetViewProjectionMatrix());
+            test += 1;
+            if (test == 500)
+            {
+                events::Event::GetInstance().Broadcast(events::EventType::MOVE);
+            }
             m_WorldSystem->OnUpdate();
             m_GuiSystem->OnRenderGui();
 			m_WindowSystem->OnUpdate();
+       
 		}
 
         //Usually in reverse order 
