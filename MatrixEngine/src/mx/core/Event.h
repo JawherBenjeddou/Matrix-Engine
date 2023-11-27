@@ -1,25 +1,17 @@
 #pragma once
 #include "Common.h"
 #include "pch.h"
-#include "core/Logging.h"
 
 namespace Matrix
 {
 	namespace events  
 	{
-        //id's for events
-        enum class EventType
-        {
-            NONE = 0,
-            WINDOWEVENTS,
-            KEYEVENTS,
-            MOUSEEVENTS,
-            MOVE
-        };
+       
         // Singleton Event class
         class MATRIX_DLL Event {
 
         public:
+
             // Deleted copy constructor and assignment operator to prevent cloning.
             Event(const Event&) = delete;
             Event& operator=(const Event&) = delete;
@@ -30,38 +22,31 @@ namespace Matrix
                 return instance;
             }
 
-            // Add a function and its event type.
-            void AddFunction(EventType event, std::function<void()> func) {
-                // Check if the event is already in the map
-                auto it = m_Subscribers.find(event);
-                if (it == m_Subscribers.end()) {
-                    // Event not found, add a new entry with the function in a set
-                    m_Subscribers[event] = { func };
-                }
-                else {
-                    // Event found, insert the function into the existing set
-                    it->second.push_back(func);
-                }
-                MX_CORE_WARN("Function added to the event list");
-            }
+            void AddFunction(const std::string& eventtype, std::function<void()> func);
 
-            // Broadcast with no arguments 
-            void Broadcast(EventType event) {
-                auto it = m_Subscribers.find(event);
-                if (it != m_Subscribers.end()) {
-                    const auto& subscribers = it->second;
-                    for (const auto& func : subscribers) {
-                        func(); // Call with default-constructed Args
-                    }
-                }
+            void Broadcast(const std::string& eventtype);
 
-                MX_CORE_WARN("Function is broadcasted");
-            }
         private:
             // Private constructor to enforce singleton pattern.
             Event() {}
-            std::unordered_map<EventType, std::vector<std::function<void()>>> m_Subscribers;
+            std::unordered_map<std::string, std::vector<std::function<void()>>> m_Subscribers;
         };
 
 	}
 }
+
+/**
+    * @brief macro for adding functions to the event
+    * @param eventType: A string representing the type of the event.
+    * @param functionName: The member function to be bound and added as a callback.
+*/
+#define BIND_EVENT_FUNCTION(eventType, functionName) \
+    Matrix::events::Event::GetInstance().AddFunction(eventType, std::bind(&functionName, this))
+
+
+/**
+    * @brief macro for brodcasting functions that exists in the given event
+    * @param eventType: A string representing the type of the event.
+*/
+#define BROADCAST_EVENT(eventType) \
+    Matrix::events::Event::GetInstance().Broadcast(eventType)

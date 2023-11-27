@@ -38,6 +38,7 @@
     <ClInclude Include="src\mx\graphics\world\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\mx\core\Event.cpp" />
     <ClCompile Include="src\mx\graphics\renderer\SpriteRenderer.cpp" />
     <ClCompile Include="src\mx\graphics\world\Entity.cpp" />
     <ClCompile Include="src\mx\graphics\buffers\ElementBuffer.cpp" />

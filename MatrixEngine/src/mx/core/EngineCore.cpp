@@ -52,9 +52,9 @@ namespace Matrix
             ShaderFactory::GetInstance().GetShader("defaultshader")->EnableShaderProgram();
             ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_CameraSystem2D->GetViewProjectionMatrix());
             test += 1;
-            if (test == 500)
+            if (test == 100)
             {
-                events::Event::GetInstance().Broadcast(events::EventType::MOVE);
+                BROADCAST_EVENT("move");
             }
             m_WorldSystem->OnUpdate();
             m_GuiSystem->OnRenderGui();
