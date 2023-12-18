@@ -20,21 +20,36 @@ workspace "Matrix"
       }
       optimize "On"
       
- -- additional include directories for both configurations (outside of filter blocks)
-   includedirs {
-      "Dependencies/entt/single_include/entt",
-      "Dependencies/GLFW/include",
-      "Dependencies/GLEW/include",
-      "MatrixEngine/src/mx",
-      "Dependencies/glm",
-      "MatrixEngine/src",
-      "Dependencies/spdlog/include",
-      "Dependencies/stb",
-      "Dependencies/imgui/backends",
-      "Dependencies/imgui"
-   }
+      -- additional include directories 
+      includedirs {
+         "Dependencies/entt/single_include/entt",
+         "Dependencies/GLFW/include",
+         "Dependencies/GLEW/include",
+         "MatrixEngine/src/mx",
+         "Dependencies/glm",
+         "MatrixEngine/src",
+         "Dependencies/spdlog/include",
+         "Dependencies/stb",
+         "Dependencies/imgui/backends",
+         "Dependencies/imgui"
+      }
+
+      -- Linker settings
+      links {
+         "glfw3.lib",
+         "opengl32.lib",
+         "glew32s.lib"
+      }
+
+      -- Library directories
+      libdirs {
+         "$(SolutionDir)Dependencies/GLFW/lib-vc2022",
+         "$(SolutionDir)Dependencies/GLEW/lib",
+      }
+
+      -- precompiled header settings
       pchheader "pch.h"
-      pchsource "pch.cpp"
+      pchsource "MatrixEngine/src/pch.cpp"
 
    -- Configure Debug configuration
    filter "configurations:Debug"
@@ -46,19 +61,32 @@ workspace "Matrix"
       }
       symbols "On"
 
--- additional include directories for both configurations (outside of filter blocks)
-includedirs {
-   "Dependencies/entt/single_include/entt",
-   "Dependencies/GLFW/include",
-   "Dependencies/GLEW/include",
-   "MatrixEngine/src/mx",
-   "Dependencies/glm",
-   "MatrixEngine/src",
-   "Dependencies/spdlog/include",
-   "Dependencies/stb",
-   "Dependencies/imgui/backends",
-   "Dependencies/imgui"
-}
+      -- additional include directories 
+      includedirs {
+         "Dependencies/entt/single_include/entt",
+         "Dependencies/GLFW/include",
+         "Dependencies/GLEW/include",
+         "MatrixEngine/src/mx",
+         "Dependencies/glm",
+         "MatrixEngine/src",
+         "Dependencies/spdlog/include",
+         "Dependencies/stb",
+         "Dependencies/imgui/backends",
+         "Dependencies/imgui"
+      }
+
+      -- Linker settings
+      links {
+         "glfw3.lib",
+         "opengl32.lib",
+         "glew32s.lib"
+      }
+
+      -- Library directories
+      libdirs {
+         "$(SolutionDir)Dependencies/GLFW/lib-vc2022",
+         "$(SolutionDir)Dependencies/GLEW/lib",
+      }
 
 -- precompiled header settings for both configurations (outside of filter blocks)
 pchheader "pch.h"
