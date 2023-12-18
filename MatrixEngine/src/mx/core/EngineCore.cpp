@@ -15,7 +15,7 @@ namespace Matrix
             //TODO : is the camera gonna be updated every frame? check for that 
             //it actually fucking worked damn (understand why we pass parameters like this)
             //keep playing around with this
-            m_CameraSystem2D = std::make_shared<Matrix::graphics::OrthoCamera>(-5.0f,5.0f, -5.0f, 5.0f);
+            m_CameraSystem2D = std::make_shared<Matrix::graphics::OrthoCamera>(1600.0f,0.0f,0.0f, 900.0f);
             m_WorldSystem = std::make_shared<Matrix::graphics::World>();
         }
         void EngineCore::Initialize()
@@ -62,7 +62,7 @@ namespace Matrix
        
 		}
 
-        //Usually in reverse order 
+        //in reverse order 
         void EngineCore::Shutdown()
         {
             ShaderFactory::GetInstance().Cleanup();

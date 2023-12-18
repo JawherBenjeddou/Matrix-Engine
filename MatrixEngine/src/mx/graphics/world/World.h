@@ -25,6 +25,7 @@ namespace Matrix
 			void MoveEntity();
 
 			void test(float x);
+
 		private:
 			void DrawScreenElements();
 

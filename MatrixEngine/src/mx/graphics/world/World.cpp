@@ -14,7 +14,6 @@ namespace Matrix
 
 		{
 			m_SpriteRenderer = std::make_shared<SpriteRenderer>(m_Entities);
-			
 		}
 
 		void World::InitWorld()
@@ -27,8 +26,9 @@ namespace Matrix
 			MX_CORE_WARN("Game World Initialized successfully");
 			//events::Event::GetInstance().AddFunction("MOVE", [this]() { test(3.0f); });
 			BIND_EVENT_FUNCTION("move",World::MoveEntity);
+		
 			
-		}
+		} 
 	
 		//TODO : Remove this shit
 		void World::OnUpdate()
@@ -43,7 +43,6 @@ namespace Matrix
 			 entity->AddComponent<PSRComponent>();
 			 m_Entities.push_back(entity);
 			 m_SpriteRenderer->UpdateEntities(m_Entities);
-
 			 return entity;
 		}
 
@@ -56,7 +55,7 @@ namespace Matrix
 		{
 			m_Entities[0]->GetComponent<PSRComponent>().Position.x = 3.0f;
 			m_Entities[0]->GetComponent<PSRComponent>().updateTransform();
-			MX_CORE_WARN(" i have been summoned");
+
 		}
 
 		void World::test(float x)
