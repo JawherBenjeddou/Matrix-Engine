@@ -13,6 +13,7 @@ Start by cloning the repository with `git clone --recursive https://github.com/J
 <ins>**2. Configuring the dependencies:**</ins>
 
 1. Run the [build.bat] file found in repository. This will download the required prerequisites for the project if they are not present yet.
+2. After installing the required dependencies run [premake5 vsXXXX] command.
 
 ***
 
