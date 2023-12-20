@@ -1,7 +1,7 @@
 -- premake5.lua
 
 -- project configurations
-project "Engine"
+project "Matrix"
    kind "SharedLib"  -- Shared library type
    language "C++"
    cppdialect "C++20"  -- C++ version Matrix uses
@@ -29,18 +29,18 @@ project "Engine"
       
       -- additional include directories 
       includedirs {
-         "../Dependencies/entt/single_include/entt",
-         "../Dependencies/GLFW/include",
-         "../Dependencies/GLEW/include",
+         "$(SolutionDir)Dependencies/entt/single_include/entt",
+         "$(SolutionDir)Dependencies/GLFW/include",
+         "$(SolutionDir)Dependencies/GLEW/include",
          "src/mx",
-         "../Dependencies/glm",
+         "$(SolutionDir)Dependencies/glm",
          "src",
-         "../Dependencies/spdlog/include",
-         "../Dependencies/stb",
-         "../Dependencies/imgui/backends",
-         "../Dependencies/imgui"
+         "$(SolutionDir)Dependencies/spdlog/include",
+         "$(SolutionDir)Dependencies/stb",
+         "$(SolutionDir)Dependencies/imgui/backends",
+         "$(SolutionDir)Dependencies/imgui"
       }
-
+      
       -- Linker settings
       links {
          "glfw3.lib",
@@ -69,17 +69,17 @@ project "Engine"
       symbols "On"
 
       includedirs {
-         "../Dependencies/entt/single_include",
-         "../Dependencies/GLFW/include",
-         "../Dependencies/GLEW/include",
-         "../MatrixEngine/src/mx",
-         "../Dependencies/glm",
+         "$(SolutionDir)Dependencies/entt/single_include/entt",
+         "$(SolutionDir)Dependencies/GLFW/include",
+         "$(SolutionDir)Dependencies/GLEW/include",
+         "src/mx",
+         "$(SolutionDir)Dependencies/glm",
          "src",
-         "../Dependencies/spdlog/include",
-         "../Dependencies/stb",
-         "../Dependencies/imgui/backends",
-         "../Dependencies/imgui",
-     }
+         "$(SolutionDir)Dependencies/spdlog/include",
+         "$(SolutionDir)Dependencies/stb",
+         "$(SolutionDir)Dependencies/imgui/backends",
+         "$(SolutionDir)Dependencies/imgui"
+      }
      
       -- Linker settings
       links {

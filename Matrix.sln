@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{8249BEE1-6EAC-4D86-1732-863C03741909}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Matrix", "MatrixEngine\Matrix.vcxproj", "{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win64 = Debug|Win64
+		Release|Win64 = Release|Win64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}.Debug|Win64.ActiveCfg = Debug Win64|x64
+		{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}.Debug|Win64.Build.0 = Debug Win64|x64
+		{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}.Release|Win64.ActiveCfg = Release Win64|x64
+		{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}.Release|Win64.Build.0 = Release Win64|x64
+		{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9}.Debug|Win64.ActiveCfg = Debug Win64|x64
+		{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9}.Debug|Win64.Build.0 = Debug Win64|x64
+		{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9}.Release|Win64.ActiveCfg = Release Win64|x64
+		{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9}.Release|Win64.Build.0 = Release Win64|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6} = {8249BEE1-6EAC-4D86-1732-863C03741909}
+		{FA1499C2-E6B6-C398-CF71-D7ECBBB24AE9} = {8249BEE1-6EAC-4D86-1732-863C03741909}
+	EndGlobalSection
+EndGlobal
