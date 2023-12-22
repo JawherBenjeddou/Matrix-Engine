@@ -54,10 +54,10 @@ namespace Matrix
 
 			auto basicshader = ShaderFactory::GetInstance().GetShader("defaultshader");
 
-			if (basicshader == nullptr)
-			{
-				MX_CORE_ERROR("defaultshader does not exist");
-			}
+			//if (basicshader == nullptr) useeless
+			//{
+			//	MX_CORE_ERROR("defaultshader does not exist");
+			//}
 			// Iterate through entities and draw each sprite
 			for (auto& entity : m_Entities)
 			{
