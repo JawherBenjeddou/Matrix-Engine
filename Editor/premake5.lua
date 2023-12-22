@@ -7,7 +7,7 @@ project "Editor"
    cppdialect "C++20"  -- C++ version Editor uses
    targetdir ("%{wks.location}/build/bin/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path TODO FIX THE OUTPUT DIR
    objdir ("%{wks.location}/build/bin-int/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path 
-
+   dependson { "Matrix" }
    -- Specify source files for the project
    files { 
       "src/**.h", 
