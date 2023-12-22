@@ -29,16 +29,16 @@ project "Matrix"
       
       -- additional include directories 
       includedirs {
-         "$(SolutionDir)Dependencies/entt/single_include/entt",
-         "$(SolutionDir)Dependencies/GLFW/include",
-         "$(SolutionDir)Dependencies/GLEW/include",
+         "%{wks.location}/Dependencies/entt/single_include/entt",
+         "%{wks.location}/Dependencies/GLFW/include",
+         "%{wks.location}/Dependencies/GLEW/include",
          "src/mx",
-         "$(SolutionDir)Dependencies/glm",
+         "%{wks.location}/Dependencies/glm",
          "src",
-         "$(SolutionDir)Dependencies/spdlog/include",
-         "$(SolutionDir)Dependencies/stb",
-         "$(SolutionDir)Dependencies/imgui/backends",
-         "$(SolutionDir)Dependencies/imgui"
+         "%{wks.location}/Dependencies/spdlog/include",
+         "%{wks.location}/Dependencies/stb",
+         "%{wks.location}/Dependencies/imgui/backends",
+         "%{wks.location}/Dependencies/imgui"
       }
       
       -- Linker settings
@@ -68,18 +68,20 @@ project "Matrix"
       }
       symbols "On"
 
-      includedirs {
-         "$(SolutionDir)Dependencies/entt/single_include/entt",
-         "$(SolutionDir)Dependencies/GLFW/include",
-         "$(SolutionDir)Dependencies/GLEW/include",
-         "src/mx",
-         "$(SolutionDir)Dependencies/glm",
-         "src",
-         "$(SolutionDir)Dependencies/spdlog/include",
-         "$(SolutionDir)Dependencies/stb",
-         "$(SolutionDir)Dependencies/imgui/backends",
-         "$(SolutionDir)Dependencies/imgui"
-      }
+    -- additional include directories 
+    includedirs {
+      "%{wks.location}/Dependencies/entt/single_include/entt",
+      "%{wks.location}/Dependencies/GLFW/include",
+      "%{wks.location}/Dependencies/GLEW/include",
+      "src/mx",
+      "%{wks.location}/Dependencies/glm",
+      "src",
+      "%{wks.location}/Dependencies/spdlog/include",
+      "%{wks.location}/Dependencies/stb",
+      "%{wks.location}/Dependencies/imgui/backends",
+      "%{wks.location}/Dependencies/imgui"
+   }
+   
      
       -- Linker settings
       links {
@@ -90,8 +92,8 @@ project "Matrix"
 
       -- Library directories
       libdirs {
-         "$(SolutionDir)Dependencies/GLFW/lib-vc2022",
-         "$(SolutionDir)Dependencies/GLEW/lib",
+         "%{wks.location}/Dependencies/GLFW/lib-vc2022",
+         "%{wks.location}/Dependencies/GLEW/lib",
       }
 
       -- precompiled header settings for both configurations (outside of filter blocks)
