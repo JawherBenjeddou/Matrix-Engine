@@ -37,6 +37,8 @@ namespace Matrix
                 return m_Registry->get<T>(m_Entity);
             }
 
+            const std::string GetName() const { return m_Name; }
+
         private:
             std::string m_Name;
             entt::entity m_Entity;

@@ -19,15 +19,7 @@ namespace Matrix
 		void World::InitWorld()
 		{
 			m_SpriteRenderer->Init();
-			SpawnEntity("joe");
-			m_Entities[0]->GetComponent<PSRComponent>().Position.x += 5.0f;
-			m_Entities[0]->GetComponent<PSRComponent>().updateTransform();
-			SpawnEntity("test");
 			MX_CORE_WARN("Game World Initialized successfully");
-			//events::Event::GetInstance().AddFunction("MOVE", [this]() { test(3.0f); });
-			BIND_EVENT_FUNCTION("move",World::MoveEntity);
-		
-			
 		} 
 	
 		//TODO : Remove this shit
@@ -46,21 +38,15 @@ namespace Matrix
 			 return entity;
 		}
 
-		/*SharedObj<Entity> World::FindEntityByName(std::string_view name)
+		SharedObj<Entity> World::FindEntityByName(std::string_view name)
 		{
-			return ;
-		}*/
-
-		void World::MoveEntity()
-		{
-			m_Entities[0]->GetComponent<PSRComponent>().Position.x = 3.0f;
-			m_Entities[0]->GetComponent<PSRComponent>().updateTransform();
-
-		}
-
-		void World::test(float x)
-		{
-			MoveEntity();
+			for (auto entity : m_Entities)
+			{
+				if (entity->GetName() == name)
+				{
+					return entity;
+				}
+			}
 		}
 
 		void World::DrawScreenElements()

@@ -4,8 +4,8 @@
 project "Matrix"
    kind "SharedLib"  -- Shared library type
    language "C++"
-   cppdialect "C++20"  -- C++ version Matrix uses
-   targetdir ("../build/bin/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path TODO FIX THE OUTPUT DIR
+   cppdialect "C++20"  -- C++ version Engine uses
+   targetdir ("../build/bin/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path 
    objdir ("../build/bin-int/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path 
 
    -- Specify source files for the project
@@ -17,7 +17,7 @@ project "Matrix"
    configurations { "Debug", "Release" }
    platforms { "Win64" }
 
-   -- Configure Release configuration
+   -- Release configuration
    filter "configurations:Release"
       defines {
          "_CRT_SECURE_NO_WARNINGS",
@@ -58,7 +58,7 @@ project "Matrix"
       pchheader "pch.h"
       pchsource "src/pch.cpp"
 
-   -- Configure Debug configuration
+   -- Debug configuration
    filter "configurations:Debug"
       defines {
          "_CRT_SECURE_NO_WARNINGS",

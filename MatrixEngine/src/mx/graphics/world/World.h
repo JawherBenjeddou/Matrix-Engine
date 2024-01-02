@@ -20,11 +20,8 @@ namespace Matrix
 
 			SharedObj<Entity> SpawnEntity(std::string_view name);
 			
-			//SharedObj<Entity> FindEntityByName(std::string_view name);
-	
-			void MoveEntity();
+			SharedObj<Entity> FindEntityByName(std::string_view name);
 
-			void test(float x);
 
 		private:
 			void DrawScreenElements();
@@ -35,8 +32,6 @@ namespace Matrix
 
 		private:
 			friend class Matrix::core::EngineCore;
-			//very temporary
-			float move = 0.0f;
 			//holds data for entites
 			entt::registry m_Registry;
 			std::vector<SharedObj<Entity>> m_Entities;

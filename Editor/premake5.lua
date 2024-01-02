@@ -2,10 +2,10 @@
 
 -- project configurations
 project "Editor"
-   kind "ConsoleApp"  -- CnsoleApp type
+   kind "ConsoleApp"  -- ConsoleApp type
    language "C++"
    cppdialect "C++20"  -- C++ version Editor uses
-   targetdir ("%{wks.location}/build/bin/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path TODO FIX THE OUTPUT DIR
+   targetdir ("%{wks.location}/build/bin/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path 
    objdir ("%{wks.location}/build/bin-int/%{prj.name}/%{cfg.buildcfg}") -- Included project name in the path 
    dependson { "Matrix" }
    -- Specify source files for the project
@@ -17,7 +17,7 @@ project "Editor"
    configurations { "Debug", "Release" }
    platforms { "Win64" }
 
-   -- Configure Release configuration
+   -- Release configuration
    filter "configurations:Release"
       defines {
          "_CRT_SECURE_NO_WARNINGS",
@@ -54,7 +54,7 @@ project "Editor"
          "%{wks.location}/build/bin/Matrix/Release"
       }
 
-   -- Configure Debug configuration
+   -- Debug configuration
    filter "configurations:Debug"
       defines {
          "_CRT_SECURE_NO_WARNINGS",
