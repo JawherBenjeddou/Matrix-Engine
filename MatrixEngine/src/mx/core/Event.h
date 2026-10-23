@@ -1,52 +1,54 @@
 #pragma once
 #include "Common.h"
-#include "pch.h"
+///@file Event.h  Lightweight named-event bus (publish/subscribe by string key).
 
-namespace Matrix
+namespace Matrix::events
 {
-	namespace events  
-	{
-       
-        // Singleton Event class
-        class MATRIX_DLL Event {
+    using EventHandler = std::function<void()>;
+    using HandlerId = uint64_t;
 
-        public:
+    /// Global event bus. Handlers are keyed by an event name and invoked synchronously on Broadcast().
+    class MATRIX_DLL Event
+    {
+    public:
+        Event(const Event&) = delete;
+        Event& operator=(const Event&) = delete;
 
-            // Deleted copy constructor and assignment operator to prevent cloning.
-            Event(const Event&) = delete;
-            Event& operator=(const Event&) = delete;
+        static Event& GetInstance();
 
-            // Get the singleton instance.
-            static Event& GetInstance() {
-                static Event instance;
-                return instance;
-            }
+        /// Subscribes a handler to an event name and returns an id that can be used to unsubscribe.
+        HandlerId AddFunction(const std::string& eventType, EventHandler func);
 
-            void AddFunction(const std::string& eventtype, std::function<void()> func);
+        /// Removes a previously registered handler. Returns true if one was removed.
+        bool RemoveFunction(HandlerId id);
 
-            void Broadcast(const std::string& eventtype);
+        /// Invokes every handler registered for the event name. Returns the number of handlers called.
+        size_t Broadcast(const std::string& eventType);
 
-        private:
-            // Private constructor to enforce singleton pattern.
-            Event() {}
-            std::unordered_map<std::string, std::vector<std::function<void()>>> m_Subscribers;
+        /// Number of handlers currently subscribed to an event name.
+        size_t SubscriberCount(const std::string& eventType) const;
+
+        /// Removes every handler.
+        void Clear();
+
+    private:
+        Event() = default;
+
+        struct Subscriber
+        {
+            HandlerId Id;
+            EventHandler Func;
         };
 
-	}
+        HandlerId m_NextId = 1;
+        std::unordered_map<std::string, std::vector<Subscriber>> m_Subscribers;
+    };
 }
 
-/**
-    * @brief macro for adding functions to the event
-    * @param eventType: A string representing the type of the event.
-    * @param functionName: The member function to be bound and added as a callback.
-*/
+/// Binds a member function of `this` to an event type.
 #define BIND_EVENT_FUNCTION(eventType, functionName) \
-    Matrix::events::Event::GetInstance().AddFunction(eventType, std::bind(&functionName, this))
+    ::Matrix::events::Event::GetInstance().AddFunction(eventType, std::bind(&functionName, this))
 
-
-/**
-    * @brief macro for brodcasting functions that exists in the given event
-    * @param eventType: A string representing the type of the event.
-*/
+/// Broadcasts an event to all subscribers.
 #define BROADCAST_EVENT(eventType) \
-    Matrix::events::Event::GetInstance().Broadcast(eventType)
+    ::Matrix::events::Event::GetInstance().Broadcast(eventType)

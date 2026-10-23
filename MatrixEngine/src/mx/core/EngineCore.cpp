@@ -1,100 +1,120 @@
 #include "pch.h"
 #include "EngineCore.h"
 
-#include "Event.h"
+#include "Logging.h"
+#include "audio/AudioEngine.h"
+#include "graphics/renderer/RenderCommand.h"
+#include "graphics/renderer/Renderer2D.h"
+#include "graphics/shaders/ShaderFactory.h"
+#include "graphics/textures/TextureLibrary.h"
+#include "scripting/BuiltinScripts.h"
+#include "util/FileSystem.h"
 
-namespace Matrix
+namespace Matrix::core
 {
-	namespace core
-	{
-        EngineCore::EngineCore()
+    EngineCore::EngineCore(const EngineSpec& spec)
+        : m_Spec(spec)
+    {
+    }
+
+    EngineCore::~EngineCore()
+    {
+        Shutdown();
+    }
+
+    bool EngineCore::Initialize()
+    {
+        if (m_Initialized)
+            return true;
+
+        util::FileSystem::Init();
+        std::string logFile = m_Spec.LogFile.empty() ? std::string() : util::FileSystem::Resolve(m_Spec.LogFile).string();
+        Logging::Init(logFile);
+        LogSystemInfo();
+
+        m_Window = CreateExcl<ui::Window>(m_Spec.Window);
+        if (!m_Window->InitSystem())
         {
-            m_WindowSystem = std::make_shared<Matrix::ui::Window>();
-            m_InputSystem = std::make_shared<Matrix::ui::Input>();
-            m_GuiSystem = std::make_shared < Matrix::gui::GuiManager>(m_WindowSystem);
-            //TODO : is the camera gonna be updated every frame? check for that 
-            //it actually fucking worked damn (understand why we pass parameters like this)
-            //keep playing around with this
-            m_CameraSystem2D = std::make_shared<Matrix::graphics::OrthoCamera>(-5.0f,5.0f,-5.0f,5.0f);
-            m_WorldSystem = std::make_shared<Matrix::graphics::World>();
+            MX_CORE_CRITICAL("Engine initialization failed: no window");
+            return false;
         }
-        void EngineCore::Initialize()
+        m_Window->GetInfo();
+        ui::Input::InitSystem();
+
+        if (m_Spec.EnableGui)
         {
-            //Init logging
-            m_LoggingSystem.InitLogging();
-
-            //Log system info
-            GetInfo();
-            
-            //TODO : maybe change the systems log infos in the functions itself??
-            // Initialize Window System
-            m_WindowSystem->InitSystem();    
-            m_WindowSystem->GetInfo();
-            MX_CORE_INFO("Initialization Started ... ");
-            m_WindowSystem->SetWindowIcon();
-            MX_CORE_WARN("Window System Initialized");
-
-            // Initialize Input System
-            m_InputSystem->InitSystem();
-            // Initialize Gui System
-            m_GuiSystem->InitSystem();
-            //Initializing Shaders
-            MX_CORE_WARN("Compiling Shaders...");
-            ShaderFactory::GetInstance().CreateShader("defaultshader","../resources/shaders/default.frag","../resources/shaders/default.vert");
-            MX_CORE_WARN("Shader compilation completed successfully");
-            m_WorldSystem->InitWorld();
-            MX_CORE_INFO("Engine Initialization Completed");
-
-        }
-
-		void EngineCore::OnUpdate(float deltatime)
-		{
-            ShaderFactory::GetInstance().GetShader("defaultshader")->EnableShaderProgram();
-            ShaderFactory::GetInstance().GetShader("defaultshader")->SetUniformValue<glm::mat4>("u_ViewProjection", m_CameraSystem2D->GetViewProjectionMatrix());
-            test += 1;
-            if (test == 100)
+            m_Gui = CreateExcl<gui::GuiManager>(*m_Window, m_Spec.Gui);
+            if (!m_Gui->InitSystem())
             {
-                BROADCAST_EVENT("move");
+                MX_CORE_ERROR("GUI could not be initialized; continuing without it");
+                m_Gui.reset();
             }
-            m_WorldSystem->OnUpdate();
-            m_GuiSystem->OnRenderGui();
-			m_WindowSystem->OnUpdate();
-       
-		}
-
-        //in reverse order 
-        void EngineCore::Shutdown()
-        {
-            ShaderFactory::GetInstance().Cleanup();
-            m_GuiSystem->Shutdown();
-            m_WindowSystem->~Window();
-            m_WindowSystem.reset();
-            Logging::ShutDown();
-            MX_CORE_ERROR("Engine SHUTDOWN!");
         }
 
-		bool EngineCore::IsWindowClosed() const
-		{
-			return m_WindowSystem->Closed();
-		}
+        graphics::Renderer2D::Init();
 
-        void EngineCore::GetInfo()
+        if (m_Spec.EnableAudio)
+            m_AudioEnabled = audio::AudioEngine::Init();
+
+        scripting::RegisterBuiltinScripts();
+
+        m_Initialized = true;
+        MX_CORE_INFO("Engine initialization completed");
+        return true;
+    }
+
+    void EngineCore::Shutdown()
+    {
+        if (!m_Initialized)
         {
-            MX_CORE_INFO("MATRIX ENGINE v{}.{}", 0, 1);
-            std::cout << ("-------------------- \n");
-            std::cout << ("SYSTEM INFORMATION \n");
-            std::cout << ("-------------------- \n");
-
-#ifdef  MX_DEBUG_MODE 
-
-            std::cout << ("Configuration : DEBUG \n");
-#endif  
-#ifdef  MX_RELEASE_MODE
-
-            std::cout << ("Configuration : RELEASE \n");
-
-#endif 
+            // Partial initialization (e.g. window failed): still release what exists.
+            m_Gui.reset();
+            m_Window.reset();
+            return;
         }
 
-	}
+        MX_CORE_INFO("Engine shutting down");
+        if (m_AudioEnabled)
+            audio::AudioEngine::Shutdown();
+
+        // GPU resources must be released while the OpenGL context is alive.
+        graphics::Renderer2D::Shutdown();
+        graphics::TextureLibrary::Get().Clear();
+        graphics::ShaderFactory::GetInstance().Cleanup();
+
+        m_Gui.reset();
+        m_Window.reset();
+        m_Initialized = false;
+    }
+
+    void EngineCore::BeginFrame()
+    {
+        m_Window->PollEvents();
+        graphics::RenderCommand::SetViewport(0, 0, m_Window->GetWidth(), m_Window->GetHeight());
+        graphics::RenderCommand::SetClearColor(m_Spec.ClearColor);
+        graphics::RenderCommand::Clear();
+    }
+
+    void EngineCore::EndFrame()
+    {
+        if (m_AudioEnabled)
+            audio::AudioEngine::Update();
+        m_Window->SwapBuffers();
+    }
+
+    bool EngineCore::IsWindowClosed() const
+    {
+        return !m_Window || m_Window->Closed();
+    }
+
+    void EngineCore::LogSystemInfo() const
+    {
+        MX_CORE_INFO("{} v{}", MX_ENGINE_NAME, MX_VERSION_STRING);
+#ifdef MX_DEBUG_MODE
+        MX_CORE_INFO("Configuration : Debug");
+#else
+        MX_CORE_INFO("Configuration : Release");
+#endif
+        MX_CORE_INFO("Project root  : {}", util::FileSystem::GetRootDirectory().string());
+    }
 }

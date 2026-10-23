@@ -1,92 +1,76 @@
 #pragma once
 #include "Common.h"
-///@file Texture2D.h
+///@file Texture2D.h  OpenGL 2D texture.
 
-#include "GL/glew.h"
-
-
-namespace Matrix
+namespace Matrix::graphics
 {
-	namespace graphics
-	{
-		enum class MATRIX_DLL TextureWrap
-		{
-			DEFAULT = GL_REPEAT,
-			MIRRORED_REPEAT = GL_MIRRORED_REPEAT,
-			CLAMP_TO_EDGE = GL_CLAMP_TO_EDGE,
-			CLAMP_TO_BORDER = GL_CLAMP_TO_BORDER
-		};
+    enum class TextureWrap : uint8_t
+    {
+        DEFAULT = 0,     ///< Repeat
+        REPEAT = 0,
+        MIRRORED_REPEAT,
+        CLAMP_TO_EDGE,
+        CLAMP_TO_BORDER
+    };
 
-		enum class MATRIX_DLL TextureFilter
-		{
-			NEAREST = GL_NEAREST,
-			LINEAR = GL_LINEAR
-		};	
+    enum class TextureFilter : uint8_t
+    {
+        LINEAR = 0,
+        NEAREST
+    };
 
-		class MATRIX_DLL Texture2D 
-		{
+    struct MATRIX_DLL TextureSpec
+    {
+        TextureWrap Wrap = TextureWrap::REPEAT;
+        TextureFilter Filter = TextureFilter::LINEAR;
+        bool GenerateMipmaps = true;
+        bool FlipVertically = true;
+    };
 
-		public:
+    class MATRIX_DLL Texture2D
+    {
+    public:
+        Texture2D();
+        ~Texture2D();
 
-			/// Default constructor.
-			Texture2D();
+        Texture2D(const Texture2D&) = delete;
+        Texture2D& operator=(const Texture2D&) = delete;
 
-			/// Copy constructor is deleted.
-			Texture2D(const Texture2D& other) = delete; 
+        /// Loads an image file (PNG, JPG, BMP, TGA...). Returns false and leaves the texture empty on failure.
+        bool LoadTexture2D(const std::filesystem::path& filepath, const TextureSpec& spec = TextureSpec());
 
-			/// Move constructor.
-			Texture2D(Texture2D&& other) noexcept
-				:m_TextureID(std::move(other.m_TextureID)),
-				 m_Width(std::move(other.m_Width)),
-				 m_Height(std::move(other.m_Height)),
-				 m_NrChannels(std::move(other.m_NrChannels)),
-				 m_TexType(std::move(other.m_TexType)),
-				 m_NrComponents(std::move(other.m_NrComponents))
-			{
-				other.m_TextureID = 0;
-				other.m_Width = 0;
-				other.m_Height = 0;
-				other.m_NrChannels = 0;
-				other.m_NrComponents = 0;
-				other.m_TexType.clear();
-			}
+        /// Legacy overload kept for API compatibility.
+        bool LoadTexture2D(std::string_view filepath, TextureWrap wrap, TextureFilter filter = TextureFilter::LINEAR);
 
-			~Texture2D();
-		
-		public:
+        /// Creates an empty RGBA8 texture of the given size.
+        bool Create(uint32_t width, uint32_t height, const TextureSpec& spec = TextureSpec());
 
-			/// Load a 2D texture from a file.
-			/// \param filepath :  The path to the image file.
-			/// \param wrap  : The texture wrapping mode (default is TextureWrap::DEFAULT).
-			/// \param filter : The texture filtering mode (default is TextureFilter::LINEAR).
-			void LoadTexture2D(std::string_view filepath, TextureWrap wrap = TextureWrap::DEFAULT, TextureFilter filter = TextureFilter::LINEAR);
-			
-			/// Bind the texture to a specific texture unit.
-			void Bind() const;
+        /// Uploads raw RGBA8 pixel data. size must equal width * height * 4.
+        void SetData(const void* data, uint32_t size);
 
-			/// Unbind the currently bound texture.
-			void Unbind() const;
+        /// Binds to a texture unit (slot).
+        void Bind(uint32_t slot = 0) const;
+        void Unbind() const;
 
-			/// Get the ID of the texture.
-			uint32_t GetID() const;
+        bool IsLoaded() const { return m_TextureID != 0; }
+        uint32_t GetID() const { return m_TextureID; }
+        uint32_t GetWidth() const { return static_cast<uint32_t>(m_Width); }
+        uint32_t GetHeight() const { return static_cast<uint32_t>(m_Height); }
+        uint32_t GetWidht() const { return GetWidth(); } ///< Legacy misspelling kept for compatibility.
+        uint32_t GetChannels() const { return static_cast<uint32_t>(m_NrChannels); }
+        const std::string& GetPath() const { return m_TexturePath; }
+        float GetAspectRatio() const { return m_Height > 0 ? static_cast<float>(m_Width) / static_cast<float>(m_Height) : 1.0f; }
 
-			/// Get the width of the texture.
-			uint32_t GetWidht() const;
+        bool operator==(const Texture2D& other) const { return m_TextureID == other.m_TextureID; }
 
-			/// Get the height of the texture.
-			uint32_t GetHeight() const;
+    private:
+        void ApplyParameters(const TextureSpec& spec) const;
+        void Release();
 
-		private:
-			uint32_t m_TextureID;
-			std::string m_TexType;
-			std::string m_TexturePath;
-
-			int32_t m_Width;
-			int32_t m_Height;
-			int32_t m_NrChannels;
-			int32_t m_NrComponents;
-		};
-
-	}
+        uint32_t m_TextureID;
+        std::string m_TexturePath;
+        int32_t m_Width;
+        int32_t m_Height;
+        int32_t m_NrChannels;
+    };
 }
-

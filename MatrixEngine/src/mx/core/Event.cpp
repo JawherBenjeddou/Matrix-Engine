@@ -1,43 +1,59 @@
 #include "pch.h"
 #include "Event.h"
 
-#include "core/Logging.h"
-
-namespace Matrix
+namespace Matrix::events
 {
-    namespace events
+    Event& Event::GetInstance()
     {
-            // Add a function and its event type.
-            void Event::AddFunction(const std::string& eventtype, std::function<void()> func) {
-                // Check if the event is already in the map
-                auto it = m_Subscribers.find(eventtype);
-                if (it == m_Subscribers.end()) {
-                    // Event not found, add a new entry with the function in a set
-                    m_Subscribers[eventtype] = {func};
-                    MX_CORE_WARN("{} is not found and function will be added to the new event type", eventtype);
-                }
-                else {
-                    // Event found, insert the function into the existing set
-                    it->second.push_back(func);
+        static Event instance;
+        return instance;
+    }
 
-                    MX_CORE_WARN("{} is found and function will be added",eventtype);
-                }
+    HandlerId Event::AddFunction(const std::string& eventType, EventHandler func)
+    {
+        HandlerId id = m_NextId++;
+        m_Subscribers[eventType].push_back({ id, std::move(func) });
+        return id;
+    }
+
+    bool Event::RemoveFunction(HandlerId id)
+    {
+        for (auto it = m_Subscribers.begin(); it != m_Subscribers.end(); ++it)
+        {
+            auto& list = it->second;
+            auto found = std::find_if(list.begin(), list.end(), [id](const Subscriber& s) { return s.Id == id; });
+            if (found != list.end())
+            {
+                list.erase(found);
+                if (list.empty())
+                    m_Subscribers.erase(it);
+                return true;
             }
+        }
+        return false;
+    }
 
-            // Broadcast with no arguments 
-            void Event::Broadcast(const std::string& eventtype) {
-                auto it = m_Subscribers.find(eventtype);
-                if (it != m_Subscribers.end()) {
-                    const auto& subscribers = it->second;
-                    for (const auto& func : subscribers) {
-                        func(); // Call with default-constructed Args
+    size_t Event::Broadcast(const std::string& eventType)
+    {
+        auto it = m_Subscribers.find(eventType);
+        if (it == m_Subscribers.end())
+            return 0;
 
-                        MX_CORE_WARN("{} events are being broadcasted",eventtype);
-                    }
-                }
+        // Copy so handlers may safely subscribe/unsubscribe while being invoked.
+        std::vector<Subscriber> subscribers = it->second;
+        for (const auto& subscriber : subscribers)
+            subscriber.Func();
+        return subscribers.size();
+    }
 
-            }
-        
+    size_t Event::SubscriberCount(const std::string& eventType) const
+    {
+        auto it = m_Subscribers.find(eventType);
+        return it == m_Subscribers.end() ? 0 : it->second.size();
+    }
 
+    void Event::Clear()
+    {
+        m_Subscribers.clear();
     }
 }

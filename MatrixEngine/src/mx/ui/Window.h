@@ -1,95 +1,109 @@
 #pragma once
 #include "Common.h"
-///@file Window.h
-
-
-#include "math/Math.h"
+///@file Window.h  GLFW window + OpenGL context owner.
 
 #include "GL/glew.h"
-#include "GLFW/glfw3.h" 
+#include "GLFW/glfw3.h"
 
 #include "Input.h"
 
-namespace Matrix {
-	
-    namespace ui
-	{
-        /// Structure for specifying window properties aka (title,widh,heigh).
-        struct MATRIX_DLL WindowSpec
-        {
-            std::string_view m_Title;
-            uint32_t m_Width;
-            uint32_t m_Height;
-            WindowSpec(std::string_view title = "mxEditor", uint32_t width = 1600, uint32_t height = 900)
-                : m_Title(title), m_Width(width), m_Height(height) {};
-        };
+namespace Matrix::ui
+{
+    /// Window creation parameters.
+    struct MATRIX_DLL WindowSpec
+    {
+        std::string Title = "Matrix Engine";
+        uint32_t Width = 1600;
+        uint32_t Height = 900;
+        bool VSync = true;
+        bool Resizable = true;
+        bool Maximized = false;
+        /// Root-relative path to a PNG used as the window icon (empty for none).
+        std::string IconPath = "resources/branding/icon/matrix_icon.png";
 
-        
-        class MATRIX_DLL Window
-        {
-        public:
-            Window(WindowSpec config = WindowSpec());
+        WindowSpec() = default;
+        WindowSpec(std::string_view title, uint32_t width, uint32_t height)
+            : Title(title), Width(width), Height(height) {}
+    };
 
-            ~Window();
+    class MATRIX_DLL Window
+    {
+    public:
+        using ResizeCallback = std::function<void(uint32_t width, uint32_t height)>;
 
-            /// Initialize the window and input system.
-            void InitSystem();
+        explicit Window(const WindowSpec& spec = WindowSpec());
+        ~Window();
 
-            /// Update the window and handle input events.
-            void OnUpdate() const;
+        Window(const Window&) = delete;
+        Window& operator=(const Window&) = delete;
 
-            /**
-             * @brief Check if window is closed.
-             * @return True if window is closed, false otherwise.
-             */
-            bool Closed() const;
+        /// Creates the OS window and OpenGL context. Returns false on failure.
+        bool InitSystem();
 
-            /// Get window information.
-            void GetInfo();
+        /// Destroys the window and terminates GLFW. Safe to call more than once.
+        void Shutdown();
 
-            /// Set the window icon (temporary, should be set by the user).
-            void SetWindowIcon(const char* path = "../resources/branding/icon/iconpsd256.png");
+        /// Clears transient input state and pumps OS events.
+        void PollEvents();
 
-            ///Get the width of the window.
-            uint32_t GetWidth() const { return m_Width; }
+        /// Presents the back buffer.
+        void SwapBuffers();
 
-            /// Get the height of the window.
-            uint32_t GetHeight() const { return m_Height; }
+        /// Legacy helper: PollEvents() + SwapBuffers().
+        void OnUpdate();
 
-            /// Get a pointer to the GLFW window.
-            auto* GetWindow()
-            {
-                return m_Window;
-            }
+        bool Closed() const;
+        bool ShouldClose() const { return Closed(); }
+        void Close();
 
-        private:
-          
+        /// Logs renderer / driver information.
+        void GetInfo() const;
 
-            /// Clear the window with a specified clear color.
-            void Clear(glm::vec4 clear_color = glm::vec4(0.16f, 0.16f, 0.16f, 1.0f)) const;
+        void SetWindowIcon(const std::string& rootRelativePath);
+        void SetTitle(const std::string& title);
+        void SetVSync(bool enabled);
+        bool IsVSync() const { return m_VSync; }
+        void Maximize();
+        bool IsMinimized() const { return m_Minimized; }
 
-            /// Initialize OpenGL.
-            void InitGL();
+        uint32_t GetWidth() const { return m_Width; }
+        uint32_t GetHeight() const { return m_Height; }
+        float GetAspectRatio() const { return m_Height == 0 ? 1.0f : static_cast<float>(m_Width) / static_cast<float>(m_Height); }
 
-            /// Static callback functions for handling input events.
-            static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
+        GLFWwindow* GetNativeWindow() const { return m_Window; }
+        GLFWwindow* GetWindow() const { return m_Window; }
 
-            static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
+        void SetResizeCallback(ResizeCallback callback) { m_ResizeCallback = std::move(callback); }
 
-            static void CursorPositionCallBack(GLFWwindow* window, double xpos, double ypos);
+        /// Reads the current back buffer and writes it to a PNG file. Returns false on failure.
+        bool CaptureScreenshot(const std::filesystem::path& path) const;
 
-            static void CursorEnterCallBack(GLFWwindow* window, int entered);
+        const std::string& GetGLRenderer() const { return m_GLRenderer; }
+        const std::string& GetGLVersion() const { return m_GLVersion; }
 
-        private:
-            int m_IconWidth;
-            int m_IconHeight;
-            int m_IconChannels;
-            const char* m_Title;
-            uint32_t m_Width;
-            uint32_t m_Height;
-            GLFWwindow* m_Window = nullptr;
-        };
+    private:
+        bool InitGL();
 
-	}
+        static void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods);
+        static void MouseCallBack(GLFWwindow* window, int button, int action, int mods);
+        static void CursorPositionCallBack(GLFWwindow* window, double xpos, double ypos);
+        static void CursorEnterCallBack(GLFWwindow* window, int entered);
+        static void ScrollCallBack(GLFWwindow* window, double xoffset, double yoffset);
+        static void FramebufferSizeCallBack(GLFWwindow* window, int width, int height);
+        static void WindowCloseCallBack(GLFWwindow* window);
+        static void ErrorCallBack(int error, const char* description);
 
+    private:
+        WindowSpec m_Spec;
+        std::string m_Title;
+        uint32_t m_Width;
+        uint32_t m_Height;
+        bool m_VSync;
+        bool m_Minimized = false;
+        bool m_Initialized = false;
+        GLFWwindow* m_Window = nullptr;
+        ResizeCallback m_ResizeCallback;
+        std::string m_GLRenderer;
+        std::string m_GLVersion;
+    };
 }

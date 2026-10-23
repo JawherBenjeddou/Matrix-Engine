@@ -1,63 +1,43 @@
-#include"pch.h"
+#include "pch.h"
 #include "Timer.h"
 
-namespace Matrix
+namespace Matrix::util
 {
-    namespace util
+    Timer::Timer()
     {
-        Timer::Timer()
-            :m_Running(false),
-             m_ElapsedTime(0.0f)
-        {
-            // Initialize the timer without starting it.
-        }
+        Reset();
+    }
 
-        void Timer::StartFrame()
-        {
-            m_StartTime = std::chrono::high_resolution_clock::now();
-            m_LastFrameTime = m_StartTime;
-            m_Running = true;
-        }
+    void Timer::Reset()
+    {
+        m_StartTime = Clock::now();
+        m_LastTick = m_StartTime;
+        m_DeltaTime = 0.0f;
+        m_RawDeltaTime = 0.0f;
+        m_TotalTime = 0.0f;
+        m_FPS = 0.0f;
+        m_FPSAccumulator = 0.0f;
+        m_FPSFrames = 0;
+        m_FrameCount = 0;
+    }
 
-        void Timer::Stop()
-        {
-            m_Running = false;
-        }
+    void Timer::Tick()
+    {
+        const auto now = Clock::now();
+        m_RawDeltaTime = std::chrono::duration<float>(now - m_LastTick).count();
+        m_LastTick = now;
+        m_DeltaTime = std::min(m_RawDeltaTime, MaxDeltaTime);
+        m_TotalTime = std::chrono::duration<float>(now - m_StartTime).count();
+        ++m_FrameCount;
 
-        void Timer::Reset()
+        // Smooth FPS over ~0.25 second windows.
+        m_FPSAccumulator += m_RawDeltaTime;
+        ++m_FPSFrames;
+        if (m_FPSAccumulator >= 0.25f)
         {
-            m_StartTime = std::chrono::high_resolution_clock::now();
-            m_LastFrameTime = m_StartTime;
-            m_ElapsedTime = 0.0f;
-        }
-
-        float Timer::ElapsedTime() const
-        {
-            if (m_Running)
-            {
-                auto now = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<float> duration = now - m_StartTime;
-                return duration.count();
-            }
-            return m_ElapsedTime;
-        }
-
-        float Timer::DeltaTime() const
-        {
-            auto now = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<float> duration = now - m_LastFrameTime;
-            return duration.count() * 1000.0f;
-        }
-
-        void Timer::EndFrame()
-        {
-            if (m_Running)
-            {
-                auto now = std::chrono::high_resolution_clock::now();
-                std::chrono::duration<float> frameDuration = now - m_LastFrameTime;
-                m_ElapsedTime += frameDuration.count();
-                m_LastFrameTime = now;
-            }
+            m_FPS = static_cast<float>(m_FPSFrames) / m_FPSAccumulator;
+            m_FPSAccumulator = 0.0f;
+            m_FPSFrames = 0;
         }
     }
 }

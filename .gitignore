@@ -1,15 +1,28 @@
-#DIRECTORIES
+# Build output
+build/
+bin/
+bin-int/
+Intermediates/
+x64/
+x86/
+[Dd]ebug/
+[Rr]elease/
+out/
+
+# Generated project files (regenerate with GenerateProjects.bat)
+*.sln
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
 .vs/
-# User-specific files
-*.rsuser
 *.suo
 *.user
+*.rsuser
 *.userosscache
 *.sln.docstates
-*.filters
 *.ilk
 *.pdb
-*.log
 *.idb
 *.exp
 *.iobj
@@ -17,21 +30,16 @@
 *.tlog
 *.lastbuildstate
 *.sdf
-Intermediates/
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-build/
-[Bb]in/
-[Oo]bj/
-[Oo]ut/
-[Ll]og/
-[Ll]ogs/
-[Bb]in-int/
+
+# Runtime artefacts
+logs/
+/screenshots/
+imgui.ini
+build/editor_layout.ini
+
+# Generated documentation
+docs/doxygen/
+
+# Python
+__pycache__/
+*.pyc

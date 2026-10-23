@@ -1,36 +1,42 @@
 #pragma once
 #include "Common.h"
+///@file VertexArray.h  OpenGL vertex array object wrapper.
 
-///@file VertexArray.h
+#include "VertexBuffer.h"
+#include "ElementBuffer.h"
 
-
-
-namespace Matrix
+namespace Matrix::graphics
 {
-	namespace graphics
-	{
-		class MATRIX_DLL VertexArray
-		{
-		public:
-			/// Creates a VertexArray object.
-			VertexArray();
+    class MATRIX_DLL VertexArray
+    {
+    public:
+        VertexArray();
+        ~VertexArray();
 
-			/// Destructor for VertexArray (calls DeleteVertexArray).
-			~VertexArray();
+        VertexArray(const VertexArray&) = delete;
+        VertexArray& operator=(const VertexArray&) = delete;
 
-			void Init();
-			/// Bind the VertexArray.
-			void Bind() const;
+        /// Creates the VAO. Must be called with a valid OpenGL context.
+        void Init();
 
-			/// Unbind the VertexArray.
-			void UnBind() const;
+        void Bind() const;
+        void UnBind() const;
 
-			/// Get the ID of the VertexArray.
-			uint32_t GetId();
+        /// Attaches a vertex buffer and configures its attributes from the buffer layout.
+        void AddVertexBuffer(const SharedObj<VertexBuffer>& vertexBuffer);
 
-		private:
-			/// Private member variable to store the ID of the VertexArray.
-			uint32_t m_ID;
-		};
-	}
+        /// Attaches the index buffer.
+        void SetElementBuffer(const SharedObj<ElementBuffer>& elementBuffer);
+
+        const std::vector<SharedObj<VertexBuffer>>& GetVertexBuffers() const { return m_VertexBuffers; }
+        const SharedObj<ElementBuffer>& GetElementBuffer() const { return m_ElementBuffer; }
+
+        uint32_t GetId() const { return m_ID; }
+
+    private:
+        uint32_t m_ID;
+        uint32_t m_AttributeIndex = 0;
+        std::vector<SharedObj<VertexBuffer>> m_VertexBuffers;
+        SharedObj<ElementBuffer> m_ElementBuffer;
+    };
 }

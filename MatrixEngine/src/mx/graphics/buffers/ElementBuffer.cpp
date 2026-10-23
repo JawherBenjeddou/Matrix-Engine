@@ -3,44 +3,40 @@
 
 #include "GL/glew.h"
 
-namespace Matrix
+namespace Matrix::graphics
 {
-	namespace graphics
-	{
-		ElementBuffer::ElementBuffer() 
-			: m_ID(0)
-		{
-		}
+    ElementBuffer::ElementBuffer()
+        : m_ID(0)
+    {
+    }
 
-		void ElementBuffer::Init()
-		{
-			glGenBuffers(1, &m_ID);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
-		}
+    ElementBuffer::~ElementBuffer()
+    {
+        if (m_ID != 0)
+            glDeleteBuffers(1, &m_ID);
+    }
 
-		ElementBuffer::~ElementBuffer()
-		{
-			glDeleteBuffers(1, &m_ID);
-		}
+    void ElementBuffer::Init()
+    {
+        if (m_ID == 0)
+            glGenBuffers(1, &m_ID);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+    }
 
-		void ElementBuffer::Bind() const
-		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
-		}
+    void ElementBuffer::Bind() const
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+    }
 
-		void ElementBuffer::UnBind() const
-		{
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
+    void ElementBuffer::UnBind() const
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    }
 
-		void ElementBuffer::BufferData(uint32_t size, const void* data)
-		{
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-		}
-
-		uint32_t ElementBuffer::GetId()
-		{
-			return m_ID;
-		}
-	}
+    void ElementBuffer::BufferData(uint32_t size, const void* data)
+    {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+        m_Count = size / sizeof(uint32_t);
+    }
 }

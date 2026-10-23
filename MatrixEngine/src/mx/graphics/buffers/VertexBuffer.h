@@ -1,43 +1,42 @@
 #pragma once
 #include "Common.h"
+///@file VertexBuffer.h  OpenGL array buffer wrapper.
 
-///@file VertexBuffer.h
+#include "BufferLayout.h"
 
-
-namespace Matrix
+namespace Matrix::graphics
 {
-	namespace graphics
-	{
-		class MATRIX_DLL VertexBuffer
-		{
-		public:
+    class MATRIX_DLL VertexBuffer
+    {
+    public:
+        VertexBuffer();
+        ~VertexBuffer();
 
-			/// Creates a buffer object.
-			VertexBuffer();
-			
-			/// Deletes the vertex buffer.
-			~VertexBuffer();
-			
-			void Init();
+        VertexBuffer(const VertexBuffer&) = delete;
+        VertexBuffer& operator=(const VertexBuffer&) = delete;
 
-			/// Bind the VertexBuffer.
-			void Bind() const;
-			
-			/// UnBind the VertexBuffer.
-			void UnBind() const;
+        /// Creates the GPU buffer. Must be called with a valid OpenGL context.
+        void Init();
 
-			/// Function to bufferSubData into the VertexBuffer.
-			void BufferSubData(uint32_t& offset, uint32_t size, const void* data);
+        /// Creates a dynamic buffer of the given byte size (contents undefined until BufferSubData).
+        void InitDynamic(uint32_t size);
 
-			/// Function to buffer data into the VertexBuffer
-			void BufferData(uint32_t size, const void* data);
+        void Bind() const;
+        void UnBind() const;
 
-			/// Function to get the ID of the VertexBuffer.
-			uint32_t GetId();
-		private:
-			/// Private member variable to store the ID of the VertexBuffer.
-			uint32_t m_ID;
-		};
-	}
+        /// Uploads static data.
+        void BufferData(uint32_t size, const void* data);
+
+        /// Updates a region of a dynamic buffer.
+        void BufferSubData(uint32_t offset, uint32_t size, const void* data);
+
+        const BufferLayout& GetLayout() const { return m_Layout; }
+        void SetLayout(const BufferLayout& layout) { m_Layout = layout; }
+
+        uint32_t GetId() const { return m_ID; }
+
+    private:
+        uint32_t m_ID;
+        BufferLayout m_Layout;
+    };
 }
-

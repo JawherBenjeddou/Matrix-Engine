@@ -1,39 +1,32 @@
 #pragma once
-#include "Common.h" 
+#include "Common.h"
+///@file ElementBuffer.h  OpenGL index buffer wrapper.
 
-///@file ElementBuffer.h
-
-
-namespace Matrix 
+namespace Matrix::graphics
 {
-	namespace graphics 
-	{
-		class MATRIX_DLL ElementBuffer
-		{
-		public:
+    class MATRIX_DLL ElementBuffer
+    {
+    public:
+        ElementBuffer();
+        ~ElementBuffer();
 
-			/// Creates a buffer object.
-			ElementBuffer();
+        ElementBuffer(const ElementBuffer&) = delete;
+        ElementBuffer& operator=(const ElementBuffer&) = delete;
 
-			/// Deletes the vertex buffer.
-			~ElementBuffer();
-			
-			void Init();
-			/// Bind the VertexBuffer.
-			void Bind() const;
+        /// Creates the GPU buffer. Must be called with a valid OpenGL context.
+        void Init();
 
-			/// UnBind the VertexBuffer.
-			void UnBind() const;
+        void Bind() const;
+        void UnBind() const;
 
-			/// Function to buffer data into the ElementBuffer.
-			void BufferData(uint32_t size, const void* data);
+        /// Uploads 32-bit indices. size is in bytes.
+        void BufferData(uint32_t size, const void* data);
 
-			/// Function to get the ID of the ElementBuffer.
-			uint32_t GetId();
+        uint32_t GetCount() const { return m_Count; }
+        uint32_t GetId() const { return m_ID; }
 
-		private:
-
-			uint32_t m_ID; /// Private member variable to store the ID of the ElementBuffer.
-		};
-	} 
+    private:
+        uint32_t m_ID;
+        uint32_t m_Count = 0;
+    };
 }

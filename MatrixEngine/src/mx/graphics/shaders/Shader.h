@@ -1,57 +1,60 @@
 #pragma once
-#include "GL/glew.h"
 #include "Common.h"
+///@file Shader.h  OpenGL shader program wrapper with uniform caching.
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-namespace Matrix
+namespace Matrix::graphics
 {
-	namespace graphics
-	{
-		class MATRIX_DLL Shader
-		{
-		public:
-			template <typename Type>
-			void SetUniformValue(std::string_view name, Type value) const = delete;
+    class MATRIX_DLL Shader
+    {
+    public:
+        Shader() = default;
+        ~Shader();
 
-			template <>
-			void SetUniformValue<int>(std::string_view name, int value) const {
-				glUniform1i(glGetUniformLocation(m_ID, name.data()), value);
-			}
+        Shader(const Shader&) = delete;
+        Shader& operator=(const Shader&) = delete;
 
-			template <>
-			void SetUniformValue<float>(std::string_view name, float value) const {
-				glUniform1f(glGetUniformLocation(m_ID, name.data()), value);
-			}
-			template <>
-			void SetUniformValue<glm::vec3>(std::string_view name,glm::vec3 RGB) const {
-				glUniform3f(glGetUniformLocation(m_ID, name.data()), RGB.x, RGB.y, RGB.z);
-			}
-			template<>
-			void SetUniformValue<glm::mat4>(std::string_view name,glm::mat4 Matrix) const {
-				uint32_t Location = glGetUniformLocation(m_ID, name.data());
-				glUniformMatrix4fv(Location, 1, GL_FALSE, glm::value_ptr(Matrix));
-			}
+        /// Compiles and links from vertex/fragment source files. Returns false (and logs) on failure.
+        bool CompileFromFiles(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
 
-			uint32_t GetId() const {
-				return m_ID;
-			}
+        /// Compiles and links from in-memory source strings. Returns false (and logs) on failure.
+        bool CompileFromSource(const std::string& vertexSource, const std::string& fragmentSource, const std::string& debugName = "shader");
 
-			void EnableShaderProgram();
-			
-			void DisableShaderProgram();
+        void EnableShaderProgram() const;
+        void DisableShaderProgram() const;
+        void Bind() const { EnableShaderProgram(); }
+        void Unbind() const { DisableShaderProgram(); }
 
-		private:
-			void CompileShaderProgram(std::string_view fragpath, std::string_view vertpath);
+        bool IsValid() const { return m_ID != 0; }
+        uint32_t GetId() const { return m_ID; }
+        const std::string& GetName() const { return m_Name; }
 
-			std::string ReadFile(std::string_view filepath);
+        void SetInt(std::string_view name, int value) const;
+        void SetIntArray(std::string_view name, const int* values, uint32_t count) const;
+        void SetFloat(std::string_view name, float value) const;
+        void SetFloat2(std::string_view name, const glm::vec2& value) const;
+        void SetFloat3(std::string_view name, const glm::vec3& value) const;
+        void SetFloat4(std::string_view name, const glm::vec4& value) const;
+        void SetMat4(std::string_view name, const glm::mat4& value) const;
 
-		private:
-			friend class ShaderFactory;
-			//PROGRAM ID 
-			uint32_t m_ID;
-		};
-	}
+        /// Backwards compatible typed setter.
+        template <typename T>
+        void SetUniformValue(std::string_view name, const T& value) const
+        {
+            if constexpr (std::is_same_v<T, int>)            SetInt(name, value);
+            else if constexpr (std::is_same_v<T, float>)     SetFloat(name, value);
+            else if constexpr (std::is_same_v<T, glm::vec2>) SetFloat2(name, value);
+            else if constexpr (std::is_same_v<T, glm::vec3>) SetFloat3(name, value);
+            else if constexpr (std::is_same_v<T, glm::vec4>) SetFloat4(name, value);
+            else if constexpr (std::is_same_v<T, glm::mat4>) SetMat4(name, value);
+            else static_assert(sizeof(T) == 0, "Unsupported uniform type");
+        }
+
+    private:
+        int32_t GetUniformLocation(std::string_view name) const;
+        static uint32_t CompileStage(uint32_t type, const std::string& source, const std::string& debugName);
+
+        uint32_t m_ID = 0;
+        std::string m_Name;
+        mutable std::unordered_map<std::string, int32_t> m_UniformCache;
+    };
 }

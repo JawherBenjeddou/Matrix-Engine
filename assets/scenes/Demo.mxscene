@@ -1,0 +1,1819 @@
+{
+  "Scene": "Demo",
+  "Version": 1,
+  "Gravity": [
+    0.0,
+    -22.0
+  ],
+  "BackgroundColor": [
+    0.09,
+    0.1,
+    0.14,
+    1.0
+  ],
+  "Entities": [
+    {
+      "ID": 4214127113185798343,
+      "Tag": "Sky",
+      "TransformComponent": {
+        "Position": [
+          0,
+          4,
+          -20
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          80,
+          40,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/sky.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "ID": 3678616536602480995,
+      "Tag": "Clouds",
+      "TransformComponent": {
+        "Position": [
+          0,
+          7.5,
+          -15
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 3.0,
+          "Frequency": 0.05,
+          "Horizontal": 1.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          3556093188501912565,
+          5159300609014975831,
+          2790023973677762073
+        ]
+      }
+    },
+    {
+      "ID": 3556093188501912565,
+      "Tag": "Cloud A",
+      "TransformComponent": {
+        "Position": [
+          -9,
+          0.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          4,
+          2,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          0.9
+        ],
+        "TexturePath": "assets/textures/cloud.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 3678616536602480995,
+        "Children": []
+      }
+    },
+    {
+      "ID": 5159300609014975831,
+      "Tag": "Cloud B",
+      "TransformComponent": {
+        "Position": [
+          -1,
+          1.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          5,
+          2.5,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          0.8
+        ],
+        "TexturePath": "assets/textures/cloud.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 3678616536602480995,
+        "Children": []
+      }
+    },
+    {
+      "ID": 2790023973677762073,
+      "Tag": "Cloud C",
+      "TransformComponent": {
+        "Position": [
+          8,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          3.5,
+          1.75,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          0.85
+        ],
+        "TexturePath": "assets/textures/cloud.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 3678616536602480995,
+        "Children": []
+      }
+    },
+    {
+      "ID": 1254803989804068091,
+      "Tag": "Ground",
+      "TransformComponent": {
+        "Position": [
+          0,
+          -4.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          60,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/ground.png",
+        "Tiling": [
+          60.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Static",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.6,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      }
+    },
+    {
+      "ID": 2279589067415923409,
+      "Tag": "Platforms",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          3038687614120307801,
+          5163409783273967559,
+          5496525662135233195,
+          7798185767939311931
+        ]
+      }
+    },
+    {
+      "ID": 3038687614120307801,
+      "Tag": "Platform Left",
+      "TransformComponent": {
+        "Position": [
+          -8,
+          -1.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          4,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/platform.png",
+        "Tiling": [
+          2.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Static",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.4,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 2279589067415923409,
+        "Children": []
+      }
+    },
+    {
+      "ID": 5163409783273967559,
+      "Tag": "Platform Middle",
+      "TransformComponent": {
+        "Position": [
+          -2,
+          0.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          3,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/platform.png",
+        "Tiling": [
+          1.5,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Static",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.4,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 2279589067415923409,
+        "Children": []
+      }
+    },
+    {
+      "ID": 5496525662135233195,
+      "Tag": "Platform High",
+      "TransformComponent": {
+        "Position": [
+          4,
+          2.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          3,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/platform.png",
+        "Tiling": [
+          1.5,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Static",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.4,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 2279589067415923409,
+        "Children": []
+      }
+    },
+    {
+      "ID": 7798185767939311931,
+      "Tag": "Moving Platform",
+      "TransformComponent": {
+        "Position": [
+          10,
+          0.0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          3,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          0.8,
+          0.9,
+          1.0,
+          1
+        ],
+        "TexturePath": "assets/textures/platform.png",
+        "Tiling": [
+          1.5,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Static",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.4,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 2.0,
+          "Frequency": 0.2,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 2279589067415923409,
+        "Children": []
+      }
+    },
+    {
+      "ID": 4788315235727562975,
+      "Tag": "Player",
+      "TransformComponent": {
+        "Position": [
+          -11,
+          -2.5,
+          1
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/player.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 1.0,
+        "Restitution": 0.0,
+        "Friction": 0.2,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.42,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "PlatformerController2D",
+        "Parameters": {
+          "Speed": 6.0,
+          "JumpForce": 9.5,
+          "RespawnY": -20.0
+        }
+      },
+      "AudioSourceComponent": {
+        "ClipPath": "assets/audio/jump.wav",
+        "Volume": 0.8,
+        "Pitch": 1.0,
+        "Loop": false,
+        "PlayOnStart": false
+      }
+    },
+    {
+      "ID": 1495431297382814891,
+      "Tag": "Crates",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          6122468058885819769,
+          280779969003981215,
+          3555632407433498187,
+          8238232727293865939,
+          2078770664046708567,
+          5198489976917286433
+        ]
+      }
+    },
+    {
+      "ID": 6122468058885819769,
+      "Tag": "Crate 1",
+      "TransformComponent": {
+        "Position": [
+          1.0,
+          -3.5,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 280779969003981215,
+      "Tag": "Crate 2",
+      "TransformComponent": {
+        "Position": [
+          2.05,
+          -3.5,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 3555632407433498187,
+      "Tag": "Crate 3",
+      "TransformComponent": {
+        "Position": [
+          1.0,
+          -2.45,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 8238232727293865939,
+      "Tag": "Crate 4",
+      "TransformComponent": {
+        "Position": [
+          2.05,
+          -2.45,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 2078770664046708567,
+      "Tag": "Crate 5",
+      "TransformComponent": {
+        "Position": [
+          1.0,
+          -1.4,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 5198489976917286433,
+      "Tag": "Crate 6",
+      "TransformComponent": {
+        "Position": [
+          2.05,
+          -1.4,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/crate.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 2.0,
+        "Restitution": 0.05,
+        "Friction": 0.7,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "BoxCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Size": [
+          0.5,
+          0.5
+        ],
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1495431297382814891,
+        "Children": []
+      }
+    },
+    {
+      "ID": 1721507391339067001,
+      "Tag": "Balls",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          1023850908813075163,
+          6147820925548650723,
+          3485402580262756601,
+          9163541938514583265
+        ]
+      }
+    },
+    {
+      "ID": 1023850908813075163,
+      "Tag": "Ball 1",
+      "TransformComponent": {
+        "Position": [
+          5.5,
+          6.0,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.7,
+          0.7,
+          1
+        ]
+      },
+      "CircleRendererComponent": {
+        "Color": [
+          0.3,
+          0.7,
+          1.0,
+          1.0
+        ],
+        "Thickness": 1.0,
+        "Fade": 0.01
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 0.5,
+        "Restitution": 0.65,
+        "Friction": 0.2,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "CircleCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Radius": 0.5,
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1721507391339067001,
+        "Children": []
+      }
+    },
+    {
+      "ID": 6147820925548650723,
+      "Tag": "Ball 2",
+      "TransformComponent": {
+        "Position": [
+          6.4,
+          7.2,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.7,
+          0.7,
+          1
+        ]
+      },
+      "CircleRendererComponent": {
+        "Color": [
+          0.5,
+          0.7,
+          0.8,
+          1.0
+        ],
+        "Thickness": 1.0,
+        "Fade": 0.01
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 0.5,
+        "Restitution": 0.65,
+        "Friction": 0.2,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "CircleCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Radius": 0.5,
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1721507391339067001,
+        "Children": []
+      }
+    },
+    {
+      "ID": 3485402580262756601,
+      "Tag": "Ball 3",
+      "TransformComponent": {
+        "Position": [
+          7.3,
+          8.4,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.7,
+          0.7,
+          1
+        ]
+      },
+      "CircleRendererComponent": {
+        "Color": [
+          0.7,
+          0.7,
+          0.6,
+          1.0
+        ],
+        "Thickness": 1.0,
+        "Fade": 0.01
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 0.5,
+        "Restitution": 0.65,
+        "Friction": 0.2,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "CircleCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Radius": 0.5,
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1721507391339067001,
+        "Children": []
+      }
+    },
+    {
+      "ID": 9163541938514583265,
+      "Tag": "Ball 4",
+      "TransformComponent": {
+        "Position": [
+          8.2,
+          9.6,
+          0.5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.7,
+          0.7,
+          1
+        ]
+      },
+      "CircleRendererComponent": {
+        "Color": [
+          0.9000000000000001,
+          0.7,
+          0.3999999999999999,
+          1.0
+        ],
+        "Thickness": 1.0,
+        "Fade": 0.01
+      },
+      "RigidBody2DComponent": {
+        "Type": "Dynamic",
+        "Velocity": [
+          0,
+          0
+        ],
+        "GravityScale": 1.0,
+        "Mass": 0.5,
+        "Restitution": 0.65,
+        "Friction": 0.2,
+        "LinearDamping": 0.0,
+        "FixedRotation": true
+      },
+      "CircleCollider2DComponent": {
+        "Offset": [
+          0,
+          0
+        ],
+        "Radius": 0.5,
+        "IsTrigger": false
+      },
+      "RelationshipComponent": {
+        "Parent": 1721507391339067001,
+        "Children": []
+      }
+    },
+    {
+      "ID": 7037281641742337429,
+      "Tag": "Coins",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          1588608623450000525,
+          8014007191382241105,
+          3085174502953697401,
+          8676398243537885671,
+          102749031632829509,
+          3334145591540266433,
+          1486365450632298867
+        ]
+      }
+    },
+    {
+      "ID": 1588608623450000525,
+      "Tag": "Coin 1",
+      "TransformComponent": {
+        "Position": [
+          -8.0,
+          -0.2,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.0,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 8014007191382241105,
+      "Tag": "Coin 2",
+      "TransformComponent": {
+        "Position": [
+          -5.8,
+          0.39999999999999997,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.1,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 3085174502953697401,
+      "Tag": "Coin 3",
+      "TransformComponent": {
+        "Position": [
+          -3.5999999999999996,
+          -0.2,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.2,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 8676398243537885671,
+      "Tag": "Coin 4",
+      "TransformComponent": {
+        "Position": [
+          -1.3999999999999995,
+          0.39999999999999997,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.3,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 102749031632829509,
+      "Tag": "Coin 5",
+      "TransformComponent": {
+        "Position": [
+          0.8000000000000007,
+          -0.2,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.4,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 3334145591540266433,
+      "Tag": "Coin 6",
+      "TransformComponent": {
+        "Position": [
+          3.0,
+          2.6999999999999997,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.5,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 1486365450632298867,
+      "Tag": "Coin 7",
+      "TransformComponent": {
+        "Position": [
+          5.200000000000001,
+          2.0999999999999996,
+          0.2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.6,
+          0.6,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/coin.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Oscillator",
+        "Parameters": {
+          "Amplitude": 0.15,
+          "Frequency": 1.6,
+          "Horizontal": 0.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 7037281641742337429,
+        "Children": []
+      }
+    },
+    {
+      "ID": 7736604844160383805,
+      "Tag": "Windmill",
+      "TransformComponent": {
+        "Position": [
+          -5.5,
+          3.2,
+          -1
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "Rotator",
+        "Parameters": {
+          "Speed": 45.0
+        }
+      },
+      "RelationshipComponent": {
+        "Parent": 0,
+        "Children": [
+          6833726114080735697,
+          6457150784216279431,
+          6876964687577392957,
+          4532810402812824169,
+          3853660033101712715
+        ]
+      }
+    },
+    {
+      "ID": 6833726114080735697,
+      "Tag": "Hub",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0.1
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.5,
+          0.5,
+          1
+        ]
+      },
+      "CircleRendererComponent": {
+        "Color": [
+          0.35,
+          0.35,
+          0.4,
+          1.0
+        ],
+        "Thickness": 1.0,
+        "Fade": 0.02
+      },
+      "RelationshipComponent": {
+        "Parent": 7736604844160383805,
+        "Children": []
+      }
+    },
+    {
+      "ID": 6457150784216279431,
+      "Tag": "Blade 1",
+      "TransformComponent": {
+        "Position": [
+          -0.0,
+          1.1,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.5,
+          2.2,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/blade.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 7736604844160383805,
+        "Children": []
+      }
+    },
+    {
+      "ID": 6876964687577392957,
+      "Tag": "Blade 2",
+      "TransformComponent": {
+        "Position": [
+          -1.1,
+          6.735557395310444e-17,
+          0
+        ],
+        "Rotation": 90.0,
+        "Scale": [
+          0.5,
+          2.2,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/blade.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 7736604844160383805,
+        "Children": []
+      }
+    },
+    {
+      "ID": 4532810402812824169,
+      "Tag": "Blade 3",
+      "TransformComponent": {
+        "Position": [
+          -1.3471114790620887e-16,
+          -1.1,
+          0
+        ],
+        "Rotation": 180.0,
+        "Scale": [
+          0.5,
+          2.2,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/blade.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 7736604844160383805,
+        "Children": []
+      }
+    },
+    {
+      "ID": 3853660033101712715,
+      "Tag": "Blade 4",
+      "TransformComponent": {
+        "Position": [
+          1.1,
+          -2.0206672185931328e-16,
+          0
+        ],
+        "Rotation": 270.0,
+        "Scale": [
+          0.5,
+          2.2,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "TexturePath": "assets/textures/blade.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      },
+      "RelationshipComponent": {
+        "Parent": 7736604844160383805,
+        "Children": []
+      }
+    },
+    {
+      "ID": 7602857201512645237,
+      "Tag": "Windmill Pole",
+      "TransformComponent": {
+        "Position": [
+          -5.5,
+          0.0,
+          -2
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          0.3,
+          6.4,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          0.45,
+          0.35,
+          0.3,
+          1
+        ],
+        "TexturePath": "",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "ID": 290255368711262835,
+      "Tag": "Matrix Logo",
+      "TransformComponent": {
+        "Position": [
+          13.0,
+          4.5,
+          -5
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          7.5,
+          3.0,
+          1
+        ]
+      },
+      "SpriteComponent": {
+        "Color": [
+          1,
+          1,
+          1,
+          0.95
+        ],
+        "TexturePath": "resources/branding/Artboard 2.png",
+        "Tiling": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "ID": 6786330002992976849,
+      "Tag": "Main Camera",
+      "TransformComponent": {
+        "Position": [
+          -6,
+          0.5,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "CameraComponent": {
+        "OrthographicSize": 13.0,
+        "Near": -100.0,
+        "Far": 100.0,
+        "Primary": true,
+        "FixedAspectRatio": false
+      },
+      "NativeScriptComponent": {
+        "ScriptName": "CameraFollow2D",
+        "Parameters": {
+          "Smoothing": 3.0,
+          "OffsetX": 1.5,
+          "OffsetY": 2.5
+        }
+      }
+    },
+    {
+      "ID": 1099307235928941811,
+      "Tag": "Ambient Audio",
+      "TransformComponent": {
+        "Position": [
+          0,
+          0,
+          0
+        ],
+        "Rotation": 0.0,
+        "Scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "AudioSourceComponent": {
+        "ClipPath": "assets/audio/ambient_loop.wav",
+        "Volume": 0.25,
+        "Pitch": 1.0,
+        "Loop": true,
+        "PlayOnStart": true
+      }
+    }
+  ]
+}
